@@ -3,6 +3,10 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from __init__ import __version__
 import sys
+
+from PSCalculator import PSCalculator
+from Rebuilder import Rebuilder
+
 class mainGUI(QMainWindow):
     def __init__(self, parent = None):
         QMainWindow.__init__(self, parent)
@@ -27,22 +31,23 @@ class mainGUI(QMainWindow):
         m_Auto_Rebuilder.setStatusTip('Автоматическая пересборка сырых данных камеры Andor в единые файлы формата "dat"')
         m_Auto_Rebuilder.triggered.connect(self.t_Rebuilder)
         m_Auto.addAction(m_Auto_Rebuilder)
-        
 
+        #____ Widgets
+        self.widgets = {
+            'PSCalculator' : PSCalculator(),
+            'Rebuilder' : Rebuilder()
+        }
         
-        
-        #exitButton.setShortcut('Ctrl+Q')
-        #exitButton.setStatusTip('Exit application')
-        #exitButton.triggered.connect(self.close)
-        #fileMenu.addAction(exitButton)
         #____ Layout Settings
         self.startLayout.addWidget(self.label, 0, 0)
         self.startWidget.setLayout(self.startLayout)
         self.setCentralWidget(self.startWidget)
+    
     def t_PSCalculator(self):
-        pass
+        self.setCentralWidget(self.widgets['PSCalculator'])
+    
     def t_Rebuilder(self):
-        pass
+        self.setCentralWidget(self.widgets['Rebuilder'])
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
