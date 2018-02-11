@@ -9,5 +9,5 @@ setup(name='linux_mavr_software',
       url='https://github.com/Black13Wolf/linux_mavr_module',
       packages=['mavrControl',],
       install_requires=['mavr_module', 'PyQt5', 'numpy', 'scipy', 'matplotlib', 'pyqtgraph'],
-      dependency_links=['git+https://github.com/black13wolf/mavr_module.git'],
+      dependency_links=['git+https://github.com/black13wolf/mavr_module'],
      )
