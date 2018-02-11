@@ -32,23 +32,17 @@ class mainGUI(QMainWindow):
         m_Auto_Rebuilder.triggered.connect(self.t_Rebuilder)
         m_Auto.addAction(m_Auto_Rebuilder)
 
-        #____ Widgets
-        self.widgets = {
-            'PSCalculator' : PSCalculator(),
-            'Rebuilder' : Rebuilder()
-        }
-        
         #____ Layout Settings
         self.startLayout.addWidget(self.label, 0, 0)
         self.startWidget.setLayout(self.startLayout)
         self.setCentralWidget(self.startWidget)
     
     def t_PSCalculator(self):
-        self.setCentralWidget(self.widgets['PSCalculator'])
+        self.setCentralWidget(PSCalculator())
     
     def t_Rebuilder(self):
-        self.setCentralWidget(self.widgets['Rebuilder'])
-
+        self.setCentralWidget(Rebuilder())
+        
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     g = mainGUI()
