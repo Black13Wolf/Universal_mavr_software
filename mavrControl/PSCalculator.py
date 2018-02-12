@@ -29,15 +29,17 @@ class PSCalculator(QWidget):
         
         self.layout.addWidget(self.l_Input, 0, 0)
         self.layout.addWidget(self.v_Input, 0, 1)
-        self.layout.addWidget(self.b_Input, 0, 2)
-        self.layout.addWidget(self.l_Type, 1, 0)
-        self.layout.addWidget(self.v_Type, 1, 1)
-        self.layout.addWidget(self.l_Output, 2, 0)
-        self.layout.addWidget(self.v_Outout, 2, 1)
-        self.layout.addWidget(self.b_Output, 2, 2)
-        self.layout.addWidget(self.b_Start, 3, 0, 1, 3)
+        self.layout.addWidget(self.b_Input, 0, 2, 1, 2)
+        self.layout.addWidget(self.l_Output, 1, 0)
+        self.layout.addWidget(self.v_Outout, 1, 1)
+        self.layout.addWidget(self.b_Output, 1, 2, 1, 2)
+        self.layout.addWidget(self.l_Type, 2, 0)
+        self.layout.addWidget(self.v_Type, 2, 1)
+        self.layout.addWidget(self.b_Start, 10, 1, 1, 2)
         self.setLayout(self.layout)
     
+
+    #def get_ps(path_to_dat, diff=0, acf=False, save=False, shape=(512,512), output=False, rmbgr_on=True)
     def c_Start(self):
         self.th = Thread(target = get_ps, args=())
 
