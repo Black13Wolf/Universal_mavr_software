@@ -64,7 +64,7 @@ class PSCalculator(QWidget):
         self.layout.addWidget(self.l_Acf, 3, 0)
         self.layout.addWidget(self.v_Acf, 3, 1)
         self.layout.addWidget(self.l_Save, 3, 2)
-        self.layout.addWidget(self.v_Save, 3, 2)
+        self.layout.addWidget(self.v_Save, 3, 3)
         self.layout.addWidget(self.l_Shape, 4, 0)
         self.layout.addWidget(self.v_Shape, 4, 1)
         self.layout.addWidget(self.l_Rmbgr, 4, 2)
