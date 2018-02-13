@@ -16,7 +16,7 @@ def scan_year(params, loading_bars=False):
         scan_set(params, loading_bars)
         if loading_bars:
             num_set += 1
-            loading_bars['year'].setValue(num_set)
+            loading_bars['sets'].setValue(num_set)
 
 def scan_set(params, loading_bars):
     if isdir(join(params['input']['set'], 'cut')):
