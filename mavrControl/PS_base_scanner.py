@@ -48,7 +48,7 @@ def scan_night(params, loading_bars=False):
         pass
     for root, dirs, files in walk(params['input']['night']):
         for name in files:
-            if not name.endswith('.dat') and name.startswith('dark') and name.startswith('flat') and 'moon' in name:
+            if not name.endswith('.dat') or name.startswith('dark') or name.startswith('flat') or 'moon' in name:
                 continue
             else:
                 stars.append(join(root, name))

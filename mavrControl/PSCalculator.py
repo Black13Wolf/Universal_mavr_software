@@ -126,12 +126,6 @@ class PSCalculator(QWidget):
                 '1' : Thread(target = base_scan.scan_set, args=(params, self.loading_bars)),
                 '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
             }
-        elif params['type'] == 'night':
-            self.loading_bars['stars'].show()
-            self.th = {
-                '1' : Thread(target = base_scan.scan_night, args=(params, self.loading_bars)),
-                '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
-            }
         elif params['type'] == 'star':
             #def get_ps(path_to_dat, diff=0, acf=False, save=False, shape=(512,512), output=False, rmbgr_on=True):
             self.th = {
