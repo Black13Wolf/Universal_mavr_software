@@ -5,20 +5,21 @@ from mavr.processing import get_ps
 from time import time
 from numpy import mean
 
-def scan_year(params, loading_bars=False):
+def scan_year(params, parent = None):
     sets = list(walk(params['input']['year']))[0][1]
-    if loading_bars:
-        loading_bars['sets'].setRange(0, len(sets))
+    if parent:
         num_set = 0
+        parent.set_progress.emit('sets', len(sets), num_set)
+        
     for month in sets:
         params['input']['set'] = join(params['input']['year'], month)
         params['output']['set'] = join(params['output']['year'], month)
-        scan_set(params, loading_bars)
-        if loading_bars:
+        scan_set(params, parent)
+        if parent:
             num_set += 1
-            loading_bars['sets'].setValue(num_set)
+            parent.set_progress.emit('sets', len(sets), num_set)
 
-def scan_set(params, loading_bars):
+def scan_set(params, parent = None):
     if isdir(join(params['input']['set'], 'cut')):
         params['input']['subdir'] = join(params['input']['set'], 'cut')
     elif isdir(join(params['input']['set'], 'rebuild')):
@@ -29,18 +30,18 @@ def scan_set(params, loading_bars):
         print('Error')
         return 1
     nights = list(walk(params['input']['subdir']))[0][1]
-    if loading_bars:
-        loading_bars['nights'].setRange(0, len(nights))
+    if parent:
         num_night = 0
+        parent.set_progress.emit('nights', len(nights), num_night)
     for night in nights:
         params['input']['night'] = join(params['input']['subdir'], night)
         params['output']['night'] = join(params['output']['set'], night)
-        scan_night(params, loading_bars)
-        if loading_bars:
+        scan_night(params, parent)
+        if parent:
             num_night += 1
-            loading_bars['nights'].setValue(num_night)
+            parent.set_progress.emit('nights', len(nights), num_night)
 
-def scan_night(params, loading_bars=False):
+def scan_night(params, parent = False):
     stars = []
     try:
         makedirs(params['output']['night'])
@@ -53,11 +54,11 @@ def scan_night(params, loading_bars=False):
             else:
                 stars.append(join(root, name))
         break
-    if loading_bars:
-        loading_bars['stars'].setRange(0, len(stars))
+    if parent:
         num_star = 0
+        parent.set_progress.emit('stars', len(stars), num_star)
     for star in stars:
         get_ps(star, diff=params['diff'], acf=params['acf'], save=params['save'], shape=params['shape'], output=params['output']['night'], rmbgr_on=params['rmbgr'])
-        if loading_bars:
+        if parent:
             num_star += 1
-            loading_bars['stars'].setValue(num_star)
+            parent.set_progress.emit('stars', len(stars), num_star)

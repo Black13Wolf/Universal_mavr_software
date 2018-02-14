@@ -9,9 +9,12 @@ from ast import literal_eval
 from time import sleep
 
 class PSCalculator(QWidget):
+    set_progress = pyqtSignal(str, int, int)    
     def __init__(self, parent = None):
         QWidget.__init__(self, parent)
         self.layout = QGridLayout()
+
+        self.set_progress.connect(self.ss_set_range)
         
         self.b_Start = QPushButton('Start')
         self.b_Start.clicked.connect(self.c_Start)
@@ -60,12 +63,14 @@ class PSCalculator(QWidget):
             'nights' : QProgressBar(),
             'stars' : QProgressBar()
         }
+
         self.loading_bars['sets'].setFormat('Sets')
         self.loading_bars['sets'].hide()
         self.loading_bars['nights'].setFormat('Nights')
         self.loading_bars['nights'].hide()
         self.loading_bars['stars'].setFormat('Stars')
         self.loading_bars['stars'].hide()
+
         self.layout.addWidget(self.l_Input, 0, 0)
         self.layout.addWidget(self.v_Input, 0, 1)
         self.layout.addWidget(self.b_Input, 0, 2, 1, 2)
@@ -116,27 +121,35 @@ class PSCalculator(QWidget):
             self.loading_bars['nights'].show()
             self.loading_bars['stars'].show()
             self.th = {
-                '1' : Thread(target = base_scan.scan_year, args=(params, self.loading_bars)),
+                '1' : Thread(target = base_scan.scan_year, args=(params, self)),
                 '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
             }
         elif params['type'] == 'set':
             self.loading_bars['nights'].show()
             self.loading_bars['stars'].show()
             self.th = {
-                '1' : Thread(target = base_scan.scan_set, args=(params, self.loading_bars)),
+                '1' : Thread(target = base_scan.scan_set, args=(params, self)),
+                '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
+            }
+        elif params['type'] == 'night':
+            self.loading_bars['stars'].show()
+            self.th = {
+                '1' : Thread(target = base_scan.scan_night, args=(params, self)),
                 '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
             }
         elif params['type'] == 'star':
-            #def get_ps(path_to_dat, diff=0, acf=False, save=False, shape=(512,512), output=False, rmbgr_on=True):
             self.th = {
                 '1' : Thread(target = get_ps, args = (params['input']['star'],), kwargs={'diff':params['diff'], 'acf':params['acf'], 'save':params['save'], 'shape':params['shape'], 'output':params['output']['star'], 'rmbgr_on':params['rmbgr']}),
                 '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
             }
         else:
             return 1
+        self.th['1'].daemon = True
         self.th['1'].start()
         sleep(0.5)
+        self.th['2'].daemon = True        
         self.th['2'].start()
+
     def c_Input(self):
         if self.v_Type.currentText().lower() == 'star':
             self.v_Input.setText(QFileDialog.getOpenFileName(self, 'Select Input Dat File', '.', "DAT (*.dat)")[0])
@@ -151,3 +164,6 @@ class PSCalculator(QWidget):
             if active_count() == 2:
                 button.setEnabled(True)
                 break
+    def ss_set_range(self, ltype, max_val, value):
+        self.loading_bars[ltype].setRange(0, max_val)
+        self.loading_bars[ltype].setValue(value)
