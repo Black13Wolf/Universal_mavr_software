@@ -1,11 +1,17 @@
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from __init__ import __version__
+try:
+    from . import __version__
+except:
+    from __init__ import __version__
 import sys
-
-from PSCalculator import PSCalculator
-from Rebuilder import Rebuilder
+try:    
+    from .PSCalculator import PSCalculator
+    from .Rebuilder import Rebuilder
+except:
+    from PSCalculator import PSCalculator
+    from Rebuilder import Rebuilder
 
 class mainGUI(QMainWindow):
     def __init__(self, parent = None):

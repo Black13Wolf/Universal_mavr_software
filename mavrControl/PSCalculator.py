@@ -4,9 +4,14 @@ from PyQt5.QtWidgets import *
 import sys
 from mavr.processing import get_ps
 from threading import Thread, active_count
-import PS_base_scanner as base_scan
 from ast import literal_eval
 from time import sleep
+try:
+    from . import PS_base_scanner as base_scan
+except:
+    import PS_base_scanner as base_scan
+    
+
 
 class PSCalculator(QWidget):
     set_progress = pyqtSignal(str, int, int)    
