@@ -16,6 +16,7 @@ except:
 class PSCalculator(QWidget):
     set_progress = pyqtSignal(str, int, int)    
     def __init__(self, parent = None):
+        self.mainGui = parent
         QWidget.__init__(self, parent)
         self.layout = QGridLayout()
 
@@ -149,11 +150,12 @@ class PSCalculator(QWidget):
             }
         else:
             return 1
-        self.th['1'].daemon = True
+        #self.th['1'].daemon = True
         self.th['1'].start()
         sleep(0.5)
-        self.th['2'].daemon = True        
+        #self.th['2'].daemon = True        
         self.th['2'].start()
+        self.mainGui.close()
 
     def c_Input(self):
         if self.v_Type.currentText().lower() == 'star':
@@ -166,8 +168,10 @@ class PSCalculator(QWidget):
     
     def check_of_end(self, button):
         while True:
+            sleep(1)
+            print(active_count())
             if active_count() == 2:
-                button.setEnabled(True)
+                print('Завершено')
                 break
     def ss_set_range(self, ltype, max_val, value):
         self.loading_bars[ltype].setRange(0, max_val)

@@ -44,10 +44,10 @@ class mainGUI(QMainWindow):
         self.setCentralWidget(self.startWidget)
     
     def t_PSCalculator(self):
-        self.setCentralWidget(PSCalculator())
+        self.setCentralWidget(PSCalculator(parent = self))
     
     def t_Rebuilder(self):
-        self.setCentralWidget(Rebuilder())
+        self.setCentralWidget(Rebuilder(parent = self))
         
 if __name__ == '__main__':
     app = QApplication(sys.argv)
