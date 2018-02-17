@@ -101,3 +101,4 @@ ENV/
 .mypy_cache/
 .vscode/settings.json
 mavrControl/.vscode/settings.json
+mavrControl/nohup.out
