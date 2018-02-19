@@ -1,4 +1,3 @@
-#from distutils.core import setup
 from setuptools import setup
 from mavrControl import __version__
 setup(name='linux_mavr_software',
@@ -8,5 +7,5 @@ setup(name='linux_mavr_software',
       author_email='beskakotov.as@gmail.com',
       url='https://github.com/Black13Wolf/linux_mavr_module',
       packages=['mavrControl',],
-      install_requires=['PyQt5', 'numpy', 'scipy', 'matplotlib', 'pyqtgraph'],
+      install_requires=['PyQt5>=5.10', 'numpy>=1.14', 'scipy>=1.0', 'matplotlib>=2.1.2', 'pyqtgraph>=0.10'],
      )
