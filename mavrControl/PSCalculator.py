@@ -99,22 +99,22 @@ class PSCalculator(QWidget):
         if params['type'] == 'year':
             self.th = {
                 '1' : Thread(target = base_scan.scan_year, args=(params, self)),
-                '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
+                '2' : Thread(target = self.check_of_end)
             }
         elif params['type'] == 'set':
             self.th = {
                 '1' : Thread(target = base_scan.scan_set, args=(params, self)),
-                '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
+                '2' : Thread(target = self.check_of_end)
             }
         elif params['type'] == 'night':
             self.th = {
                 '1' : Thread(target = base_scan.scan_night, args=(params, self)),
-                '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
+                '2' : Thread(target = self.check_of_end)
             }
         elif params['type'] == 'star':
             self.th = {
                 '1' : Thread(target = get_ps, args = (params['input']['star'],), kwargs={'diff':params['diff'], 'acf':params['acf'], 'save':params['save'], 'shape':params['shape'], 'output':params['output']['star'], 'rmbgr_on':params['rmbgr']}),
-                '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
+                '2' : Thread(target = self.check_of_end)
             }
         else:
             return 1
@@ -134,7 +134,7 @@ class PSCalculator(QWidget):
     def c_Output(self):
         self.v_Output.setText(QFileDialog.getExistingDirectory(self, "Select Output Directory", '.', QFileDialog.ShowDirsOnly))
     
-    def check_of_end(self, button):
+    def check_of_end(self):
         while True:
             sleep(1)
             if active_count() == 2:

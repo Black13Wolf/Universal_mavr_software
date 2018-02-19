@@ -47,6 +47,11 @@ class Rebuilder(QWidget):
 
     def c_Start(self):
         self.b_Start.setEnabled(False)
+        params = {}
+        params['type'] = self.v_Type.currentText().lower()
+        params['input'] = {self.v_Type.currentText().lower() : self.v_Input.text()}
+        params['output'] = {self.v_Type.currentText().lower() : self.v_Output.text()}
+        
         
     def s_Def_path(self):
         if self.v_Output.text() == '':
