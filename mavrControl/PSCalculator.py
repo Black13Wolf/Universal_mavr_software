@@ -12,14 +12,11 @@ except:
     from sub import PS_base_scanner as base_scan
     
 class PSCalculator(QWidget):
-    set_progress = pyqtSignal(str, int, int)    
     def __init__(self, parent = None):
         self.mainGui = parent
         QWidget.__init__(self, parent)
         self.layout = QGridLayout()
 
-        self.set_progress.connect(self.ss_set_range)
-        
         self.b_Start = QPushButton('Start')
         self.b_Start.clicked.connect(self.c_Start)
         self.b_Input = QPushButton('Choose path')
@@ -60,22 +57,6 @@ class PSCalculator(QWidget):
         self.v_Rmbgr = QComboBox()
         self.v_Rmbgr.addItems(['ON', 'OFF'])
 
-        
-        #___ Loadingbars
-
-        self.loading_bars = {
-            'sets' : QProgressBar(),
-            'nights' : QProgressBar(),
-            'stars' : QProgressBar()
-        }
-
-        self.loading_bars['sets'].setFormat('Sets')
-        self.loading_bars['sets'].hide()
-        self.loading_bars['nights'].setFormat('Nights')
-        self.loading_bars['nights'].hide()
-        self.loading_bars['stars'].setFormat('Stars')
-        self.loading_bars['stars'].hide()
-
         self.layout.addWidget(self.l_Input, 0, 0)
         self.layout.addWidget(self.v_Input, 0, 1, 1, 2)
         self.layout.addWidget(self.b_Input, 0, 3)
@@ -95,15 +76,11 @@ class PSCalculator(QWidget):
         self.layout.addWidget(self.l_Rmbgr, 4, 2)
         self.layout.addWidget(self.v_Rmbgr, 4, 3)
         self.layout.addWidget(self.b_Start, 10, 1, 1, 2)
-        self.layout.addWidget(self.loading_bars['sets'], 11, 0, 1, 4)
-        self.layout.addWidget(self.loading_bars['nights'], 12, 0, 1, 4)
-        self.layout.addWidget(self.loading_bars['stars'], 13, 0, 1, 4)
         self.setLayout(self.layout)
     
 
     def c_Start(self):
         self.b_Start.setEnabled(False)
-        [self.loading_bars[i].hide() for i in self.loading_bars]
         params = {}
         params['input'] = {self.v_Type.currentText().lower() : self.v_Input.text()}
         params['output'] = {self.v_Type.currentText().lower() : self.v_Output.text()}
@@ -122,22 +99,16 @@ class PSCalculator(QWidget):
         elif self.v_Rmbgr.currentText() == 'OFF':
             params['rmbgr'] = False
         if params['type'] == 'year':
-            self.loading_bars['sets'].show()
-            self.loading_bars['nights'].show()
-            self.loading_bars['stars'].show()
             self.th = {
                 '1' : Thread(target = base_scan.scan_year, args=(params, self)),
                 '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
             }
         elif params['type'] == 'set':
-            self.loading_bars['nights'].show()
-            self.loading_bars['stars'].show()
             self.th = {
                 '1' : Thread(target = base_scan.scan_set, args=(params, self)),
                 '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
             }
         elif params['type'] == 'night':
-            self.loading_bars['stars'].show()
             self.th = {
                 '1' : Thread(target = base_scan.scan_night, args=(params, self)),
                 '2' : Thread(target = self.check_of_end, args=(self.b_Start,))
@@ -171,7 +142,3 @@ class PSCalculator(QWidget):
             if active_count() == 2:
                 print('Завершено')
                 break
-                
-    def ss_set_range(self, ltype, max_val, value):
-        self.loading_bars[ltype].setRange(0, max_val)
-        self.loading_bars[ltype].setValue(value)

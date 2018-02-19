@@ -5,21 +5,16 @@ from mavr.processing import get_ps
 from time import time
 from numpy import mean
 
-def scan_year(params, parent = None):
+def scan_year(params, parent = None, level = 0):
     sets = list(walk(params['input']['year']))[0][1]
-    if parent:
-        num_set = 0
-        parent.set_progress.emit('sets', len(sets), num_set)
         
     for month in sets:
         params['input']['set'] = join(params['input']['year'], month)
         params['output']['set'] = join(params['output']['year'], month)
-        scan_set(params, parent)
-        if parent:
-            num_set += 1
-            parent.set_progress.emit('sets', len(sets), num_set)
-
-def scan_set(params, parent = None):
+        print('\t'*level + params['input']['set'])
+        scan_set(params, parent, level+1)
+        
+def scan_set(params, parent = None, level = 0):
     if isdir(join(params['input']['set'], 'cut')):
         params['input']['subdir'] = join(params['input']['set'], 'cut')
     elif isdir(join(params['input']['set'], 'rebuild')):
@@ -30,18 +25,13 @@ def scan_set(params, parent = None):
         print('Error')
         return 1
     nights = list(walk(params['input']['subdir']))[0][1]
-    if parent:
-        num_night = 0
-        parent.set_progress.emit('nights', len(nights), num_night)
     for night in nights:
         params['input']['night'] = join(params['input']['subdir'], night)
         params['output']['night'] = join(params['output']['set'], night)
+        print('\t'*level + params['input']['night'])        
         scan_night(params, parent)
-        if parent:
-            num_night += 1
-            parent.set_progress.emit('nights', len(nights), num_night)
-
-def scan_night(params, parent = False):
+        
+def scan_night(params, parent = False, level = 0):
     stars = []
     try:
         makedirs(params['output']['night'])
@@ -54,11 +44,7 @@ def scan_night(params, parent = False):
             else:
                 stars.append(join(root, name))
         break
-    if parent:
-        num_star = 0
-        parent.set_progress.emit('stars', len(stars), num_star)
     for star in stars:
+        print('\t'*level + star)                
         get_ps(star, diff=params['diff'], acf=params['acf'], save=params['save'], shape=params['shape'], output=params['output']['night'], rmbgr_on=params['rmbgr'])
-        if parent:
-            num_star += 1
-            parent.set_progress.emit('stars', len(stars), num_star)
+        
