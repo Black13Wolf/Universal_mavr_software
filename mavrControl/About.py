@@ -60,7 +60,6 @@ class About(QWidget):
         self.l_git_version.show()
 
     def c_Update(self):
-        self.mainGui.close()
         proxies = {
             "http" : "http://squid.sao.ru:8080",
             "https" : "http://squid.sao.ru:8080",
@@ -78,7 +77,7 @@ class About(QWidget):
         last_update = data[0]
         from pip import main as pip
         pip(['install', last_update['tarball_url'], '--proxy=http://squid.sao.ru:8080'])
-
+        self.mainGui.close()
 
 class sLabel(QLabel):
     def __init__(self, text, parent = None):
