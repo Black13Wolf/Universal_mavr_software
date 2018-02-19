@@ -19,15 +19,17 @@ class About(QWidget):
         self.l_version = sLabel('Версия: {}'.format(__version__))
         self.l_programmer = sLabel('Разработчик: Бескакотов А. С.')
         self.l_mail = sLabel('eMail: beskakotov.as@gmail.com')
-
-        self.b_Check = QPushButton('Проверить обновления')
-        self.b_Check.clicked.connect(self.c_Check_updates)
         
         self.l_git_version = sLabel('')
         self.l_git_version.hide()
         
+        self.b_Check = QPushButton('Проверить обновления')
+        self.b_Check.clicked.connect(self.c_Check_updates)
+        self.b_Check.setFixedHeight(25)
+        
         self.b_Update = QPushButton('Обновить')
         self.b_Update.clicked.connect(self.c_Update)
+        self.b_Update.setFixedHeight(25)
         self.b_Update.hide()
 
         self.layout.addWidget(self.l_name)
