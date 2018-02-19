@@ -73,12 +73,12 @@ class About(QWidget):
             data = json.loads(url.read().decode())
         last_update = data[0]
         from pip import main as pip
-        pip(['install', last_update['tarball_url'], '--proxy=http://squid.sao.ru:8080'])
+        pip(['install', last_update['tarball_url'], '--user', '--proxy=http://squid.sao.ru:8080'])
         with urllib.request.urlopen('https://api.github.com/repos/Black13Wolf/mavr_module/tags') as url:
             data = json.loads(url.read().decode())
         last_update = data[0]
         from pip import main as pip
-        pip(['install', last_update['tarball_url'], '--proxy=http://squid.sao.ru:8080'])
+        pip(['install', last_update['tarball_url'], '--user', '--proxy=http://squid.sao.ru:8080'])
         self.mainGui.close()
 
 class sLabel(QLabel):
