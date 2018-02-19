@@ -169,7 +169,6 @@ class PSCalculator(QWidget):
     def check_of_end(self, button):
         while True:
             sleep(1)
-            print(active_count())
             if active_count() == 2:
                 print('Завершено')
                 break
