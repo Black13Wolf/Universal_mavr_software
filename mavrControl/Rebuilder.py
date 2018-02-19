@@ -3,6 +3,13 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import sys
 from os.path import join
+from time import sleep
+from threading import Thread, active_count
+try:
+    from .sub import Rebuilder as rebuilder
+except:
+    from sub import Rebuilder as rebuilder
+
 class Rebuilder(QWidget):
     def __init__(self, parent = None):
         QWidget.__init__(self, parent)
@@ -27,7 +34,7 @@ class Rebuilder(QWidget):
         self.l_Type = QLabel('Type: ')
         self.v_Type = QComboBox()
         self.v_Type.addItems(['Set', 'Night', 'Star'])
-
+        
         self.layout.addWidget(self.l_Input, 0, 0)
         self.layout.addWidget(self.v_Input, 0, 1, 1, 2)
         self.layout.addWidget(self.b_Input, 0, 3)
@@ -51,8 +58,35 @@ class Rebuilder(QWidget):
         params['type'] = self.v_Type.currentText().lower()
         params['input'] = {self.v_Type.currentText().lower() : self.v_Input.text()}
         params['output'] = {self.v_Type.currentText().lower() : self.v_Output.text()}
-        
-        
+
+        if params['type'] == 'set':
+            self.th = {
+                '1' : Thread(target = rebuilder.rebuild_set, args=(params, self)),
+                '2' : Thread(target = self.check_of_end)
+            }
+            
+        elif params['type'] == 'night':
+            self.th = {
+                '1' : Thread(target = rebuilder.rebuild_night, args=(params, self)),
+                '2' : Thread(target = self.check_of_end)
+            }
+            
+        elif params['type'] == 'star':
+            self.th = {
+                '1' : Thread(target = rebuilder.rebuild_star, args=(params, self)),
+                '2' : Thread(target = self.check_of_end)
+            }
+        self.th['1'].start()
+        sleep(0.5)
+        self.th['2'].start()
+        self.mainGui.close()        
     def s_Def_path(self):
         if self.v_Output.text() == '':
             self.v_Output.setText(join(self.v_Input.text(), 'rebuild'))
+    
+    def check_of_end(self):
+        while True:
+            sleep(1)
+            if active_count() == 2:
+                print('Завершено')
+                break

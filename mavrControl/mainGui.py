@@ -40,7 +40,6 @@ class mainGUI(QMainWindow):
         m_Auto_Rebuilder = QAction(QIcon(''), 'Пересборщик', self)
         m_Auto_Rebuilder.setStatusTip('Автоматическая пересборка сырых данных камеры Andor в единые файлы формата "dat"')
         m_Auto_Rebuilder.triggered.connect(self.t_Rebuilder)
-        m_Auto_Rebuilder.setEnabled(False)
         m_Auto.addAction(m_Auto_Rebuilder)
             
             #____ Help signals
