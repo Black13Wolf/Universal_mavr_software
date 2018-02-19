@@ -7,12 +7,10 @@ from threading import Thread, active_count
 from ast import literal_eval
 from time import sleep
 try:
-    from . import PS_base_scanner as base_scan
+    from .sub import PS_base_scanner as base_scan
 except:
-    import PS_base_scanner as base_scan
+    from sub import PS_base_scanner as base_scan
     
-
-
 class PSCalculator(QWidget):
     set_progress = pyqtSignal(str, int, int)    
     def __init__(self, parent = None):
@@ -29,9 +27,11 @@ class PSCalculator(QWidget):
         self.b_Output = QPushButton('Choose path')
         self.b_Output.clicked.connect(self.c_Output)        
         
-        self.l_Input = QLabel('Input path')
+        self.l_Input = QLabel('Input path: ')
         self.v_Input = QLineEdit()
-
+        self.l_Output = QLabel('Output path: ')
+        self.v_Output = QLineEdit()
+        
         self.l_Type = QLabel('Type: ')
         self.v_Type = QComboBox()
         self.v_Type.addItems(['Year', 'Set', 'Night', 'Star'])
@@ -40,6 +40,7 @@ class PSCalculator(QWidget):
         
         self.l_Diff = QLabel('Diff frames: ')
         self.v_Diff = QSpinBox()
+        self.v_Diff.setValue(1)
         self.l_Diff.setFixedWidth(150)
         self.v_Diff.setFixedWidth(150)
         
@@ -59,8 +60,6 @@ class PSCalculator(QWidget):
         self.v_Rmbgr = QComboBox()
         self.v_Rmbgr.addItems(['ON', 'OFF'])
 
-        self.l_Output = QLabel('Output path: ')
-        self.v_Output = QLineEdit()
         
         #___ Loadingbars
 
@@ -78,11 +77,11 @@ class PSCalculator(QWidget):
         self.loading_bars['stars'].hide()
 
         self.layout.addWidget(self.l_Input, 0, 0)
-        self.layout.addWidget(self.v_Input, 0, 1)
-        self.layout.addWidget(self.b_Input, 0, 2, 1, 2)
+        self.layout.addWidget(self.v_Input, 0, 1, 1, 2)
+        self.layout.addWidget(self.b_Input, 0, 3)
         self.layout.addWidget(self.l_Output, 1, 0)
-        self.layout.addWidget(self.v_Output, 1, 1)
-        self.layout.addWidget(self.b_Output, 1, 2, 1, 2)
+        self.layout.addWidget(self.v_Output, 1, 1, 1, 2)
+        self.layout.addWidget(self.b_Output, 1, 3)
         self.layout.addWidget(self.l_Type, 2, 0)
         self.layout.addWidget(self.v_Type, 2, 1)
         self.layout.addWidget(self.l_Diff, 2, 2)
@@ -172,6 +171,7 @@ class PSCalculator(QWidget):
             if active_count() == 2:
                 print('Завершено')
                 break
+                
     def ss_set_range(self, ltype, max_val, value):
         self.loading_bars[ltype].setRange(0, max_val)
         self.loading_bars[ltype].setValue(value)

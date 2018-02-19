@@ -20,6 +20,7 @@ class mainGUI(QMainWindow):
         QMainWindow.__init__(self, parent)
         self.startWidget = QWidget()
         self.startLayout = QGridLayout()
+        self.setWindowTitle('LINUX MAVR SOFTWARE. VER: {}'.format(__version__))
         self.label = QLabel('LINUX MAVR SOFTWARE. VER: {}'.format(__version__))
         self.label.setStyleSheet('font-size: 20pt')
         
