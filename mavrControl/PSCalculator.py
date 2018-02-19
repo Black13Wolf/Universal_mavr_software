@@ -26,20 +26,18 @@ class PSCalculator(QWidget):
         
         self.l_Input = QLabel('Input path: ')
         self.v_Input = QLineEdit()
+        self.v_Input.setFixedWidth(300)
         self.l_Output = QLabel('Output path: ')
         self.v_Output = QLineEdit()
+        self.v_Output.setFixedWidth(300)
         
         self.l_Type = QLabel('Type: ')
         self.v_Type = QComboBox()
         self.v_Type.addItems(['Year', 'Set', 'Night', 'Star'])
-        self.l_Type.setFixedWidth(150)
-        self.v_Type.setFixedWidth(150)
         
         self.l_Diff = QLabel('Diff frames: ')
         self.v_Diff = QSpinBox()
         self.v_Diff.setValue(1)
-        self.l_Diff.setFixedWidth(150)
-        self.v_Diff.setFixedWidth(150)
         
         self.l_Acf = QLabel('ACF')
         self.v_Acf = QComboBox()

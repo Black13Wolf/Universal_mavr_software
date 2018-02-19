@@ -86,4 +86,5 @@ class sLabel(QLabel):
         QLabel.__init__(self, parent)
         self.setAlignment(Qt.AlignCenter)
         self.setText(text)
+        self.setFixedWidth(450)
         

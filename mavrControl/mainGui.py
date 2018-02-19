@@ -23,6 +23,7 @@ class mainGUI(QMainWindow):
         self.setWindowTitle('LINUX MAVR SOFTWARE. VER: {}'.format(__version__))
         self.label = QLabel('LINUX MAVR SOFTWARE. VER: {}'.format(__version__))
         self.label.setStyleSheet('font-size: 20pt')
+        self.setFixedSize(0,0)
         
         #____ MainMenu
             #____ Menu buttons
@@ -54,12 +55,15 @@ class mainGUI(QMainWindow):
     
     def t_PSCalculator(self):
         self.setCentralWidget(PSCalculator(parent = self))
+        self.setFixedSize(0,0)
     
     def t_Rebuilder(self):
         self.setCentralWidget(Rebuilder(parent = self))
+        self.setFixedSize(0,0)
     
     def t_About(self):
         self.setCentralWidget(About(parent = self))
+        self.setFixedSize(0,0)
         
 if __name__ == '__main__':
     app = QApplication(sys.argv)
