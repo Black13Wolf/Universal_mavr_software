@@ -1,7 +1,8 @@
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-import socket
+import urllib.request
+import json
 
 try:
     from . import __version__
@@ -40,12 +41,44 @@ class About(QWidget):
         self.setLayout(self.layout)
 
     def c_Check_updates(self):
-        self.last_version = '0.1.2'
-        self.l_git_version.setText('Последняя версия: {}'.format(self.last_version))
+        proxies = {
+    "http" : "http://squid.sao.ru:8080",
+    "https" : "http://squid.sao.ru:8080",
+        }
+        proxy_support = urllib.request.ProxyHandler(proxies)
+        opener = urllib.request.build_opener(proxy_support)
+        urllib.request.install_opener(opener)
+        with urllib.request.urlopen('https://api.github.com/repos/Black13Wolf/linux_mavr_software/tags') as url:
+            data = json.loads(url.read().decode())
+        self.last_update = data[0]['name']
+
+        if __version__ == self.last_update:
+            self.l_git_version.setText('У Вас установлена самая последняя версия.')
+        else:
+            self.l_git_version.setText('Последняя версия: {}'.format(self.last_update))           
+            self.b_Update.show() 
         self.l_git_version.show()
 
     def c_Update(self):
-        pass
+        self.mainGui.close()
+        proxies = {
+            "http" : "http://squid.sao.ru:8080",
+            "https" : "http://squid.sao.ru:8080",
+        }
+        proxy_support = urllib.request.ProxyHandler(proxies)
+        opener = urllib.request.build_opener(proxy_support)
+        urllib.request.install_opener(opener)
+        with urllib.request.urlopen('https://api.github.com/repos/Black13Wolf/linux_mavr_software/tags') as url:
+            data = json.loads(url.read().decode())
+        last_update = data[0]
+        from pip import main as pip
+        pip(['install', last_update['tarball_url'], '--proxy=http://squid.sao.ru:8080'])
+        with urllib.request.urlopen('https://api.github.com/repos/Black13Wolf/mavr_module/tags') as url:
+            data = json.loads(url.read().decode())
+        last_update = data[0]
+        from pip import main as pip
+        pip(['install', last_update['tarball_url'], '--proxy=http://squid.sao.ru:8080'])
+
 
 class sLabel(QLabel):
     def __init__(self, text, parent = None):
