@@ -13,8 +13,8 @@ class Rebuilder(QWidget):
         self.b_Input.clicked.connect(self.c_Input)
         self.b_Output = QPushButton('Choose path')
         self.b_Output.clicked.connect(self.c_Output)
-        self.b_Rebuild = QPushButton('Пересобрать')
-        self.b_Rebuild.clicked.connect(self.c_Rebuild)        
+        self.b_Start = QPushButton('Пересобрать')
+        self.b_Start.clicked.connect(self.c_Start)        
         
         self.l_Input = QLabel('Input path: ')
         self.v_Input = QLineEdit()
@@ -24,13 +24,19 @@ class Rebuilder(QWidget):
         self.v_Output = QLineEdit()
         self.v_Output.setFixedWidth(300)
 
+        self.l_Type = QLabel('Type: ')
+        self.v_Type = QComboBox()
+        self.v_Type.addItems(['Set', 'Night', 'Star'])
+
         self.layout.addWidget(self.l_Input, 0, 0)
         self.layout.addWidget(self.v_Input, 0, 1, 1, 2)
         self.layout.addWidget(self.b_Input, 0, 3)
         self.layout.addWidget(self.l_Output, 1, 0)
         self.layout.addWidget(self.v_Output, 1, 1, 1, 2)
         self.layout.addWidget(self.b_Output, 1, 3)
-        self.layout.addWidget(self.b_Rebuild, 2, 1, 1, 2)
+        self.layout.addWidget(self.l_Type, 2, 0)
+        self.layout.addWidget(self.v_Type, 2, 1)
+        self.layout.addWidget(self.b_Start, 2, 2, 1, 2)
         self.setLayout(self.layout)
 
     def c_Input(self):
@@ -39,9 +45,9 @@ class Rebuilder(QWidget):
     def c_Output(self):
         self.v_Output.setText(QFileDialog.getExistingDirectory(self, "Select Output Directory", '.', QFileDialog.ShowDirsOnly))
 
-    def c_Rebuild(self):
-        pass
-    
+    def c_Start(self):
+        self.b_Start.setEnabled(False)
+        
     def s_Def_path(self):
         if self.v_Output.text() == '':
             self.v_Output.setText(join(self.v_Input.text(), 'rebuild'))

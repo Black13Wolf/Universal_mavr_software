@@ -1,5 +1,10 @@
 from numpy import *
 
-class Rebuilder:
-    def __init__(self, input_path, output_path):
-        pass
+def rebuild_set():
+    pass
+
+def rebuild_night():
+    pass
+    
+def rebuild_star():
+    pass
