@@ -1,7 +1,7 @@
 from numpy import *
 from os import walk
 from os.path import isdir, join, isfile
-
+from mavr.rebuild import *
 def rebuild_set(params, parent = None, level = 0):
     nights = []
     for root, dirs, files in walk(params['input']['set']):
@@ -31,11 +31,11 @@ def rebuild_star(params, parent = None, level = 0):
     if not serie_type:
         return 0
     if serie_type == 'dat':
-        pass
+        spool(params['input']['star'], params['output']['star'])
     elif serie_type == 'big_tif':
-        pass
+        big_tif(params['input']['star'], params['output']['star'])        
     elif serie_type == 'serie_tif':
-        pass
+        serie_tif(params['input']['star'], params['output']['star'])
 
 def check_serie_type(path_to_dir):
     files_num = 0

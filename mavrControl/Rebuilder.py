@@ -80,7 +80,8 @@ class Rebuilder(QWidget):
         self.th['1'].start()
         sleep(0.5)
         self.th['2'].start()
-        self.mainGui.close()        
+        self.mainGui.close()
+                
     def s_Def_path(self):
         if self.v_Output.text() == '':
             self.v_Output.setText(join(self.v_Input.text(), 'rebuild'))
