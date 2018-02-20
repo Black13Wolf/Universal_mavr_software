@@ -102,3 +102,5 @@ ENV/
 .vscode/settings.json
 mavrControl/.vscode/settings.json
 mavrControl/nohup.out
+install_from_master.bat
+delete_installed_modules.bat

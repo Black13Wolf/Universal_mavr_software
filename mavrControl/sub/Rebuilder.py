@@ -1,13 +1,12 @@
 from numpy import *
 from os import walk
-from os.path import isdir, join
+from os.path import isdir, join, isfile
 
 def rebuild_set(params, parent = None, level = 0):
     nights = []
     for root, dirs, files in walk(params['input']['set']):
         for d in dirs:
-            if d.startswith('2'):
-                nights.append(d)
+            nights.append(d)
         break
     for night in nights:
         params['input']['night'] = join(params['input']['set'], night)
@@ -29,10 +28,14 @@ def rebuild_night(params, parent = None, level = 0):
 
 def rebuild_star(params, parent = None, level = 0):
     serie_type = check_serie_type(params['input']['star'])
-    if serie_type:
-        print(serie_type)
-    else:
+    if not serie_type:
         return 0
+    if serie_type == 'dat':
+        pass
+    elif serie_type == 'big_tif':
+        pass
+    elif serie_type == 'serie_tif':
+        pass
 
 def check_serie_type(path_to_dir):
     files_num = 0
@@ -43,7 +46,9 @@ def check_serie_type(path_to_dir):
         return 0
     elif isdir(join(path_to_dir, 'spool')):
         return 'dat'
-    elif files_num == 1:
-        return 'big_tiff'
+    elif isfile(join(path_to_dir, 'spool.tif')):
+        return 'big_tif'
+    elif files_num > 500 and files[-1].endswith('.tif'):
+        return 'serie_tif'
     else:
         print(path_to_dir+' have unknown format')
