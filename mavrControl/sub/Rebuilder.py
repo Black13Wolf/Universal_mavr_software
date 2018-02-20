@@ -1,5 +1,5 @@
 from numpy import *
-from os import walk
+from os import walk, makedirs
 from os.path import isdir, join, isfile
 from mavr.rebuild import *
 def rebuild_set(params, parent = None, level = 0):
@@ -27,6 +27,10 @@ def rebuild_night(params, parent = None, level = 0):
         rebuild_star(params, parent, level+1)
 
 def rebuild_star(params, parent = None, level = 0):
+    try:
+        makedirs(params['output']['night'])
+    except:
+        pass
     serie_type = check_serie_type(params['input']['star'])
     if not serie_type:
         return 0
