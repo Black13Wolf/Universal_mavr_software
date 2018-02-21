@@ -62,6 +62,8 @@ class About(QWidget):
         self.l_git_version.show()
 
     def c_Update(self):
+        self.b_Check.setEnabled(False)
+        self.b_Update.setEnabled(False)
         proxies = {
             "http" : "http://squid.sao.ru:8080",
             "https" : "http://squid.sao.ru:8080",
