@@ -45,8 +45,7 @@ class Rebuilder(QWidget):
         self.layout.addWidget(self.v_Type, 2, 1)
         self.layout.addWidget(self.b_Start, 2, 2, 1, 2)
         self.setLayout(self.layout)
-        
-        self.v_Input.setText('d:\\!WORK\\OBSERVATIONS\\2016\\TEST_SET\\')
+
     def c_Input(self):
         self.v_Input.setText(QFileDialog.getExistingDirectory(self, "Select Input Directory", '.', QFileDialog.ShowDirsOnly))
 
