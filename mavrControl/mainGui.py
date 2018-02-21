@@ -6,14 +6,17 @@ try:
 except:
     from __init__ import __version__
 import sys
-try:    
+try:
     from .PSCalculator import PSCalculator
     from .Rebuilder import Rebuilder
     from .About import About
+    from .Help import Help
 except:
+    print('Debug version')
     from PSCalculator import PSCalculator
     from Rebuilder import Rebuilder
     from About import About
+    from Help import Help
 
 class mainGUI(QMainWindow):
     def __init__(self, parent = None):
@@ -48,6 +51,12 @@ class mainGUI(QMainWindow):
         m_Help_About.triggered.connect(self.t_About)
         m_Help.addAction(m_Help_About)
 
+        m_Help_Help = QAction(QIcon(''), 'Помощь', self)
+        m_Help_Help.setStatusTip('Информация о модулях программы')
+        m_Help_Help.triggered.connect(self.t_Help)
+        m_Help.addAction(m_Help_Help)
+
+
         #____ Layout Settings
         self.startLayout.addWidget(self.label, 0, 0)
         self.startWidget.setLayout(self.startLayout)
@@ -64,7 +73,11 @@ class mainGUI(QMainWindow):
     def t_About(self):
         self.setCentralWidget(About(parent = self))
         self.setFixedSize(0,0)
-        
+
+    def t_Help(self):
+        self.setCentralWidget(Help(parent = self))
+        self.setFixedSize(0,0)
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     g = mainGUI()
