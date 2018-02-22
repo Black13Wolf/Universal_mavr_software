@@ -40,6 +40,7 @@ def rebuild_star(params, parent = None, level = 0):
         big_tif(params['input']['star'], params['output']['star'])        
     elif serie_type == 'serie_tif':
         serie_tif(params['input']['star'], params['output']['star'])
+
 def check_serie_type(path_to_dir):
     files_num = 0
     for root, dirs, files in walk(path_to_dir):

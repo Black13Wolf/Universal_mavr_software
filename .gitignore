@@ -104,3 +104,17 @@ mavrControl/.vscode/settings.json
 mavrControl/nohup.out
 install_from_master.bat
 delete_installed_modules.bat
+mavrControl/doc/file.fdb_latexmk
+mavrControl/doc/file.aux
+mavrControl/doc/file.fls
+mavrControl/doc/file.pdf
+mavrControl/doc/file.tex
+mavrControl/doc/file.toc
+mavrControl/doc/file.synctex.gz
+mavrControl/doc/file.fls
+mavrControl/doc/file.aux
+mavrControl/doc/file.fdb_latexmk
+mavrControl/doc/file.pdf
+mavrControl/doc/file.tex
+mavrControl/doc/file.toc
+mavrControl/doc/file.synctex.gz

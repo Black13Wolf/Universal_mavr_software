@@ -6,17 +6,17 @@ try:
 except:
     from __init__ import __version__
 import sys
+from os import startfile
+from os.path import join
 try:
     from .PSCalculator import PSCalculator
     from .Rebuilder import Rebuilder
     from .About import About
-    from .Help import Help
 except:
     print('Debug version')
     from PSCalculator import PSCalculator
     from Rebuilder import Rebuilder
     from About import About
-    from Help import Help
 
 class mainGUI(QMainWindow):
     def __init__(self, parent = None):
@@ -55,7 +55,7 @@ class mainGUI(QMainWindow):
         m_Help_Help.setStatusTip('Информация о модулях программы')
         m_Help_Help.triggered.connect(self.t_Help)
         m_Help.addAction(m_Help_Help)
-        m_Help_Help.setEnabled(False)
+        #m_Help_Help.setEnabled(False)
 
 
         #____ Layout Settings
@@ -76,8 +76,8 @@ class mainGUI(QMainWindow):
         self.setFixedSize(0,0)
 
     def t_Help(self):
-        self.setCentralWidget(Help(parent = self))
-        self.setFixedSize(0,0)
+        print(__file__)
+        #startfile(join('doc', 'lms-help.pdf'))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
