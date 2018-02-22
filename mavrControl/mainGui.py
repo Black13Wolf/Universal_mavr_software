@@ -55,6 +55,7 @@ class mainGUI(QMainWindow):
         m_Help_Help.setStatusTip('Информация о модулях программы')
         m_Help_Help.triggered.connect(self.t_Help)
         m_Help.addAction(m_Help_Help)
+        m_Help_Help.setEnabled(False)
 
 
         #____ Layout Settings
