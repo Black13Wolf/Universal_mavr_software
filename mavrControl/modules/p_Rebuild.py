@@ -1,7 +1,12 @@
 from numpy import *
 from os import walk, makedirs
 from os.path import isdir, join, isfile
-from mavr.rebuild import *
+
+try:
+    from .m_Rebuild import *
+except:
+    from m_Rebuild import *
+
 def rebuild_set(params, parent = None, level = 0):
     nights = []
     for root, dirs, files in walk(params['input']['set']):

@@ -1,13 +1,16 @@
 ﻿from os.path import join, isdir, basename
 from os import walk, makedirs, system
 import sys
-from mavr.processing import get_ps
 from time import time
 from numpy import mean
 
+try:
+    from .m_PSCalc import get_ps
+except:
+    from m_PSCalc import get_ps
+    
 def scan_year(params, parent = None, level = 0):
     sets = list(walk(params['input']['year']))[0][1]
-        
     for month in sets:
         params['input']['set'] = join(params['input']['year'], month)
         params['output']['set'] = join(params['output']['year'], month)

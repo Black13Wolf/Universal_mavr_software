@@ -2,14 +2,16 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import sys
-from mavr.processing import get_ps
+#from mavr.processing import get_ps
 from threading import Thread, active_count
 from ast import literal_eval
 from time import sleep
 try:
-    from .sub import PS_base_scanner as base_scan
+    from .modules import p_PSBaseScan as base_scan
+    from .modules.m_PSCalc import get_ps
 except:
-    from sub import PS_base_scanner as base_scan
+    from modules import p_PSBaseScan as base_scan
+    from modules.m_PSCalc import get_ps
     
 class PSCalculator(QWidget):
     def __init__(self, parent = None):

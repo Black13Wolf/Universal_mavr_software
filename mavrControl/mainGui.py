@@ -1,22 +1,21 @@
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-try:
-    from . import __version__
-except:
-    from __init__ import __version__
 import sys
 from os import startfile
-from os.path import join
+from os.path import join, dirname
+
 try:
-    from .PSCalculator import PSCalculator
-    from .Rebuilder import Rebuilder
-    from .About import About
+    from . import __version__
+    from .w_PSCalc import PSCalculator
+    from .w_Rebuilder import Rebuilder
+    from .w_About import About
 except:
     print('Debug version')
-    from PSCalculator import PSCalculator
-    from Rebuilder import Rebuilder
-    from About import About
+    from __init__ import __version__
+    from w_PSCalc import PSCalculator
+    from w_Rebuilder import Rebuilder
+    from w_About import About
 
 class mainGUI(QMainWindow):
     def __init__(self, parent = None):
@@ -76,8 +75,7 @@ class mainGUI(QMainWindow):
         self.setFixedSize(0,0)
 
     def t_Help(self):
-        print(__file__)
-        #startfile(join('doc', 'lms-help.pdf'))
+        startfile(join(dirname(__file__), 'doc', 'lms-help.pdf'))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

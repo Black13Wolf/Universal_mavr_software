@@ -5,10 +5,11 @@ import sys
 from os.path import join
 from time import sleep
 from threading import Thread, active_count
+
 try:
-    from .sub import Rebuilder as rebuilder
+    from .modules import p_Rebuild as rebuilder
 except:
-    from sub import Rebuilder as rebuilder
+    from modules import p_Rebuild as rebuilder
 
 class Rebuilder(QWidget):
     def __init__(self, parent = None):
