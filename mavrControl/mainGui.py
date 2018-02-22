@@ -2,7 +2,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import sys
-from os import startfile
+import webbrowser
 from os.path import join, dirname
 
 try:
@@ -75,7 +75,7 @@ class mainGUI(QMainWindow):
         self.setFixedSize(0,0)
 
     def t_Help(self):
-        startfile(join(dirname(__file__), 'doc', 'lms-help.pdf'))
+        webbrowser.open_new(join(dirname(__file__), 'doc', 'lms-help.pdf'))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
