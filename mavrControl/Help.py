@@ -1,7 +1,7 @@
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-import markdown
+#import markdown
 try:
     from .helps import *
 except:
@@ -33,9 +33,9 @@ class Help(QWidget):
         
         self.setLayout(self.layout)
 
-        with open('helps\\test.md', encoding='utf-8') as f:
-            self.test_test = f.read()
-            self.browser.setHtml(markdown.markdown(self.test_test))
+        #with open('helps\\test.md', encoding='utf-8') as f:
+        #    self.test_test = f.read()
+        #    self.browser.setHtml(markdown.markdown(self.test_test))
     def ch_Menu(self):
         self.v_Name.clear()
         if self.v_Menu.currentText() == 'Автоматизация':
