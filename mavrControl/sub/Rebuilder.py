@@ -22,6 +22,7 @@ def rebuild_night(params, parent = None, level = 0):
         break
     for star in stars:
         params['input']['star'] = join(params['input']['night'], star)
+        params['output']['star'] = join(params['output']['night'], star)        
         print('\t'*level + params['input']['star'])
         rebuild_star(params, parent, level+1)
 
@@ -33,21 +34,12 @@ def rebuild_star(params, parent = None, level = 0):
     serie_type = check_serie_type(params['input']['star'])
     if not serie_type:
         return 0
-    try:
-        if serie_type == 'dat':
-            spool(params['input']['star'], params['output']['night'])
-        elif serie_type == 'big_tif':
-            big_tif(params['input']['star'], params['output']['night'])        
-        elif serie_type == 'serie_tif':
-            serie_tif(params['input']['star'], params['output']['night'])
-    except:
-        if serie_type == 'dat':
-            spool(params['input']['star'], params['output']['star'])
-        elif serie_type == 'big_tif':
-            big_tif(params['input']['star'], params['output']['star'])        
-        elif serie_type == 'serie_tif':
-            serie_tif(params['input']['star'], params['output']['star'])
-            
+    if serie_type == 'dat':
+        spool(params['input']['star'], params['output']['star'])
+    elif serie_type == 'big_tif':
+        big_tif(params['input']['star'], params['output']['star'])        
+    elif serie_type == 'serie_tif':
+        serie_tif(params['input']['star'], params['output']['star'])
 def check_serie_type(path_to_dir):
     files_num = 0
     for root, dirs, files in walk(path_to_dir):
