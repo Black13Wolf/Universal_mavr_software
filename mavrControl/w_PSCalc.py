@@ -51,7 +51,7 @@ class PSCalculator(QWidget):
 
         self.l_Shape = QLabel('Shape: ')
         self.v_Shape = QComboBox()
-        self.v_Shape.addItems(['(1024,1024)', '(512,512)', '(2048,2048)', '(4096,4096)'])
+        self.v_Shape.addItems(['(1024,1024)', '(512,512)', '(2048,2048)', '(4096,4096)', '(512, 640)'])
 
         self.l_Rmbgr = QLabel('Removing BGR: ')
         self.v_Rmbgr = QComboBox()
@@ -141,4 +141,7 @@ class PSCalculator(QWidget):
             sleep(0.5)
             if active_count() == 2:
                 print('Завершено')
+                import gc
+                memory = gc.collect()
+                print('Очищено объектов из памяти: {}'.format(memory))
                 break

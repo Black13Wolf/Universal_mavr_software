@@ -1,5 +1,5 @@
 ﻿from os.path import join, isdir, basename
-from os import walk, makedirs, system
+from os import walk, makedirs, system, listdir
 import sys
 from time import time
 from numpy import mean
@@ -25,8 +25,8 @@ def scan_set(params, parent = None, level = 0):
     elif isdir(join(params['input']['set'], 'rebuilded')):
         params['input']['subdir'] = join(params['input']['set'], 'rebuilded')
     else:
-        print('Error')
-        return 1
+        params['input']['subdir'] = params['input']['set']
+    
     nights = list(walk(params['input']['subdir']))[0][1]
     for night in nights:
         params['input']['night'] = join(params['input']['subdir'], night)
@@ -38,8 +38,9 @@ def scan_night(params, parent = False, level = 0):
     stars = []
     try:
         makedirs(params['output']['night'])
+        print('Dir created: '+params['output']['night'])
     except:
-        pass
+        print('Error create: '+params['output']['night'])
     for root, dirs, files in walk(params['input']['night']):
         for name in files:
             if not name.endswith('.dat') or name.startswith('dark') or name.startswith('flat') or 'moon' in name or 'bin' in name:
