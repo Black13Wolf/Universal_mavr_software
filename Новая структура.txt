@@ -1,0 +1,26 @@
+Общее описание:
+
+1. Автоматизация
+    1.1. Пересборщик
+    1.2. Спектр Мощности
+
+2. Наблюдения
+    2.1. Координаты HPMS
+
+3. Помощь
+    3.1. О программе
+    3.2. Помощь
+
+Описание по модулям:
+
+mainGUI.py
+d_AUTO:
+    w_Rebuilder.py
+        p_Rebuild.py
+    w_PSCalc.py
+        p_PSBaseScan.py
+        m_PSCalc.py
+d_OBS:
+    w_HPMS.py
+d_HELP:
+    w_About.py

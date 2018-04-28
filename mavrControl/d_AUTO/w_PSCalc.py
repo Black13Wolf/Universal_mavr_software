@@ -6,11 +6,11 @@ from threading import Thread, active_count
 from ast import literal_eval
 from time import sleep
 try:
-    from .modules import p_PSBaseScan as base_scan
-    from .modules.m_PSCalc import get_ps
+    from . import p_PSBaseScan as base_scan
+    from .m_PSCalc import get_ps
 except:
-    from modules import p_PSBaseScan as base_scan
-    from modules.m_PSCalc import get_ps
+    import p_PSBaseScan as base_scan
+    from m_PSCalc import get_ps
     
 class PSCalculator(QWidget):
     def __init__(self, parent = None):

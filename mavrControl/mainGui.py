@@ -7,15 +7,15 @@ from os.path import join, dirname
 
 try:
     from . import __version__
-    from .w_PSCalc import PSCalculator
-    from .w_Rebuilder import Rebuilder
-    from .w_About import About
+    from .d_AUTO.w_PSCalc import PSCalculator
+    from .d_AUTO.w_Rebuilder import Rebuilder
+    from .d_HELP.w_About import About
 except:
     print('Debug version')
     from __init__ import __version__
-    from w_PSCalc import PSCalculator
-    from w_Rebuilder import Rebuilder
-    from w_About import About
+    from d_AUTO.w_PSCalc import PSCalculator
+    from d_AUTO.w_Rebuilder import Rebuilder
+    from d_HELP.w_About import About
 
 class mainGUI(QMainWindow):
     def __init__(self, parent = None):
@@ -72,7 +72,7 @@ class mainGUI(QMainWindow):
         self.setGeometry(self.geometry().x(), self.geometry().y(), 0, 0)
     
     def t_About(self):
-        self.setCentralWidget(About(parent = self))
+        self.setCentralWidget(About(__version__, parent = self))
         self.setGeometry(self.geometry().x(), self.geometry().y(), 0, 0)
 
     def t_Help(self):

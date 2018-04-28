@@ -7,9 +7,9 @@ from time import sleep
 from threading import Thread, active_count
 
 try:
-    from .modules import p_Rebuild as rebuilder
+    from . import p_Rebuild as rebuilder
 except:
-    from modules import p_Rebuild as rebuilder
+    import p_Rebuild as rebuilder
 
 class Rebuilder(QWidget):
     def __init__(self, parent = None):

@@ -4,13 +4,8 @@ from PyQt5.QtWidgets import *
 import urllib.request
 import json
 
-try:
-    from . import __version__
-except:
-    from __init__ import __version__
-
 class About(QWidget):
-    def __init__(self, parent = None):
+    def __init__(self,  __version__, parent = None):
         self.mainGui = parent
         QWidget.__init__(self, parent)
         self.layout = QGridLayout()
