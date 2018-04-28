@@ -2,7 +2,6 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import sys
-#from mavr.processing import get_ps
 from threading import Thread, active_count
 from ast import literal_eval
 from time import sleep
@@ -120,10 +119,8 @@ class PSCalculator(QWidget):
             }
         else:
             return 1
-        #self.th['1'].daemon = True
         self.th['1'].start()
         sleep(0.5)
-        #self.th['2'].daemon = True        
         self.th['2'].start()
         self.mainGui.close()
 

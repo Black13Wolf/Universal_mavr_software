@@ -75,6 +75,9 @@ class About(QWidget):
             data = json.loads(url.read().decode())
         last_update = data[0]
         self.mainGui.close()
+        
+        from pip._internal import main as pip
+        pip(['install', last_update['tarball_url'], '--user', '--proxy=http://squid.sao.ru:8080'])
 
 class sLabel(QLabel):
     def __init__(self, text, parent = None):

@@ -22,8 +22,9 @@ class mainGUI(QMainWindow):
         QMainWindow.__init__(self, parent)
         self.startWidget = QWidget()
         self.startLayout = QGridLayout()
-        self.setWindowTitle('LINUX MAVR SOFTWARE. VER: {}'.format(__version__))
-        self.label = QLabel('LINUX MAVR SOFTWARE. VER: {}'.format(__version__))
+        title = 'MAVR HELPER SOFTWARE VER: {}'.format(__version__)
+        self.setWindowTitle(title)
+        self.label = QLabel(title)
         self.label.setStyleSheet('font-size: 20pt')
         self.setFixedSize(0,0)
         
@@ -54,7 +55,7 @@ class mainGUI(QMainWindow):
         m_Help_Help.setStatusTip('Информация о модулях программы')
         m_Help_Help.triggered.connect(self.t_Help)
         m_Help.addAction(m_Help_Help)
-        #m_Help_Help.setEnabled(False)
+        m_Help_Help.setEnabled(False)
 
 
         #____ Layout Settings
@@ -64,15 +65,15 @@ class mainGUI(QMainWindow):
     
     def t_PSCalculator(self):
         self.setCentralWidget(PSCalculator(parent = self))
-        self.setFixedSize(0,0)
+        self.setGeometry(self.geometry().x(), self.geometry().y(), 0, 0)
     
     def t_Rebuilder(self):
         self.setCentralWidget(Rebuilder(parent = self))
-        self.setFixedSize(0,0)
+        self.setGeometry(self.geometry().x(), self.geometry().y(), 0, 0)
     
     def t_About(self):
         self.setCentralWidget(About(parent = self))
-        self.setFixedSize(0,0)
+        self.setGeometry(self.geometry().x(), self.geometry().y(), 0, 0)
 
     def t_Help(self):
         webbrowser.open_new(join(dirname(__file__), 'doc', 'lms-help.pdf'))
