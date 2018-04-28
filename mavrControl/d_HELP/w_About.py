@@ -6,12 +6,13 @@ import json
 
 class About(QWidget):
     def __init__(self,  __version__, parent = None):
+        self.ver = __version__
         self.mainGui = parent
         QWidget.__init__(self, parent)
         self.layout = QGridLayout()
 
         self.l_name = sLabel('Название: Linux Mavr Software')
-        self.l_version = sLabel('Версия: {}'.format(__version__))
+        self.l_version = sLabel('Версия: {}'.format(self.ver))
         self.l_programmer = sLabel('Разработчик: Бескакотов А. С.')
         self.l_mail = sLabel('eMail: beskakotov.as@gmail.com')
         
@@ -49,7 +50,7 @@ class About(QWidget):
             data = json.loads(url.read().decode())
         self.last_update = data[0]['name']
 
-        if __version__ == self.last_update:
+        if self.ver == self.last_update:
             self.l_git_version.setText('У Вас установлена самая последняя версия.')
         else:
             self.l_git_version.setText('Последняя версия: {}'.format(self.last_update))           
