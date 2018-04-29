@@ -16,19 +16,16 @@ class HPMS(QWidget):
         
        #________ Buttons
         self.b_Calc = QPushButton('Culculate')
-        self.b_Calc.clicked.connect(self._Culc)
-        self.b_Calc.setFixedWidth(200)
-        self.b_Exit = QPushButton('Exit')
-        self.b_Exit.clicked.connect(self._Exit)
-        self.b_Exit.setFixedWidth(200)
-        
+        self.b_Calc.clicked.connect(self._Culc)        
         #________ Labels and TextBoxes
         self.today = QLabel('Today: {:.2f}'.format(self.diff + 2000))
         self.today.setAlignment(Qt.AlignCenter)
         self.l_old_ra = QLabel('RA:')
         self.l_old_dec = QLabel('DEC:')
         self.t_old_ra = QLineEdit()
+        self.t_old_ra.setFixedWidth(200)
         self.t_old_dec = QLineEdit()
+        self.t_old_dec.setFixedWidth(200)        
         self.l_p_ra = QLabel('RA proper:')
         self.l_p_dec = QLabel('RA proper:')
         self.t_p_ra = QLineEdit()
@@ -50,8 +47,7 @@ class HPMS(QWidget):
         self.layout.addWidget(self.t_p_dec, 4, 1)
         self.layout.addWidget(self.new_ra, 5, 0)
         self.layout.addWidget(self.new_dec, 5, 1)
-        self.layout.addWidget(self.b_Calc, 6, 0)
-        self.layout.addWidget(self.b_Exit, 6, 1)
+        self.layout.addWidget(self.b_Calc, 6, 0, 1, 2)
         self.setLayout(self.layout)
         
     def _Culc(self):
@@ -99,6 +95,3 @@ class HPMS(QWidget):
             new_dec = '%i %i %.2f'%(new_dec_d, new_dec_m, new_dec_s)
             self.new_ra.setText(new_ra)
             self.new_dec.setText(new_dec)
-        
-    def _Exit(self):
-        sys.exit(app.exec_())
