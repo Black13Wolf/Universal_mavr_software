@@ -27,7 +27,7 @@ class HPMS(QWidget):
         self.t_old_dec = QLineEdit()
         self.t_old_dec.setFixedWidth(200)        
         self.l_p_ra = QLabel('RA proper:')
-        self.l_p_dec = QLabel('RA proper:')
+        self.l_p_dec = QLabel('DEC proper:')
         self.t_p_ra = QLineEdit()
         self.t_p_dec = QLineEdit()
         self.new_ra = QLabel('HH MM SS.SS')
