@@ -9,12 +9,14 @@ try:
     from . import __version__
     from .d_AUTO.w_PSCalc import PSCalculator
     from .d_AUTO.w_Rebuilder import Rebuilder
+    from .d_OBS.w_HPMS import HPMS
     from .d_HELP.w_About import About
 except:
     print('Debug version')
     from __init__ import __version__
     from d_AUTO.w_PSCalc import PSCalculator
     from d_AUTO.w_Rebuilder import Rebuilder
+    from d_OBS.w_HPMS import HPMS
     from d_HELP.w_About import About
 
 class mainGUI(QMainWindow):
@@ -34,7 +36,8 @@ class mainGUI(QMainWindow):
         m_Auto = mainMenu.addMenu('Автоматизация')
         m_Obs = mainMenu.addMenu('Наблюдения')
         m_Help = mainMenu.addMenu('Помощь')
-            #____ Menu signals
+
+            #____ AUTO signals
         m_Auto_PSCalculator = QAction(QIcon(''), 'Расчет спектра мощности', self)
         m_Auto_PSCalculator.setStatusTip('Автоматический расчет спектра мощности по году, сету, ночи или файлу')
         m_Auto_PSCalculator.triggered.connect(self.t_PSCalculator)
@@ -44,8 +47,14 @@ class mainGUI(QMainWindow):
         m_Auto_Rebuilder.setStatusTip('Автоматическая пересборка сырых данных камеры Andor в единые файлы формата "dat"')
         m_Auto_Rebuilder.triggered.connect(self.t_Rebuilder)
         m_Auto.addAction(m_Auto_Rebuilder)
+
+            #____ OBS signals
+        m_Obs_HPMS = QAction(QIcon(''), 'Координаты HPMS', self)
+        m_Obs_HPMS.setStatusTip('Пересчет координат для объектов с сильным собственным движением')
+        m_Obs_HPMS.triggered.connect(self.t_HPMS)
+        m_Obs.addAction(m_Obs_HPMS)            
             
-            #____ Help signals
+            #____ HELP signals
         m_Help_About = QAction(QIcon(''), 'О программе', self)
         m_Help_About.setStatusTip('Информация о программе')
         m_Help_About.triggered.connect(self.t_About)
@@ -74,6 +83,10 @@ class mainGUI(QMainWindow):
     def t_About(self):
         self.setCentralWidget(About(__version__, parent = self))
         self.setGeometry(self.geometry().x(), self.geometry().y(), 0, 0)
+    
+    def t_HPMS(self):
+        self.setCentralWidget(HPMS(parent = self))
+        self.setGeometry(self.geometry().x(), self.geometry().y(), 0, 0)        
 
     def t_Help(self):
         webbrowser.open_new(join(dirname(__file__), 'doc', 'lms-help.pdf'))
