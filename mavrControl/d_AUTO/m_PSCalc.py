@@ -10,6 +10,7 @@
     else: lims = (512,512)
     frames = int(serie.size/lims[0]/lims[1])
     serie = serie.reshape((frames, lims[0], lims[1]))
+    serie = partickle_searcher(serie)
     output_ps = zeros(shape)
     for num in range(frames):
         frame = zeros(shape)
@@ -48,9 +49,10 @@ def rmbgr(middle_star, xlim):
     middle_star_clean = middle_star - slice_out 
     return middle_star_clean 
 
-def partickle_searcher(frame):
+def partickle_searcher(data):
     '''
-        Функция будет анализировать кадр (или серию кадров) на поиск перекопов или частиц и выдавать номера кадров, допущенные к расчетам.
+        Функция будет анализировать кадр (или серию кадров) на поиск перекопов или частиц и выдавать номера кадров, допущенные к 
+        расчетам.
         не более 50 кадров можно выкинуть из серии 2000 кадров. То есть не более %2.5 от общего количества кадров в серии.
     '''
-    pass
+    return data
