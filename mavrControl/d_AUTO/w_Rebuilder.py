@@ -83,8 +83,12 @@ class Rebuilder(QWidget):
         self.mainGui.close()
                 
     def s_Def_path(self):
-        if self.v_Output.text() == '':
+        if self.v_Output.text() == '' and self.v_Type.currentText().lower() == 'star':
+            self.v_Output.setText(join(self.v_Input.text()))
+            
+        elif self.v_Output.text() == '' and (self.v_Type.currentText().lower() == 'night' or self.v_Type.currentText().lower() == 'set'):
             self.v_Output.setText(join(self.v_Input.text(), 'rebuild'))
+        
     
     def check_of_end(self):
         while True:
