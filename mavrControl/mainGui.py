@@ -35,6 +35,7 @@ class mainGUI(QMainWindow):
         mainMenu = self.menuBar() 
         m_Auto = mainMenu.addMenu('Автоматизация')
         m_Obs = mainMenu.addMenu('Наблюдения')
+        m_Win = mainMenu.addMenu('WindowsOnly')
         m_Help = mainMenu.addMenu('Помощь')
 
             #____ AUTO signals
@@ -53,7 +54,18 @@ class mainGUI(QMainWindow):
         m_Obs_HPMS.setStatusTip('Пересчет координат для объектов с сильным собственным движением')
         m_Obs_HPMS.triggered.connect(self.t_HPMS)
         m_Obs.addAction(m_Obs_HPMS)            
-            
+
+            #____ OBS signals
+        m_Win_Mask = QAction(QIcon(''), 'Рассчет масок', self)
+        m_Win_Mask.setStatusTip('Рассчет положения пучков в масках используя модуль model.exe пакета starc')
+        m_Win_Mask.triggered.connect(self.t_starc_Mask)
+        m_Win.addAction(m_Win_Mask)
+
+        m_Win_PS = QAction(QIcon(''), 'СПМ и АКФ', self)
+        m_Win_PS.setStatusTip('Рассчет спектров мощности и АвтоКорреляционной функции звезд используя модуль spectr.exe пакета starc')
+        m_Win_PS.triggered.connect(self.t_starc_PS)
+        m_Win.addAction(m_Win_PS)  
+
             #____ HELP signals
         m_Help_About = QAction(QIcon(''), 'О программе', self)
         m_Help_About.setStatusTip('Информация о программе')
@@ -90,6 +102,12 @@ class mainGUI(QMainWindow):
 
     def t_Help(self):
         webbrowser.open_new(join(dirname(__file__), 'doc', 'lms-help.pdf'))
+
+    def t_starc_Mask(self):
+        pass
+    
+    def t_starc_PS(self):
+        pass
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
