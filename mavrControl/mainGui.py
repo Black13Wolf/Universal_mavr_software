@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 import sys
 import webbrowser
 from os.path import join, dirname
+from time import sleep
 
 try:
     from . import __version__
@@ -11,6 +12,8 @@ try:
     from .d_AUTO.w_Rebuilder import Rebuilder
     from .d_OBS.w_HPMS import HPMS
     from .d_HELP.w_About import About
+    from .d_WIN.w_starc_Mask import starc_MASK
+    from .d_WIN.w_starc_PS import starc_PS
 except:
     print('Debug version')
     from __init__ import __version__
@@ -18,6 +21,8 @@ except:
     from d_AUTO.w_Rebuilder import Rebuilder
     from d_OBS.w_HPMS import HPMS
     from d_HELP.w_About import About
+    from d_WIN.w_starc_Mask import starc_MASK
+    from d_WIN.w_starc_PS import starc_PS
 
 class mainGUI(QMainWindow):
     def __init__(self, parent = None):
@@ -36,6 +41,8 @@ class mainGUI(QMainWindow):
         m_Auto = mainMenu.addMenu('Автоматизация')
         m_Obs = mainMenu.addMenu('Наблюдения')
         m_Win = mainMenu.addMenu('WindowsOnly')
+        if not (sys.platform == 'win32' or sys.platform == 'win64'):
+            m_Win.setEnabled(False)        
         m_Help = mainMenu.addMenu('Помощь')
 
             #____ AUTO signals
@@ -83,31 +90,41 @@ class mainGUI(QMainWindow):
         self.startLayout.addWidget(self.label, 0, 0)
         self.startWidget.setLayout(self.startLayout)
         self.setCentralWidget(self.startWidget)
+        self.setGeometry(320, 240, 0, 0)                
     
     def t_PSCalculator(self):
         self.setCentralWidget(PSCalculator(parent = self))
-        self.setGeometry(self.geometry().x(), self.geometry().y(), 0, 0)
+        self.update_sizes()
     
     def t_Rebuilder(self):
         self.setCentralWidget(Rebuilder(parent = self))
-        self.setGeometry(self.geometry().x(), self.geometry().y(), 0, 0)
+        self.update_sizes()
     
     def t_About(self):
         self.setCentralWidget(About(__version__, parent = self))
-        self.setGeometry(self.geometry().x(), self.geometry().y(), 0, 0)
+        self.update_sizes()
     
     def t_HPMS(self):
         self.setCentralWidget(HPMS(parent = self))
-        self.setGeometry(self.geometry().x(), self.geometry().y(), 0, 0)        
+        self.update_sizes()
 
     def t_Help(self):
         webbrowser.open_new(join(dirname(__file__), 'doc', 'lms-help.pdf'))
 
     def t_starc_Mask(self):
-        pass
+        self.setCentralWidget(starc_MASK(parent = self))
+        self.update_sizes()
     
     def t_starc_PS(self):
-        pass
+        self.setCentralWidget(starc_PS(parent = self))
+        self.update_sizes()
+
+    def update_sizes(self):
+        self.setGeometry(self.geometry().x(), self.geometry().y(), 0, 0)
+        sleep(0.001)
+        self.update()
+        self.updateGeometry()
+        self.setFixedSize(0,0)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
