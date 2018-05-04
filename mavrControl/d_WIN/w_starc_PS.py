@@ -7,18 +7,19 @@ from ast import literal_eval
 from time import sleep
 from subprocess import call
 from threading import Thread
-from os import walk
-from os.path import join, isdir
-
-__DEBUG__ = True   
+from os import walk, makedirs
+from os.path import join, isdir, basename
+from shutil import copy, move
 
 class starc_PS(QWidget):
     sign_change_progress = pyqtSignal(int, int, str)
+    sign_end_of_calc = pyqtSignal()
     def __init__(self, parent = None):
         self.mainGui = parent
         QWidget.__init__(self, parent)
 
         self.sign_change_progress.connect(self.slot_change_progress)
+        self.sign_end_of_calc.connect(self.slot_end_of_calc)
         self.layout = QGridLayout()
         
         self.l_Starc = QLabel('STARC path: ')
@@ -39,11 +40,11 @@ class starc_PS(QWidget):
         
         self.l_Type = QLabel('Type: ')
         self.v_Type = QComboBox()
-        self.v_Type.addItems(['Set', 'Year', 'Night', 'Star'])
+        self.v_Type.addItems(['Year', 'Set', 'Night', 'Star'])
 
         self.l_Diff = QLabel('Frame diff (/k): ')
         self.v_Diff = QComboBox()
-        self.v_Diff.addItems(['-1', '0', '1', '2', '3', '5', '10', '25', '50', '100'])
+        self.v_Diff.addItems(['1', '0', '-1', '2', '3', '5', '10', '25', '50', '100'])
 
         self.l_Size = QLabel('Resizing (/S): ')
         self.v_Size = QComboBox()
@@ -93,11 +94,6 @@ class starc_PS(QWidget):
 
         self.setLayout(self.layout)
 
-        if __DEBUG__:
-            self.v_Starc.setText(r'd:\Prog\STARC')
-            self.v_Input.setText(r'd:\!WORK\OBSERVATIONS\test_year')
-            self.v_Output.setText(r'd:\!WORK\OBSERVATIONS\temp')
-
     def c_Input(self):
         if self.v_Type.currentText().lower() == 'star':
             self.v_Input.setText(QFileDialog.getOpenFileName(self, 'Select Input Dat File', '.', "DAT (*.dat)")[0])
@@ -126,6 +122,10 @@ class starc_PS(QWidget):
             self.PB.setValue(0)
         self.PB.setValue(v)
         self.msg.setText(text)
+    
+    def slot_end_of_calc(self):
+        self.b_Start.setEnabled(True)
+        self.msg.setText('Finished')
         
     def process(self):
         if self.v_Type.currentText().lower() == 'year':
@@ -136,7 +136,9 @@ class starc_PS(QWidget):
             self.scan_night()
         elif self.v_Type.currentText().lower() == 'star':
             pass
-        print(self.params)
+        self.sign_change_progress.emit(0, len(self.params['work']), 'Ready to calculate.')
+        self.calc_PS()
+        self.sign_end_of_calc.emit()
 
     def scan_year(self):
         self.params['sets'] = {}
@@ -166,10 +168,47 @@ class starc_PS(QWidget):
                             if f.endswith('.dat') and not f.startswith('dark') and not f.startswith('flat') and not f.endswith('moon.dat'):
                                 self.params['work'].append(join(self.params['basepath'], p_set, night, f))
         elif 'nights' in self.params:
-            pass
-        else:
-            pass
-
+            for night in self.params['nights']:
+                for root, dirs, files in walk(join(self.params['basepath'], night)):
+                    for f in files:
+                        if f.endswith('.dat') and not f.startswith('dark') and not f.startswith('flat') and not f.endswith('moon.dat'):
+                            self.params['work'].append(join(self.params['basepath'], night, f))
+        else:   
+            for root, dirs, files in walk(self.params['basepath']):
+                for f in files:
+                    if f.endswith('.dat') and not f.startswith('dark') and not f.startswith('flat') and not f.endswith('moon.dat'):
+                        self.params['work'].append(join(self.params['basepath'], f))
     
-    def calc_PS(self, level = 0):
-        pass
+    def calc_PS(self):
+        i = 0
+        for star in self.params['work']:
+            i+=1
+            self.sign_change_progress.emit(i, len(self.params['work']), star)
+            if self.v_Silent.currentText() == 'ON':
+                self.silent = '/s'
+            else:
+                self.silent = ''
+            if self.v_Batch.currentText() == 'ON':
+                self.batch = '/p'
+            else:
+                self.batch = ''
+
+            if self.v_Type.currentText().lower() == 'star':
+                output_path = self.v_Output.text()
+            elif self.v_Type.currentText().lower() == 'night':
+                output_path = join(self.v_Output.text(), star.split('\\')[-2])                
+            elif self.v_Type.currentText().lower() == 'set':
+                output_path = join(self.v_Output.text(), star.split('\\')[-2])
+            elif self.v_Type.currentText().lower() == 'year':
+                output_path = join(self.v_Output.text(), star.split('\\')[-4], star.split('\\')[-2])
+            try:
+                makedirs(output_path)
+            except:
+                pass
+            copy(join(self.v_Starc.text(), 'DATA', 'file.xfs'), star+'.xfs')
+            call([join(self.v_Starc.text(), 'spectr.exe'), star, '/k {}'.format(self.v_Diff.currentText()), '/S {}'.format(self.v_Size.currentText()), self.silent, self.batch])
+            move(join(self.v_Starc.text(), 'SPECTR', '{}x'.format(self.v_Size.currentText()), 'VIS', basename(star)+'.spectr.[1]acf.dat'), join(output_path, basename(star)+'ACF.dat')) 
+            move(join(self.v_Starc.text(), 'SPECTR', '{}x'.format(self.v_Size.currentText()), 'VIS', basename(star)+'.spectr.[1]acf.%dat'), join(output_path, basename(star)+'ACF.%dat')) 
+            move(join(self.v_Starc.text(), 'SPECTR', '{}x'.format(self.v_Size.currentText()), 'VIS', basename(star)+'.spectr.[1]sw4.dat'), join(output_path, basename(star)+'PS.dat')) 
+            move(join(self.v_Starc.text(), 'SPECTR', '{}x'.format(self.v_Size.currentText()), 'VIS', basename(star)+'.spectr.[1]sw4.%dat'), join(output_path, basename(star)+'PS.%dat')) 
+             
