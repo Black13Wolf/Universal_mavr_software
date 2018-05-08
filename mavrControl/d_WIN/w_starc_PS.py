@@ -24,7 +24,7 @@ class starc_PS(QWidget):
         
         self.l_Starc = QLabel('STARC path: ')
         self.v_Starc = QLineEdit()
-        self.v_Starc.setFixedWidth(250)
+        self.v_Starc.setFixedWidth(300)
         self.b_Starc = QPushButton('Choose path')
         self.b_Starc.clicked.connect(self.c_Starc)
 
@@ -156,10 +156,16 @@ class starc_PS(QWidget):
                     self.params['sets'][p_set]['nights'] = [join(subdir, d) for d in dirs]                    
                     break
         else:
-            self.params['nights'] = list(walk(join(self.params['basepath'])))[0][1]
+            #  !!! Добавить учёт "SUBDIR"
+            if isdir(join(self.params['basepath'], 'cut')): subdir = 'cut'
+            elif isdir(join(self.params['basepath'], 'rebuild')): subdir = 'rebuild'
+            elif isdir(join(self.params['basepath'], 'rebuilded')): subdir = 'rebuilded'
+            self.params['nights'] = [join(subdir, p) for p in list(walk(join(self.params['basepath'], subdir)))[0][1]]
         self.scan_night()
 
     def scan_night(self):
+        for i in self.params:
+            print(self.params[i])    
         if 'sets' in self.params:
             for p_set in self.params['sets']['paths']:
                 for night in self.params['sets'][p_set]['nights']:
