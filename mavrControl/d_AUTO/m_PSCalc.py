@@ -10,7 +10,7 @@
     else: lims = (512,512)
     frames = int(serie.size/lims[0]/lims[1])
     serie = serie.reshape((frames, lims[0], lims[1]))
-    serie = partickle_searcher(serie)
+    serie, frames = partickle_searcher(serie)
     output_ps = zeros(shape)
     for num in range(frames):
         frame = zeros(shape)
@@ -50,9 +50,25 @@ def rmbgr(middle_star, xlim):
     return middle_star_clean 
 
 def partickle_searcher(data):
-    '''
-        Функция будет анализировать кадр (или серию кадров) на поиск перекопов или частиц и выдавать номера кадров, допущенные к 
-        расчетам.
-        не более 50 кадров можно выкинуть из серии 2000 кадров. То есть не более %2.5 от общего количества кадров в серии.
-    '''
-    return data
+    print('Поиск частиц')
+    #from matplotlib.pyplot import plot, clf, savefig
+    from numpy import std, array, mean, where, delete
+    stds = []
+    for i in data:
+        stds.append(std(i))
+    norm = stds/max(stds)
+    ad = mean(norm)
+    print('Показатель адекватности: {:.2f}'.format(ad))
+    if ad < 0.5:
+        print('Поиск плохих кадров')
+        bad_frames = where(norm > ad*1.2)[0]
+        print(bad_frames)
+        print('Найдено плохих кадров: {}, что составляет: {:.2f}%.Удаление'.format(len(bad_frames), (len(bad_frames)/data.shape[0])*100))
+        data = delete(data, bad_frames, axis=0)
+        stds = []
+        for i in data:
+            stds.append(std(i))
+        norm = stds/max(stds)
+        print('Длина серии: {}'.format(data.shape[0]))
+    print('Конец поиска частиц')
+    return data, data.shape[0]
