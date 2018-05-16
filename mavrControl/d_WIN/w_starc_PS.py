@@ -156,7 +156,6 @@ class starc_PS(QWidget):
                     self.params['sets'][p_set]['nights'] = [join(subdir, d) for d in dirs]                    
                     break
         else:
-            #  !!! Добавить учёт "SUBDIR"
             if isdir(join(self.params['basepath'], 'cut')): subdir = 'cut'
             elif isdir(join(self.params['basepath'], 'rebuild')): subdir = 'rebuild'
             elif isdir(join(self.params['basepath'], 'rebuilded')): subdir = 'rebuilded'
