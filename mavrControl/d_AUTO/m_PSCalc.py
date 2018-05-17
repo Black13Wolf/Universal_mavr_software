@@ -10,7 +10,11 @@
     else: lims = (512,512)
     frames = int(serie.size/lims[0]/lims[1])
     serie = serie.reshape((frames, lims[0], lims[1]))
-    serie, frames = partickle_searcher(serie)
+
+    serie, frames = partickle_searcher(serie, path_to_dat, output_file, output)
+    return 0
+
+########################################################
     output_ps = zeros(shape)
     for num in range(frames):
         frame = zeros(shape)
@@ -49,26 +53,43 @@ def rmbgr(middle_star, xlim):
     middle_star_clean = middle_star - slice_out 
     return middle_star_clean 
 
-def partickle_searcher(data):
+def partickle_searcher(data, name, output_path, log_path):
     print('Поиск частиц')
-    #from matplotlib.pyplot import plot, clf, savefig
     from numpy import std, array, mean, where, delete
+    from matplotlib.pyplot import clf, plot, savefig
+    from os.path import join
     stds = []
     for i in data:
         stds.append(std(i))
+        
+    stds -= min(stds)
     norm = stds/max(stds)
+
+    plot(norm, color='black')
+    savefig(output_path+'.before.png')
+    clf()
+
     ad = mean(norm)
+    ad2 = std(norm)
+    bad_frames = []
     print('Показатель адекватности: {:.2f}'.format(ad))
-    if ad < 0.5:
+    print('Показатель адекватности v2: {:.2f}'.format(ad2))
+    if ad2 < 0.1:
         print('Поиск плохих кадров')
-        bad_frames = where(norm > ad*1.2)[0]
+        bad_frames = where(norm > ad + ad2*3)[0]
         print(bad_frames)
-        print('Найдено плохих кадров: {}, что составляет: {:.2f}%.Удаление'.format(len(bad_frames), (len(bad_frames)/data.shape[0])*100))
+        print('Найдено плохих кадров: {}, что составляет: {:.2f}%. Удаление'.format(len(bad_frames), (len(bad_frames)/data.shape[0])*100))
         data = delete(data, bad_frames, axis=0)
         stds = []
         for i in data:
             stds.append(std(i))
         norm = stds/max(stds)
         print('Длина серии: {}'.format(data.shape[0]))
+        plot(norm, color='black')
+        savefig(output_path+'.after.png')
+        clf()
     print('Конец поиска частиц')
+    print(log_path+'\\logfile.txt')
+    with open(join(log_path, 'logfile.txt'), 'a+') as log:
+        log.write('{}\t AD1: {:.2f}\t AD2: {:.2f} Плохих кадров: {}\n'.format(name, ad, ad2, len(bad_frames)))
     return data, data.shape[0]
