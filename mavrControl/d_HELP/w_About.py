@@ -39,15 +39,19 @@ class About(QWidget):
         self.setLayout(self.layout)
 
     def c_Check_updates(self):
-        proxies = {
-    "http" : "http://squid.sao.ru:8080",
-    "https" : "http://squid.sao.ru:8080",
-        }
-        proxy_support = urllib.request.ProxyHandler(proxies)
-        opener = urllib.request.build_opener(proxy_support)
-        urllib.request.install_opener(opener)
-        with urllib.request.urlopen('https://api.github.com/repos/Black13Wolf/linux_mavr_software/tags') as url:
-            data = json.loads(url.read().decode())
+        try:
+            with urllib.request.urlopen('https://api.github.com/repos/Black13Wolf/linux_mavr_software/tags') as url:
+                data = json.loads(url.read().decode())
+        except:
+            proxies = {
+                    "http" : "http://squid.sao.ru:8080",
+                    "https" : "http://squid.sao.ru:8080",
+            }
+            proxy_support = urllib.request.ProxyHandler(proxies)
+            opener = urllib.request.build_opener(proxy_support)
+            urllib.request.install_opener(opener)
+            with urllib.request.urlopen('https://api.github.com/repos/Black13Wolf/linux_mavr_software/tags') as url:
+                data = json.loads(url.read().decode())
         self.last_update = data[0]['name']
 
         if self.ver == self.last_update:
