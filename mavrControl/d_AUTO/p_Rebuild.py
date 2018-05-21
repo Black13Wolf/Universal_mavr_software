@@ -2,10 +2,7 @@ from numpy import *
 from os import walk, makedirs
 from os.path import isdir, join, isfile, dirname
 
-try:
-    from .m_Rebuild import *
-except:
-    from m_Rebuild import *
+from .m_Rebuild import *
 
 def rebuild_start(params, parent = None):
     if params['type'] == 'set':

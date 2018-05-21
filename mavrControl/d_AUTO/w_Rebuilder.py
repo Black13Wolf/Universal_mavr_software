@@ -2,14 +2,12 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import sys
-from os.path import join
+from os.path import join, abspath, dirname, pardir
 from time import sleep
 from threading import Thread, active_count
 
-try:
-    from . import p_Rebuild as rebuilder
-except:
-    import p_Rebuild as rebuilder
+from . import p_Rebuild as rebuilder
+from ..d_LOG.logging import test_msg
 
 class Rebuilder(QWidget):
     sign_set_progress = pyqtSignal(int, int)
@@ -52,8 +50,6 @@ class Rebuilder(QWidget):
         self.layout.addWidget(self.b_Start, 2, 2, 1, 2)
         self.layout.addWidget(self.progressbar, 3, 0, 1, 4)
         self.setLayout(self.layout)
-
-        self.v_Input.setText(r'e:\CLOUDS\tests\SET')
 
     def c_Input(self):
         self.v_Input.setText(QFileDialog.getExistingDirectory(self, "Select Input Directory", '.', QFileDialog.ShowDirsOnly))

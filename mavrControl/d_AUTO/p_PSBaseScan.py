@@ -4,10 +4,7 @@ import sys
 from time import time
 from numpy import mean
 
-try:
-    from .m_PSCalc import get_ps
-except:
-    from m_PSCalc import get_ps
+from .m_PSCalc import get_ps
     
 def scan_year(params, parent = None, level = 0):
     sets = list(walk(params['input']['year']))[0][1]
@@ -48,7 +45,11 @@ def scan_night(params, parent = False, level = 0):
             else:
                 stars.append(join(root, name))
         break
+    i=0
+    parent.sign_set_progress.emit(i, len(stars))    
     for star in stars:
         print('\t'*level + star)                
         get_ps(star, diff=params['diff'], acf=params['acf'], save=params['save'], shape=params['shape'], output=params['output']['night'], rmbgr_on=params['rmbgr'])
+        i+=1
+        parent.sign_set_progress.emit(i, len(stars))
         

@@ -5,14 +5,12 @@ import sys
 from threading import Thread, active_count
 from ast import literal_eval
 from time import sleep
-try:
-    from . import p_PSBaseScan as base_scan
-    from .m_PSCalc import get_ps
-except:
-    import p_PSBaseScan as base_scan
-    from m_PSCalc import get_ps
+
+from . import p_PSBaseScan as base_scan
+from .m_PSCalc import get_ps
     
 class PSCalculator(QWidget):
+    sign_set_progress = pyqtSignal(int, int)    
     def __init__(self, parent = None):
         self.mainGui = parent
         QWidget.__init__(self, parent)
@@ -56,6 +54,10 @@ class PSCalculator(QWidget):
         self.v_Rmbgr = QComboBox()
         self.v_Rmbgr.addItems(['ON', 'OFF'])
 
+        self.progressbar = QProgressBar()
+        self.sign_set_progress.connect(self.slot_set_progress)
+        self.progressbar.hide()
+
         self.layout.addWidget(self.l_Input, 0, 0)
         self.layout.addWidget(self.v_Input, 0, 1, 1, 2)
         self.layout.addWidget(self.b_Input, 0, 3)
@@ -75,54 +77,49 @@ class PSCalculator(QWidget):
         self.layout.addWidget(self.l_Rmbgr, 4, 2)
         self.layout.addWidget(self.v_Rmbgr, 4, 3)
         self.layout.addWidget(self.b_Start, 10, 1, 1, 2)
+        self.layout.addWidget(self.progressbar, 11, 0, 1, 4)
         self.setLayout(self.layout)
     
 
     def c_Start(self):
         self.b_Start.setEnabled(False)
+        self.b_Input.setEnabled(False)
+        self.b_Output.setEnabled(False)
+        self.progressbar.show()
         params = {}
         params['input'] = {self.v_Type.currentText().lower() : self.v_Input.text()}
         params['output'] = {self.v_Type.currentText().lower() : self.v_Output.text()}
         params['type'] = self.v_Type.currentText().lower()
         params['diff'] = self.v_Diff.value() 
+
         if self.v_Acf.currentText() == 'ON':
             params['acf'] = True
         elif self.v_Acf.currentText() == 'OFF':
             params['acf'] = False
+
         if self.v_Save.currentText() == 'OFF':
             params['save'] = False
-        else: params['save'] = self.v_Save.currentText()
+        else:
+            params['save'] = self.v_Save.currentText()
+
         params['shape'] = literal_eval(self.v_Shape.currentText())
+
         if self.v_Rmbgr.currentText() == 'ON':
             params['rmbgr'] = True
         elif self.v_Rmbgr.currentText() == 'OFF':
             params['rmbgr'] = False
+
         if params['type'] == 'year':
-            self.th = {
-                '1' : Thread(target = base_scan.scan_year, args=(params, self)),
-                '2' : Thread(target = self.check_of_end)
-            }
+            self.th = Thread(target = base_scan.scan_year, args=(params, self))
         elif params['type'] == 'set':
-            self.th = {
-                '1' : Thread(target = base_scan.scan_set, args=(params, self)),
-                '2' : Thread(target = self.check_of_end)
-            }
+            self.th = Thread(target = base_scan.scan_set, args=(params, self))
         elif params['type'] == 'night':
-            self.th = {
-                '1' : Thread(target = base_scan.scan_night, args=(params, self)),
-                '2' : Thread(target = self.check_of_end)
-            }
+            self.th = Thread(target = base_scan.scan_night, args=(params, self))
         elif params['type'] == 'star':
-            self.th = {
-                '1' : Thread(target = get_ps, args = (params['input']['star'],), kwargs={'diff':params['diff'], 'acf':params['acf'], 'save':params['save'], 'shape':params['shape'], 'output':params['output']['star'], 'rmbgr_on':params['rmbgr']}),
-                '2' : Thread(target = self.check_of_end)
-            }
+            self.th = Thread(target = get_ps, args = (params['input']['star'],), kwargs={'diff':params['diff'], 'acf':params['acf'], 'save':params['save'], 'shape':params['shape'], 'output':params['output']['star'], 'rmbgr_on':params['rmbgr']})
         else:
             return 1
-        self.th['1'].start()
-        sleep(0.5)
-        self.th['2'].start()
-        self.mainGui.close()
+        self.th.start()
 
     def c_Input(self):
         if self.v_Type.currentText().lower() == 'star':
@@ -133,12 +130,10 @@ class PSCalculator(QWidget):
     def c_Output(self):
         self.v_Output.setText(QFileDialog.getExistingDirectory(self, "Select Output Directory", '.', QFileDialog.ShowDirsOnly))
     
-    def check_of_end(self):
-        while True:
-            sleep(0.5)
-            if active_count() == 2:
-                print('Завершено')
-                import gc
-                memory = gc.collect()
-                print('Очищено объектов из памяти: {}'.format(memory))
-                break
+    def slot_set_progress(self, v, maxv):
+        self.progressbar.setRange(0, maxv)
+        self.progressbar.setValue(v)
+        if v == maxv:
+            self.b_Start.setEnabled(True)
+            self.b_Input.setEnabled(True)
+            self.b_Output.setEnabled(True)
