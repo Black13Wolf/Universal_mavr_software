@@ -1,50 +1,76 @@
 from numpy import *
 from os import walk, makedirs
-from os.path import isdir, join, isfile
+from os.path import isdir, join, isfile, dirname
 
 try:
     from .m_Rebuild import *
 except:
     from m_Rebuild import *
 
-def rebuild_set(params, parent = None, level = 0):
-    nights = []
-    for root, dirs, files in walk(params['input']['set']):
-        for d in dirs:
-            nights.append(d)
-        break
-    for night in nights:
-        params['input']['night'] = join(params['input']['set'], night)
-        params['output']['night'] = join(params['output']['set'], night)
-        print('\t'*level + params['input']['night'])
-        rebuild_night(params, parent, level+1)
+def rebuild_start(params, parent = None):
+    if params['type'] == 'set':
+        params['nights'] = {}
+        params['nights']['inputs'] = []
+        params['nights']['outputs'] = []
+        append_i = params['nights']['inputs'].append
+        append_o = params['nights']['outputs'].append
+        for root, dirs, files in walk(params['input']['set']):
+            for d in dirs:
+                append_i(join(params['input']['set'], d))
+                append_o(join(params['output']['set'], d))
+            break
+        params['stars'] = {}
+        params['stars']['inputs'] = []
+        params['stars']['outputs'] = []        
+        append_i = params['stars']['inputs'].append
+        append_o = params['stars']['outputs'].append
+        for n in range(len(params['nights']['inputs'])):
+            for root, dirs, files in walk(params['nights']['inputs'][n]):
+                for d in dirs:
+                    append_i(join(root, d))
+                    append_o(join(params['nights']['outputs'][n], d+'.dat'))
+                break
 
-def rebuild_night(params, parent = None, level = 0):
-    stars = []
-    for root, dirs, files in walk(params['input']['night']):
-        for d in dirs:
-            stars.append(d)
-        break
-    for star in stars:
-        params['input']['star'] = join(params['input']['night'], star)
-        params['output']['star'] = join(params['output']['night'], star)        
-        print('\t'*level + params['input']['star'])
-        rebuild_star(params, parent, level+1)
+    elif params['type'] == 'night':
+        params['stars'] = {}
+        params['stars']['inputs'] = []
+        params['stars']['outputs'] = []        
+        append_i = params['stars']['inputs'].append
+        append_o = params['stars']['outputs'].append
+        for root, dirs, files in walk(params['input']['night']):
+            for d in dirs:
+                append_i(join(root, d))
+                append_o(join(params['output']['night'], d+'.dat'))
+            break
 
-def rebuild_star(params, parent = None, level = 0):
+    elif params['type'] == 'star':
+        params['stars'] = {}
+        params['stars']['inputs'] = [params['input']['star'],]
+        params['stars']['outputs'] = [params['output']['star']+'.dat',]
+
+    params['files'] = len(params['stars']['inputs'])
+    parent.sign_set_progress.emit(0, params['files'])
+
+    for i in range(len(params['stars']['inputs'])):
+        rebuild_star(params['stars']['inputs'][i], params['stars']['outputs'][i])
+        parent.sign_set_progress.emit(i+1, params['files'])
+        
+def rebuild_star(path_i, path_o):
     try:
-        makedirs(params['output']['night'])
+        makedirs(dirname(path_o))
     except:
         pass
-    serie_type = check_serie_type(params['input']['star'])
+    print(path_i)
+    serie_type = check_serie_type(path_i)
+
     if not serie_type:
         return 0
     if serie_type == 'dat':
-        spool(params['input']['star'], params['output']['star'])
+        spool(path_i, path_o)
     elif serie_type == 'big_tif':
-        big_tif(params['input']['star'], params['output']['star'])        
+        big_tif(path_i, path_o)       
     elif serie_type == 'serie_tif':
-        serie_tif(params['input']['star'], params['output']['star'])
+        serie_tif(path_i, path_o)
 
 def check_serie_type(path_to_dir):
     files_num = 0

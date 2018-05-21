@@ -12,6 +12,7 @@ except:
     import p_Rebuild as rebuilder
 
 class Rebuilder(QWidget):
+    sign_set_progress = pyqtSignal(int, int)
     def __init__(self, parent = None):
         QWidget.__init__(self, parent)
         self.mainGui = parent        
@@ -36,6 +37,10 @@ class Rebuilder(QWidget):
         self.v_Type = QComboBox()
         self.v_Type.addItems(['Set', 'Night', 'Star'])
         
+        self.progressbar = QProgressBar()
+        self.sign_set_progress.connect(self.slot_set_progress)
+        self.progressbar.hide()
+
         self.layout.addWidget(self.l_Input, 0, 0)
         self.layout.addWidget(self.v_Input, 0, 1, 1, 2)
         self.layout.addWidget(self.b_Input, 0, 3)
@@ -45,7 +50,10 @@ class Rebuilder(QWidget):
         self.layout.addWidget(self.l_Type, 2, 0)
         self.layout.addWidget(self.v_Type, 2, 1)
         self.layout.addWidget(self.b_Start, 2, 2, 1, 2)
+        self.layout.addWidget(self.progressbar, 3, 0, 1, 4)
         self.setLayout(self.layout)
+
+        self.v_Input.setText(r'e:\CLOUDS\tests\SET')
 
     def c_Input(self):
         self.v_Input.setText(QFileDialog.getExistingDirectory(self, "Select Input Directory", '.', QFileDialog.ShowDirsOnly))
@@ -55,44 +63,27 @@ class Rebuilder(QWidget):
 
     def c_Start(self):
         self.b_Start.setEnabled(False)
+        self.b_Input.setEnabled(False)
+        self.b_Output.setEnabled(False)
+        self.progressbar.show()
+
         params = {}
         params['type'] = self.v_Type.currentText().lower()
         params['input'] = {self.v_Type.currentText().lower() : self.v_Input.text()}
         params['output'] = {self.v_Type.currentText().lower() : self.v_Output.text()}
-
-        if params['type'] == 'set':
-            self.th = {
-                '1' : Thread(target = rebuilder.rebuild_set, args=(params, self)),
-                '2' : Thread(target = self.check_of_end)
-            }
-            
-        elif params['type'] == 'night':
-            self.th = {
-                '1' : Thread(target = rebuilder.rebuild_night, args=(params, self)),
-                '2' : Thread(target = self.check_of_end)
-            }
-            
-        elif params['type'] == 'star':
-            self.th = {
-                '1' : Thread(target = rebuilder.rebuild_star, args=(params, self)),
-                '2' : Thread(target = self.check_of_end)
-            }
-        self.th['1'].start()
-        sleep(0.5)
-        self.th['2'].start()
-        self.mainGui.close()
+        self.th = Thread(target = rebuilder.rebuild_start, args=(params, self))
+        self.th.start()
                 
     def s_Def_path(self):
         if self.v_Output.text() == '' and self.v_Type.currentText().lower() == 'star':
             self.v_Output.setText(join(self.v_Input.text()))
-            
         elif self.v_Output.text() == '' and (self.v_Type.currentText().lower() == 'night' or self.v_Type.currentText().lower() == 'set'):
             self.v_Output.setText(join(self.v_Input.text(), 'rebuild'))
         
-    
-    def check_of_end(self):
-        while True:
-            sleep(0.5)
-            if active_count() == 2:
-                print('Завершено')
-                break
+    def slot_set_progress(self, v, maxv):
+        self.progressbar.setRange(0, maxv)
+        self.progressbar.setValue(v)
+        if v == maxv:
+            self.b_Start.setEnabled(True)
+            self.b_Input.setEnabled(True)
+            self.b_Output.setEnabled(True)
