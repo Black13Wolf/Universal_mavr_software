@@ -25,7 +25,7 @@ def rebuild_start(params, parent = None):
             for root, dirs, files in walk(params['nights']['inputs'][n]):
                 for d in dirs:
                     append_i(join(root, d))
-                    append_o(join(params['nights']['outputs'][n], d+'.dat'))
+                    append_o(join(params['nights']['outputs'][n], d))
                 break
 
     elif params['type'] == 'night':
@@ -37,13 +37,13 @@ def rebuild_start(params, parent = None):
         for root, dirs, files in walk(params['input']['night']):
             for d in dirs:
                 append_i(join(root, d))
-                append_o(join(params['output']['night'], d+'.dat'))
+                append_o(join(params['output']['night'], d))
             break
 
     elif params['type'] == 'star':
         params['stars'] = {}
         params['stars']['inputs'] = [params['input']['star'],]
-        params['stars']['outputs'] = [params['output']['star']+'.dat',]
+        params['stars']['outputs'] = [params['output']['star'],]
 
     params['files'] = len(params['stars']['inputs'])
     parent.sign_set_progress.emit(0, params['files'])
@@ -80,7 +80,7 @@ def check_serie_type(path_to_dir):
         return 'dat'
     elif isfile(join(path_to_dir, 'spool.tif')):
         return 'big_tif'
-    elif files_num > 500 and files[-1].endswith('.tif'):
+    elif files_num > 100 and files[-1].endswith('.tif'):
         return 'serie_tif'
     else:
         print(path_to_dir+' have unknown format')
