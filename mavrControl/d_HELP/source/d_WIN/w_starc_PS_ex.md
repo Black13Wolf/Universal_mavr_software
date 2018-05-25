@@ -1,3 +1,34 @@
+[Назад][Back]
+
+# Модуль **WindowsOnly -> СПМ и АКФ**
+
+## Описание
+
+Модуль используется для автоматического расчета спектров мощности (СПМ) и автокорелляционных функций (АКФ) с использованием модуля **`spectr.exe`** пакета **`StarC`** по году/сету/ночи наблюдений, или конкретного объекта.
+
+## Руководство программиста
+
+---
+### 1. Состав модуля
+
+#### 1.1 Используемые библиотеки Python
+- PyQt5
+- sys
+- threading
+- ast
+- time
+- subprocess
+- os
+- shutil
+
+#### 1.2 Компоненты модуля
+- **w_starc_PS.py**: Единственный компонент, включающий в себя и виджет отображения в главном GUI, и алгоритм по-очередного запуска расчета СПМ и АКФ
+
+---
+### 2. Исходный код модулей
+
+#### 2.1. **w_starc_PS.py**:
+```python
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -214,5 +245,12 @@ class starc_PS(QWidget):
             move(join(self.v_Starc.text(), 'SPECTR', '{}x'.format(self.v_Size.currentText()), 'VIS', basename(star)+'.spectr.[1]acf.dat'), join(output_path, basename(star)+'ACF.dat')) 
             move(join(self.v_Starc.text(), 'SPECTR', '{}x'.format(self.v_Size.currentText()), 'VIS', basename(star)+'.spectr.[1]acf.%dat'), join(output_path, basename(star)+'ACF.%dat')) 
             move(join(self.v_Starc.text(), 'SPECTR', '{}x'.format(self.v_Size.currentText()), 'VIS', basename(star)+'.spectr.[1]sw4.dat'), join(output_path, basename(star)+'PS.dat')) 
-            move(join(self.v_Starc.text(), 'SPECTR', '{}x'.format(self.v_Size.currentText()), 'VIS', basename(star)+'.spectr.[1]sw4.%dat'), join(output_path, basename(star)+'PS.%dat')) 
-             
+            move(join(self.v_Starc.text(), 'SPECTR', '{}x'.format(self.v_Size.currentText()), 'VIS', basename(star)+'.spectr.[1]sw4.%dat'), join(output_path, basename(star)+'PS.%dat'))      
+```
+
+---
+### 3. Алгоритм работы
+
+Будет описан позже
+
+[Back]: ../index.html

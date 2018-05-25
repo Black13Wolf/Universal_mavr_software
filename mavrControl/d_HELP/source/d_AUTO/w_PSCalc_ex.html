@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" integrity="sha384-TEMocfGvRuD1rIAacqrknm5BQZ7W7uWitoih+jMNFXQIbNl16bO8OZmylH/Vi/Ei" crossorigin="anonymous">
+        <style>
+/*--------------------------------------------------------------------------------------------- * Copyright (c) Microsoft Corporation. All rights reserved. * Licensed under the MIT License. See License.txt in the project root for license information. *--------------------------------------------------------------------------------------------*/ body { font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback"; font-size: 14px; padding: 0 12px; line-height: 22px; word-wrap: break-word; } body.scrollBeyondLastLine { margin-bottom: calc(100vh - 22px); } body.showEditorSelection .code-line { position: relative; } body.showEditorSelection .code-active-line:before, body.showEditorSelection .code-line:hover:before { content: ""; display: block; position: absolute; top: 0; left: -12px; height: 100%; } body.showEditorSelection li.code-active-line:before, body.showEditorSelection li.code-line:hover:before { left: -30px; } .vscode-light.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); } .vscode-light.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); } .vscode-dark.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); } .vscode-dark.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); } .vscode-high-contrast.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 160, 0, 0.7); } .vscode-high-contrast.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 160, 0, 1); } img { max-width: 100%; max-height: 100%; } a { color: #4080D0; text-decoration: none; } a:focus, input:focus, select:focus, textarea:focus { outline: 1px solid -webkit-focus-ring-color; outline-offset: -1px; } hr { border: 0; height: 2px; border-bottom: 2px solid; } h1 { padding-bottom: 0.3em; line-height: 1.2; border-bottom-width: 1px; border-bottom-style: solid; } h1, h2, h3 { font-weight: normal; } h1 code, h2 code, h3 code, h4 code, h5 code, h6 code { font-size: inherit; line-height: auto; } a:hover { color: #4080D0; text-decoration: underline; } table { border-collapse: collapse; } table > thead > tr > th { text-align: left; border-bottom: 1px solid; } table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td { padding: 5px 10px; } table > tbody > tr + tr > td { border-top: 1px solid; } blockquote { margin: 0 7px 0 5px; padding: 0 16px 0 10px; border-left: 5px solid; } code { font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback"; font-size: 14px; line-height: 19px; } body.wordWrap pre { white-space: pre-wrap; } .mac code { font-size: 12px; line-height: 18px; } code > div { padding: 16px; border-radius: 3px; overflow: auto; } /** Theming */ .vscode-light { color: rgb(30, 30, 30); } .vscode-dark { color: #DDD; } .vscode-high-contrast { color: white; } .vscode-light code { color: #A31515; } .vscode-dark code { color: #D7BA7D; } .vscode-light code > div { background-color: rgba(220, 220, 220, 0.4); } .vscode-dark code > div { background-color: rgba(10, 10, 10, 0.4); } .vscode-high-contrast code > div { background-color: rgb(0, 0, 0); } .vscode-high-contrast h1 { border-color: rgb(0, 0, 0); } .vscode-light table > thead > tr > th { border-color: rgba(0, 0, 0, 0.69); } .vscode-dark table > thead > tr > th { border-color: rgba(255, 255, 255, 0.69); } .vscode-light h1, .vscode-light hr, .vscode-light table > tbody > tr + tr > td { border-color: rgba(0, 0, 0, 0.18); } .vscode-dark h1, .vscode-dark hr, .vscode-dark table > tbody > tr + tr > td { border-color: rgba(255, 255, 255, 0.18); } .vscode-light blockquote, .vscode-dark blockquote { background: rgba(127, 127, 127, 0.1); border-color: rgba(0, 122, 204, 0.5); } .vscode-high-contrast blockquote { background: transparent; border-color: #fff; }
+</style>
+<style>
+/* Tomorrow Theme */ /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */ /* Original theme - https://github.com/chriskempson/tomorrow-theme */ /* Tomorrow Comment */ .hljs-comment, .hljs-quote { color: #8e908c; } /* Tomorrow Red */ .hljs-variable, .hljs-template-variable, .hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-regexp, .hljs-deletion { color: #c82829; } /* Tomorrow Orange */ .hljs-number, .hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-params, .hljs-meta, .hljs-link { color: #f5871f; } /* Tomorrow Yellow */ .hljs-attribute { color: #eab700; } /* Tomorrow Green */ .hljs-string, .hljs-symbol, .hljs-bullet, .hljs-addition { color: #718c00; } /* Tomorrow Blue */ .hljs-title, .hljs-section { color: #4271ae; } /* Tomorrow Purple */ .hljs-keyword, .hljs-selector-tag { color: #8959a8; } .hljs { display: block; overflow-x: auto; color: #4d4d4c; padding: 0.5em; } .hljs-emphasis { font-style: italic; } .hljs-strong { font-weight: bold; }
+</style>
+<style>
+ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-left: 40px; } .task-list-item { list-style-type: none; } .task-list-item-checkbox { vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+    </head>
+    <body>
+        <p><a href="../index.html">Назад</a></p>
+<h1 id="3">Модуль <strong>Автоматизация -&gt; Расчет СПМ</strong></h1>
+<h2 id="">Описание</h2>
+<p>Модуль предназначен для автоматического расчета спектров мощности (СПМ) и автокорреляционных функций (АКФ).
+Способен рассчитать спектр мощности года/сета/ночи наблюдений или отдельно взятого объекта</p>
+<h2 id="">Руководство программиста</h2>
+<hr>
+<h3 id="1">1. Состав модуля</h3>
+<h4 id="11-3--python">1.1 Используемые библиотеки Python</h4>
+<ul>
+<li>PyQt5</li>
+<li>sys</li>
+<li>threading</li>
+<li>ast</li>
+<li>time</li>
+<li>os</li>
+<li>numpy</li>
+<li>astropy</li>
+<li>gc</li>
+<li>matplotlib</li>
+</ul>
+<h4 id="12">1.2 Компоненты модуля</h4>
+<ul>
+<li><strong>w_PSCalc.py</strong>: Содержит описание виджета, отображаемого в GUI</li>
+<li><strong>p_PSBaseScan.py</strong>: Содержит описание потока, запускаемого параллельно основному</li>
+<li><strong>m_PSCalc.py</strong>: Содержит описание различных функций для выполнения алгоритма</li>
+</ul>
+<hr>
+<h3 id="2">2. Исходный код модулей</h3>
+<h4 id="21-w-pscalcpy">2.1 <strong>w_PSCalc.py</strong>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> PyQt5.QtCore <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> PyQt5.QtGui <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> PyQt5.QtWidgets <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, active_count
+<span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval
+<span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep
+
+<span class="hljs-keyword">from</span> . <span class="hljs-keyword">import</span> p_PSBaseScan <span class="hljs-keyword">as</span> base_scan
+<span class="hljs-keyword">from</span> .m_PSCalc <span class="hljs-keyword">import</span> get_ps
+    
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PSCalculator</span><span class="hljs-params">(QWidget)</span>:</span>
+    sign_set_progress = pyqtSignal(int, int)    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, parent = None)</span>:</span>
+        self.mainGui = parent
+        QWidget.__init__(self, parent)
+        self.main_layout = QGridLayout()
+
+        self.b_Start = QPushButton(<span class="hljs-string">'Start'</span>)
+        self.b_Start.clicked.connect(self.c_Start)
+        self.b_Input = QPushButton(<span class="hljs-string">'Choose path'</span>)
+        self.b_Input.clicked.connect(self.c_Input)
+        self.b_Output = QPushButton(<span class="hljs-string">'Choose path'</span>)
+        self.b_Output.clicked.connect(self.c_Output)        
+        
+        self.l_Input = QLabel(<span class="hljs-string">'Input path: '</span>)
+        self.v_Input = QLineEdit()
+        self.v_Input.setFixedWidth(<span class="hljs-number">300</span>)
+        self.l_Output = QLabel(<span class="hljs-string">'Output path: '</span>)
+        self.v_Output = QLineEdit()
+        self.v_Output.setFixedWidth(<span class="hljs-number">300</span>)
+        
+        self.l_Type = QLabel(<span class="hljs-string">'Type: '</span>)
+        self.v_Type = QComboBox()
+        self.v_Type.addItems([<span class="hljs-string">'Year'</span>, <span class="hljs-string">'Set'</span>, <span class="hljs-string">'Night'</span>, <span class="hljs-string">'Star'</span>])
+        
+        self.l_Diff = QLabel(<span class="hljs-string">'Diff frames: '</span>)
+        self.v_Diff = QSpinBox()
+        self.v_Diff.setValue(<span class="hljs-number">1</span>)
+        self.v_Diff.setMaximum(<span class="hljs-number">50</span>)
+        
+        self.l_Acf = QLabel(<span class="hljs-string">'ACF'</span>)
+        self.v_Acf = QComboBox()
+        self.v_Acf.addItems([<span class="hljs-string">'ON'</span>, <span class="hljs-string">'OFF'</span>])
+        
+        self.l_Save = QLabel(<span class="hljs-string">'Save: '</span>)
+        self.v_Save = QComboBox()
+        self.v_Save.addItems([<span class="hljs-string">'fits'</span>, <span class="hljs-string">'OFF'</span>])
+
+        self.l_Shape = QLabel(<span class="hljs-string">'Shape: '</span>)
+        self.v_Shape = QComboBox()
+        self.v_Shape.addItems([<span class="hljs-string">'(1024,1024)'</span>, <span class="hljs-string">'(512,512)'</span>, <span class="hljs-string">'(2048,2048)'</span>, <span class="hljs-string">'(4096,4096)'</span>, <span class="hljs-string">'(512, 640)'</span>])
+
+        self.l_Rmbgr = QLabel(<span class="hljs-string">'Removing BGR: '</span>)
+        self.v_Rmbgr = QComboBox()
+        self.v_Rmbgr.addItems([<span class="hljs-string">'ON'</span>, <span class="hljs-string">'OFF'</span>])
+
+        self.progressbar = QProgressBar()
+        self.sign_set_progress.connect(self.slot_set_progress)
+        self.progressbar.hide()
+
+        self.main_layout.addWidget(self.l_Input, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
+        self.main_layout.addWidget(self.v_Input, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+        self.main_layout.addWidget(self.b_Input, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>)
+        self.main_layout.addWidget(self.l_Output, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)
+        self.main_layout.addWidget(self.v_Output, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+        self.main_layout.addWidget(self.b_Output, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>)
+        self.main_layout.addWidget(self.l_Type, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>)
+        self.main_layout.addWidget(self.v_Type, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>)
+        self.main_layout.addWidget(self.l_Diff, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>)
+        self.main_layout.addWidget(self.v_Diff, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+        self.main_layout.addWidget(self.l_Acf, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>)
+        self.main_layout.addWidget(self.v_Acf, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>)
+        self.main_layout.addWidget(self.l_Save, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>)
+        self.main_layout.addWidget(self.v_Save, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>)
+        self.main_layout.addWidget(self.l_Shape, <span class="hljs-number">4</span>, <span class="hljs-number">0</span>)
+        self.main_layout.addWidget(self.v_Shape, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>)
+        self.main_layout.addWidget(self.l_Rmbgr, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>)
+        self.main_layout.addWidget(self.v_Rmbgr, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>)
+        self.main_layout.addWidget(self.b_Start, <span class="hljs-number">10</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+        self.main_layout.addWidget(self.progressbar, <span class="hljs-number">11</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>)
+        self.setLayout(self.main_layout)
+    
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">c_Start</span><span class="hljs-params">(self)</span>:</span>
+        self.b_Start.setEnabled(<span class="hljs-keyword">False</span>)
+        self.b_Input.setEnabled(<span class="hljs-keyword">False</span>)
+        self.b_Output.setEnabled(<span class="hljs-keyword">False</span>)
+        self.progressbar.show()
+        params = {}
+        params[<span class="hljs-string">'input'</span>] = {self.v_Type.currentText().lower() : self.v_Input.text()}
+        params[<span class="hljs-string">'output'</span>] = {self.v_Type.currentText().lower() : self.v_Output.text()}
+        params[<span class="hljs-string">'type'</span>] = self.v_Type.currentText().lower()
+        params[<span class="hljs-string">'diff'</span>] = self.v_Diff.value() 
+
+        <span class="hljs-keyword">if</span> self.v_Acf.currentText() == <span class="hljs-string">'ON'</span>:
+            params[<span class="hljs-string">'acf'</span>] = <span class="hljs-keyword">True</span>
+        <span class="hljs-keyword">elif</span> self.v_Acf.currentText() == <span class="hljs-string">'OFF'</span>:
+            params[<span class="hljs-string">'acf'</span>] = <span class="hljs-keyword">False</span>
+
+        <span class="hljs-keyword">if</span> self.v_Save.currentText() == <span class="hljs-string">'OFF'</span>:
+            params[<span class="hljs-string">'save'</span>] = <span class="hljs-keyword">False</span>
+        <span class="hljs-keyword">else</span>:
+            params[<span class="hljs-string">'save'</span>] = self.v_Save.currentText()
+
+        params[<span class="hljs-string">'shape'</span>] = literal_eval(self.v_Shape.currentText())
+
+        <span class="hljs-keyword">if</span> self.v_Rmbgr.currentText() == <span class="hljs-string">'ON'</span>:
+            params[<span class="hljs-string">'rmbgr'</span>] = <span class="hljs-keyword">True</span>
+        <span class="hljs-keyword">elif</span> self.v_Rmbgr.currentText() == <span class="hljs-string">'OFF'</span>:
+            params[<span class="hljs-string">'rmbgr'</span>] = <span class="hljs-keyword">False</span>
+
+        <span class="hljs-keyword">if</span> params[<span class="hljs-string">'type'</span>] == <span class="hljs-string">'year'</span>:
+            self.th = Thread(target = base_scan.scan_year, args=(params, self))
+        <span class="hljs-keyword">elif</span> params[<span class="hljs-string">'type'</span>] == <span class="hljs-string">'set'</span>:
+            self.th = Thread(target = base_scan.scan_set, args=(params, self))
+        <span class="hljs-keyword">elif</span> params[<span class="hljs-string">'type'</span>] == <span class="hljs-string">'night'</span>:
+            self.th = Thread(target = base_scan.scan_night, args=(params, self))
+        <span class="hljs-keyword">elif</span> params[<span class="hljs-string">'type'</span>] == <span class="hljs-string">'star'</span>:
+            self.th = Thread(target = get_ps, args = (params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'star'</span>],), kwargs={<span class="hljs-string">'diff'</span>:params[<span class="hljs-string">'diff'</span>], <span class="hljs-string">'acf'</span>:params[<span class="hljs-string">'acf'</span>], <span class="hljs-string">'save'</span>:params[<span class="hljs-string">'save'</span>], <span class="hljs-string">'shape'</span>:params[<span class="hljs-string">'shape'</span>], <span class="hljs-string">'output'</span>:params[<span class="hljs-string">'output'</span>][<span class="hljs-string">'star'</span>], <span class="hljs-string">'rmbgr_on'</span>:params[<span class="hljs-string">'rmbgr'</span>]})
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>
+        self.th.start()
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">c_Input</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">if</span> self.v_Type.currentText().lower() == <span class="hljs-string">'star'</span>:
+            self.v_Input.setText(QFileDialog.getOpenFileName(self, <span class="hljs-string">'Select Input Dat File'</span>, <span class="hljs-string">'.'</span>, <span class="hljs-string">"DAT (*.dat)"</span>)[<span class="hljs-number">0</span>])
+        <span class="hljs-keyword">else</span>:
+            self.v_Input.setText(QFileDialog.getExistingDirectory(self, <span class="hljs-string">"Select Input Directory"</span>, <span class="hljs-string">'.'</span>, QFileDialog.ShowDirsOnly))
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">c_Output</span><span class="hljs-params">(self)</span>:</span>
+        self.v_Output.setText(QFileDialog.getExistingDirectory(self, <span class="hljs-string">"Select Output Directory"</span>, <span class="hljs-string">'.'</span>, QFileDialog.ShowDirsOnly))
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">slot_set_progress</span><span class="hljs-params">(self, v, maxv)</span>:</span>
+        self.progressbar.setRange(<span class="hljs-number">0</span>, maxv)
+        self.progressbar.setValue(v)
+        <span class="hljs-keyword">if</span> v == maxv:
+            self.b_Start.setEnabled(<span class="hljs-keyword">True</span>)
+            self.b_Input.setEnabled(<span class="hljs-keyword">True</span>)
+            self.b_Output.setEnabled(<span class="hljs-keyword">True</span>)
+</div></code></pre>
+<h4 id="22-p-psbasescanpy">2.2 <strong>p_PSBaseScan.py</strong>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> os.path <span class="hljs-keyword">import</span> join, isdir, basename
+<span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> walk, makedirs, system, listdir
+<span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">from</span> numpy <span class="hljs-keyword">import</span> mean
+
+<span class="hljs-keyword">from</span> .m_PSCalc <span class="hljs-keyword">import</span> get_ps
+    
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scan_year</span><span class="hljs-params">(params, parent = None, level = <span class="hljs-number">0</span>)</span>:</span>
+    sets = list(walk(params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'year'</span>]))[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]
+    <span class="hljs-keyword">for</span> month <span class="hljs-keyword">in</span> sets:
+        params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'set'</span>] = join(params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'year'</span>], month)
+        params[<span class="hljs-string">'output'</span>][<span class="hljs-string">'set'</span>] = join(params[<span class="hljs-string">'output'</span>][<span class="hljs-string">'year'</span>], month)
+        print(<span class="hljs-string">'\t'</span>*level + params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'set'</span>])
+        scan_set(params, parent, level+<span class="hljs-number">1</span>)
+        
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scan_set</span><span class="hljs-params">(params, parent = None, level = <span class="hljs-number">0</span>)</span>:</span>
+    <span class="hljs-keyword">if</span> isdir(join(params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'set'</span>], <span class="hljs-string">'cut'</span>)):
+        params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'subdir'</span>] = join(params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'set'</span>], <span class="hljs-string">'cut'</span>)
+    <span class="hljs-keyword">elif</span> isdir(join(params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'set'</span>], <span class="hljs-string">'rebuild'</span>)):
+        params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'subdir'</span>] = join(params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'set'</span>], <span class="hljs-string">'rebuild'</span>)
+    <span class="hljs-keyword">elif</span> isdir(join(params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'set'</span>], <span class="hljs-string">'rebuilded'</span>)):
+        params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'subdir'</span>] = join(params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'set'</span>], <span class="hljs-string">'rebuilded'</span>)
+    <span class="hljs-keyword">else</span>:
+        params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'subdir'</span>] = params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'set'</span>]
+    
+    nights = list(walk(params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'subdir'</span>]))[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]
+    <span class="hljs-keyword">for</span> night <span class="hljs-keyword">in</span> nights:
+        params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'night'</span>] = join(params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'subdir'</span>], night)
+        params[<span class="hljs-string">'output'</span>][<span class="hljs-string">'night'</span>] = join(params[<span class="hljs-string">'output'</span>][<span class="hljs-string">'set'</span>], night)
+        print(<span class="hljs-string">'\t'</span>*level + params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'night'</span>])        
+        scan_night(params, parent)
+        
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scan_night</span><span class="hljs-params">(params, parent = False, level = <span class="hljs-number">0</span>)</span>:</span>
+    stars = []
+    <span class="hljs-keyword">try</span>:
+        makedirs(params[<span class="hljs-string">'output'</span>][<span class="hljs-string">'night'</span>])
+        print(<span class="hljs-string">'Dir created: '</span>+params[<span class="hljs-string">'output'</span>][<span class="hljs-string">'night'</span>])
+    <span class="hljs-keyword">except</span>:
+        print(<span class="hljs-string">'Error create: '</span>+params[<span class="hljs-string">'output'</span>][<span class="hljs-string">'night'</span>])
+    <span class="hljs-keyword">for</span> root, dirs, files <span class="hljs-keyword">in</span> walk(params[<span class="hljs-string">'input'</span>][<span class="hljs-string">'night'</span>]):
+        <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> files:
+            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> name.endswith(<span class="hljs-string">'.dat'</span>) <span class="hljs-keyword">or</span> name.startswith(<span class="hljs-string">'dark'</span>) <span class="hljs-keyword">or</span> name.startswith(<span class="hljs-string">'flat'</span>) <span class="hljs-keyword">or</span> <span class="hljs-string">'moon'</span> <span class="hljs-keyword">in</span> name <span class="hljs-keyword">or</span> <span class="hljs-string">'bin'</span> <span class="hljs-keyword">in</span> name:
+                <span class="hljs-keyword">continue</span>
+            <span class="hljs-keyword">else</span>:
+                stars.append(join(root, name))
+        <span class="hljs-keyword">break</span>
+    i=<span class="hljs-number">0</span>
+    parent.sign_set_progress.emit(i, len(stars))    
+    <span class="hljs-keyword">for</span> star <span class="hljs-keyword">in</span> stars:
+        print(<span class="hljs-string">'\t'</span>*level + star)                
+        get_ps(star, diff=params[<span class="hljs-string">'diff'</span>], acf=params[<span class="hljs-string">'acf'</span>], save=params[<span class="hljs-string">'save'</span>], shape=params[<span class="hljs-string">'shape'</span>], output=params[<span class="hljs-string">'output'</span>][<span class="hljs-string">'night'</span>], rmbgr_on=params[<span class="hljs-string">'rmbgr'</span>])
+        i+=<span class="hljs-number">1</span>
+        parent.sign_set_progress.emit(i, len(stars))
+        
+</div></code></pre>
+<h4 id="23-m-pscalcpy">2.3 <strong>m_PSCalc.py</strong>:</h4>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_ps</span><span class="hljs-params">(path_to_dat, diff=<span class="hljs-number">0</span>, acf=False, save=False, shape=<span class="hljs-params">(<span class="hljs-number">512</span>,<span class="hljs-number">512</span>)</span>, output=False, rmbgr_on=True)</span>:</span>
+    <span class="hljs-keyword">from</span> numpy <span class="hljs-keyword">import</span> memmap, zeros, fft, any
+    <span class="hljs-keyword">from</span> os.path <span class="hljs-keyword">import</span> basename, join
+    <span class="hljs-keyword">if</span> output:
+        output_file = join(output, basename(path_to_dat))
+    <span class="hljs-keyword">else</span>:
+        output_file = path_to_dat
+    serie = memmap(path_to_dat, dtype=<span class="hljs-string">'uint16'</span>).astype(<span class="hljs-string">'float32'</span>)
+    <span class="hljs-keyword">if</span> shape == (<span class="hljs-number">512</span>, <span class="hljs-number">640</span>): lims = (<span class="hljs-number">512</span>, <span class="hljs-number">640</span>)
+    <span class="hljs-keyword">else</span>: lims = (<span class="hljs-number">512</span>,<span class="hljs-number">512</span>)
+    frames = int(serie.size/lims[<span class="hljs-number">0</span>]/lims[<span class="hljs-number">1</span>])
+    serie = serie.reshape((frames, lims[<span class="hljs-number">0</span>], lims[<span class="hljs-number">1</span>]))
+
+    serie, frames = partickle_searcher(serie, path_to_dat, output_file, output)
+
+    output_ps = zeros(shape)
+    <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> range(frames):
+        frame = zeros(shape)
+        <span class="hljs-keyword">if</span> diff <span class="hljs-keyword">and</span> num&lt;frames-diff:
+            frame[:lims[<span class="hljs-number">0</span>], :lims[<span class="hljs-number">1</span>]] += serie[num] - serie[num+diff]
+            frame[:lims[<span class="hljs-number">0</span>], :lims[<span class="hljs-number">1</span>]] += serie[num] - serie[num+diff]
+        <span class="hljs-keyword">else</span>:
+            frame[:lims[<span class="hljs-number">0</span>], :lims[<span class="hljs-number">1</span>]] += serie[num]
+        output_ps += abs(fft.fft2(frame)**<span class="hljs-number">2</span>)                                                                                                                                                                                                                                                                                                                                                                                            
+    output_ps /= frames  
+    <span class="hljs-keyword">if</span> rmbgr_on: 
+        output_ps = fft.fftshift(rmbgr(fft.fftshift(output_ps), <span class="hljs-number">100</span>))
+          
+    <span class="hljs-keyword">if</span> acf: output_acf = abs(fft.ifft2(fft.fftshift(output_ps)))
+    <span class="hljs-keyword">if</span> save:
+        <span class="hljs-keyword">if</span> save == <span class="hljs-string">'fits'</span>:
+            <span class="hljs-keyword">from</span> astropy.io <span class="hljs-keyword">import</span> fits
+            fits.writeto(output_file+<span class="hljs-string">'_ps_diff{}_shape{}.{}'</span>.format(diff, shape, save), fft.fftshift(output_ps))
+            <span class="hljs-keyword">if</span> acf: fits.writeto(output_file+<span class="hljs-string">'_acf_diff{}_shape{}.{}'</span>.format(diff, shape, save), fft.fftshift(output_acf))
+        <span class="hljs-keyword">else</span>:
+            print(<span class="hljs-string">'Unknown format: {}'</span>.format(save))
+        <span class="hljs-keyword">import</span> gc
+        memory = gc.collect()
+        print(<span class="hljs-string">'Очищено объектов из памяти: {}'</span>.format(memory))
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">if</span> acf:
+            <span class="hljs-keyword">return</span> fft.fftshift(output_ps), fft.fftshift(output_acf)
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">return</span> fft.fftshift(output_ps)
+    
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">rmbgr</span><span class="hljs-params">(middle_star, xlim)</span>:</span> 
+    <span class="hljs-keyword">from</span> numpy <span class="hljs-keyword">import</span> mean
+    outbound = middle_star[<span class="hljs-number">0</span>:xlim] 
+    slice_out = mean(outbound, axis=<span class="hljs-number">0</span>) 
+    middle_star_clean = middle_star - slice_out 
+    <span class="hljs-keyword">return</span> middle_star_clean 
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">partickle_searcher</span><span class="hljs-params">(data, name, output_path, log_path)</span>:</span>
+    print(<span class="hljs-string">'Поиск частиц'</span>)
+    print(data.shape)
+    <span class="hljs-keyword">from</span> numpy <span class="hljs-keyword">import</span> std, array, mean, where, delete, save
+    <span class="hljs-keyword">from</span> matplotlib.pyplot <span class="hljs-keyword">import</span> clf, plot, savefig, hlines
+    <span class="hljs-keyword">from</span> os.path <span class="hljs-keyword">import</span> join
+    
+    sf = data.shape[<span class="hljs-number">0</span>]
+    mvs = []
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> data:
+        mvs.append(i.max())
+    mvs = array(mvs)
+    mvs -= mvs.min()
+    mvs /= mvs.max()
+    ad = mean(mvs)
+    print(<span class="hljs-string">'Коэфф: {:.2f}'</span>.format(ad))
+    plot(mvs)
+    k = mean(mvs)*<span class="hljs-number">2</span> + std(mvs)*<span class="hljs-number">4</span>
+    hlines(k, <span class="hljs-number">0</span>, data.shape[<span class="hljs-number">0</span>], color=<span class="hljs-string">'red'</span>)
+    savefig(output_path+<span class="hljs-string">'.maxvalues.png'</span>)
+    clf()
+    bad_frames = where(mvs &gt; k)[<span class="hljs-number">0</span>]
+    
+    <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt; len(bad_frames) &lt; data.shape[<span class="hljs-number">0</span>] * <span class="hljs-number">0.025</span>:
+        data = delete(data, bad_frames, axis = <span class="hljs-number">0</span>)
+    print(<span class="hljs-string">'Конец поиска частиц'</span>)
+    <span class="hljs-keyword">with</span> open(join(log_path, <span class="hljs-string">'logfile.txt'</span>), <span class="hljs-string">'a+'</span>) <span class="hljs-keyword">as</span> log:
+        log.write(<span class="hljs-string">'{}\t koeff: {:.2f}\t Bad frames: {}({:.2f}) \t {}\n'</span>.format(name, ad, len(bad_frames), (len(bad_frames)/sf)*<span class="hljs-number">100</span>, str(bad_frames)))
+    <span class="hljs-keyword">return</span> data, data.shape[<span class="hljs-number">0</span>]
+
+</div></code></pre>
+<hr>
+<h3 id="3">3. Алгоритм работы</h3>
+<p>Будет описан позже</p>
+
+    </body>
+    </html>

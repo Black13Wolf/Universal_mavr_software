@@ -7,14 +7,13 @@ from time import sleep
 from threading import Thread, active_count
 
 from . import p_Rebuild as rebuilder
-from ..d_LOG.logging import test_msg
 
 class Rebuilder(QWidget):
     sign_set_progress = pyqtSignal(int, int)
     def __init__(self, parent = None):
         QWidget.__init__(self, parent)
         self.mainGui = parent        
-        self.layout = QGridLayout()
+        self.main_layout = QGridLayout()
 
         self.b_Input = QPushButton('Choose path')
         self.b_Input.clicked.connect(self.c_Input)
@@ -39,17 +38,17 @@ class Rebuilder(QWidget):
         self.sign_set_progress.connect(self.slot_set_progress)
         self.progressbar.hide()
 
-        self.layout.addWidget(self.l_Input, 0, 0)
-        self.layout.addWidget(self.v_Input, 0, 1, 1, 2)
-        self.layout.addWidget(self.b_Input, 0, 3)
-        self.layout.addWidget(self.l_Output, 1, 0)
-        self.layout.addWidget(self.v_Output, 1, 1, 1, 2)
-        self.layout.addWidget(self.b_Output, 1, 3)
-        self.layout.addWidget(self.l_Type, 2, 0)
-        self.layout.addWidget(self.v_Type, 2, 1)
-        self.layout.addWidget(self.b_Start, 2, 2, 1, 2)
-        self.layout.addWidget(self.progressbar, 3, 0, 1, 4)
-        self.setLayout(self.layout)
+        self.main_layout.addWidget(self.l_Input, 0, 0)
+        self.main_layout.addWidget(self.v_Input, 0, 1, 1, 2)
+        self.main_layout.addWidget(self.b_Input, 0, 3)
+        self.main_layout.addWidget(self.l_Output, 1, 0)
+        self.main_layout.addWidget(self.v_Output, 1, 1, 1, 2)
+        self.main_layout.addWidget(self.b_Output, 1, 3)
+        self.main_layout.addWidget(self.l_Type, 2, 0)
+        self.main_layout.addWidget(self.v_Type, 2, 1)
+        self.main_layout.addWidget(self.b_Start, 2, 2, 1, 2)
+        self.main_layout.addWidget(self.progressbar, 3, 0, 1, 4)
+        self.setLayout(self.main_layout)
 
     def c_Input(self):
         self.v_Input.setText(QFileDialog.getExistingDirectory(self, "Select Input Directory", '.', QFileDialog.ShowDirsOnly))

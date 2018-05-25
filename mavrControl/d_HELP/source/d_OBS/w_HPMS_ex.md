@@ -1,3 +1,28 @@
+[Назад][Back]
+
+# Модуль **Наблюдения -> Координаты HPMS**
+
+## Описание
+
+Модуль позволяет рассчитать новые координаты объекта, основываясь на скорости смещения, указанных в базе Simbad
+
+## Руководство программиста
+
+---
+### 1. Состав модуля
+
+#### 1.1 Используемые библиотеки Python
+- datetime
+- PyQt5
+- sys
+
+#### 1.2 Компоненты модуля
+- **w_HPMS.py**: Единственный компонент, включающий в себя и виджет отображения в главном GUI, и алгоритм расчета координат
+
+---
+### 2. Исходный код модулей
+#### 2.1 **w_HPMS.py**:
+```python 
 from datetime import datetime as dt
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
@@ -95,3 +120,12 @@ class HPMS(QWidget):
             new_dec = '%i %i %.2f'%(new_dec_d, new_dec_m, new_dec_s)
             self.new_ra.setText(new_ra)
             self.new_dec.setText(new_dec)
+```
+
+---
+### 3. Алгоритм работы
+
+Будет описан позже
+
+
+[Back]: ../index.html

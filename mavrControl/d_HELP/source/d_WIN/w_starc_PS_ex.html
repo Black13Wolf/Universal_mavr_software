@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" integrity="sha384-TEMocfGvRuD1rIAacqrknm5BQZ7W7uWitoih+jMNFXQIbNl16bO8OZmylH/Vi/Ei" crossorigin="anonymous">
+        <style>
+/*--------------------------------------------------------------------------------------------- * Copyright (c) Microsoft Corporation. All rights reserved. * Licensed under the MIT License. See License.txt in the project root for license information. *--------------------------------------------------------------------------------------------*/ body { font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback"; font-size: 14px; padding: 0 12px; line-height: 22px; word-wrap: break-word; } body.scrollBeyondLastLine { margin-bottom: calc(100vh - 22px); } body.showEditorSelection .code-line { position: relative; } body.showEditorSelection .code-active-line:before, body.showEditorSelection .code-line:hover:before { content: ""; display: block; position: absolute; top: 0; left: -12px; height: 100%; } body.showEditorSelection li.code-active-line:before, body.showEditorSelection li.code-line:hover:before { left: -30px; } .vscode-light.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); } .vscode-light.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); } .vscode-dark.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); } .vscode-dark.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); } .vscode-high-contrast.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 160, 0, 0.7); } .vscode-high-contrast.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 160, 0, 1); } img { max-width: 100%; max-height: 100%; } a { color: #4080D0; text-decoration: none; } a:focus, input:focus, select:focus, textarea:focus { outline: 1px solid -webkit-focus-ring-color; outline-offset: -1px; } hr { border: 0; height: 2px; border-bottom: 2px solid; } h1 { padding-bottom: 0.3em; line-height: 1.2; border-bottom-width: 1px; border-bottom-style: solid; } h1, h2, h3 { font-weight: normal; } h1 code, h2 code, h3 code, h4 code, h5 code, h6 code { font-size: inherit; line-height: auto; } a:hover { color: #4080D0; text-decoration: underline; } table { border-collapse: collapse; } table > thead > tr > th { text-align: left; border-bottom: 1px solid; } table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td { padding: 5px 10px; } table > tbody > tr + tr > td { border-top: 1px solid; } blockquote { margin: 0 7px 0 5px; padding: 0 16px 0 10px; border-left: 5px solid; } code { font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback"; font-size: 14px; line-height: 19px; } body.wordWrap pre { white-space: pre-wrap; } .mac code { font-size: 12px; line-height: 18px; } code > div { padding: 16px; border-radius: 3px; overflow: auto; } /** Theming */ .vscode-light { color: rgb(30, 30, 30); } .vscode-dark { color: #DDD; } .vscode-high-contrast { color: white; } .vscode-light code { color: #A31515; } .vscode-dark code { color: #D7BA7D; } .vscode-light code > div { background-color: rgba(220, 220, 220, 0.4); } .vscode-dark code > div { background-color: rgba(10, 10, 10, 0.4); } .vscode-high-contrast code > div { background-color: rgb(0, 0, 0); } .vscode-high-contrast h1 { border-color: rgb(0, 0, 0); } .vscode-light table > thead > tr > th { border-color: rgba(0, 0, 0, 0.69); } .vscode-dark table > thead > tr > th { border-color: rgba(255, 255, 255, 0.69); } .vscode-light h1, .vscode-light hr, .vscode-light table > tbody > tr + tr > td { border-color: rgba(0, 0, 0, 0.18); } .vscode-dark h1, .vscode-dark hr, .vscode-dark table > tbody > tr + tr > td { border-color: rgba(255, 255, 255, 0.18); } .vscode-light blockquote, .vscode-dark blockquote { background: rgba(127, 127, 127, 0.1); border-color: rgba(0, 122, 204, 0.5); } .vscode-high-contrast blockquote { background: transparent; border-color: #fff; }
+</style>
+<style>
+/* Tomorrow Theme */ /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */ /* Original theme - https://github.com/chriskempson/tomorrow-theme */ /* Tomorrow Comment */ .hljs-comment, .hljs-quote { color: #8e908c; } /* Tomorrow Red */ .hljs-variable, .hljs-template-variable, .hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-regexp, .hljs-deletion { color: #c82829; } /* Tomorrow Orange */ .hljs-number, .hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-params, .hljs-meta, .hljs-link { color: #f5871f; } /* Tomorrow Yellow */ .hljs-attribute { color: #eab700; } /* Tomorrow Green */ .hljs-string, .hljs-symbol, .hljs-bullet, .hljs-addition { color: #718c00; } /* Tomorrow Blue */ .hljs-title, .hljs-section { color: #4271ae; } /* Tomorrow Purple */ .hljs-keyword, .hljs-selector-tag { color: #8959a8; } .hljs { display: block; overflow-x: auto; color: #4d4d4c; padding: 0.5em; } .hljs-emphasis { font-style: italic; } .hljs-strong { font-weight: bold; }
+</style>
+<style>
+ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-left: 40px; } .task-list-item { list-style-type: none; } .task-list-item-checkbox { vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+    </head>
+    <body>
+        <p><a href="../index.html">Назад</a></p>
+<h1 id="windowsonly">Модуль <strong>WindowsOnly -&gt; СПМ и АКФ</strong></h1>
+<h2 id="">Описание</h2>
+<p>Модуль используется для автоматического расчета спектров мощности (СПМ) и автокорелляционных функций (АКФ) с использованием модуля <strong><code>spectr.exe</code></strong> пакета <strong><code>StarC</code></strong> по году/сету/ночи наблюдений, или конкретного объекта.</p>
+<h2 id="">Руководство программиста</h2>
+<hr>
+<h3 id="1">1. Состав модуля</h3>
+<h4 id="11-3--python">1.1 Используемые библиотеки Python</h4>
+<ul>
+<li>PyQt5</li>
+<li>sys</li>
+<li>threading</li>
+<li>ast</li>
+<li>time</li>
+<li>subprocess</li>
+<li>os</li>
+<li>shutil</li>
+</ul>
+<h4 id="12">1.2 Компоненты модуля</h4>
+<ul>
+<li><strong>w_starc_PS.py</strong>: Единственный компонент, включающий в себя и виджет отображения в главном GUI, и алгоритм по-очередного запуска расчета СПМ и АКФ</li>
+</ul>
+<hr>
+<h3 id="2">2. Исходный код модулей</h3>
+<h4 id="21-w-starc-pspy">2.1. <strong>w_starc_PS.py</strong>:</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> PyQt5.QtCore <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> PyQt5.QtGui <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> PyQt5.QtWidgets <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">from</span> threading <span class="hljs-keyword">import</span> Thread, active_count
+<span class="hljs-keyword">from</span> ast <span class="hljs-keyword">import</span> literal_eval
+<span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep
+<span class="hljs-keyword">from</span> subprocess <span class="hljs-keyword">import</span> call
+<span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> walk, makedirs
+<span class="hljs-keyword">from</span> os.path <span class="hljs-keyword">import</span> join, isdir, basename
+<span class="hljs-keyword">from</span> shutil <span class="hljs-keyword">import</span> copy, move
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">starc_PS</span><span class="hljs-params">(QWidget)</span>:</span>
+    sign_change_progress = pyqtSignal(int, int, str)
+    sign_end_of_calc = pyqtSignal()
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, parent = None)</span>:</span>
+        self.mainGui = parent
+        QWidget.__init__(self, parent)
+
+        self.sign_change_progress.connect(self.slot_change_progress)
+        self.sign_end_of_calc.connect(self.slot_end_of_calc)
+        self.main_layout = QGridLayout()
+        
+        self.l_Starc = QLabel(<span class="hljs-string">'STARC path: '</span>)
+        self.v_Starc = QLineEdit()
+        self.v_Starc.setFixedWidth(<span class="hljs-number">300</span>)
+        self.b_Starc = QPushButton(<span class="hljs-string">'Choose path'</span>)
+        self.b_Starc.clicked.connect(self.c_Starc)
+
+        self.l_Input = QLabel(<span class="hljs-string">'Input path: '</span>)
+        self.v_Input = QLineEdit()
+        self.b_Input = QPushButton(<span class="hljs-string">'Choose path'</span>)
+        self.b_Input.clicked.connect(self.c_Input)
+        
+        self.l_Output = QLabel(<span class="hljs-string">'Output path: '</span>)
+        self.v_Output = QLineEdit()
+        self.b_Output = QPushButton(<span class="hljs-string">'Choose path'</span>)
+        self.b_Output.clicked.connect(self.c_Output)
+        
+        self.l_Type = QLabel(<span class="hljs-string">'Type: '</span>)
+        self.v_Type = QComboBox()
+        self.v_Type.addItems([<span class="hljs-string">'Year'</span>, <span class="hljs-string">'Set'</span>, <span class="hljs-string">'Night'</span>, <span class="hljs-string">'Star'</span>])
+
+        self.l_Diff = QLabel(<span class="hljs-string">'Frame diff (/k): '</span>)
+        self.v_Diff = QComboBox()
+        self.v_Diff.addItems([<span class="hljs-string">'1'</span>, <span class="hljs-string">'0'</span>, <span class="hljs-string">'-1'</span>, <span class="hljs-string">'2'</span>, <span class="hljs-string">'3'</span>, <span class="hljs-string">'5'</span>, <span class="hljs-string">'10'</span>, <span class="hljs-string">'25'</span>, <span class="hljs-string">'50'</span>, <span class="hljs-string">'100'</span>])
+
+        self.l_Size = QLabel(<span class="hljs-string">'Resizing (/S): '</span>)
+        self.v_Size = QComboBox()
+        self.v_Size.addItems([<span class="hljs-string">'2'</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'4'</span>, <span class="hljs-string">'8'</span>])
+
+        self.l_Batch = QLabel(<span class="hljs-string">'BG mode (/p): '</span>)
+        self.v_Batch = QComboBox()
+        self.v_Batch.addItems([<span class="hljs-string">'ON'</span>, <span class="hljs-string">'OFF'</span>])
+
+        self.l_Silent = QLabel(<span class="hljs-string">'Silent mode (/s): '</span>)
+        self.v_Silent = QComboBox()
+        self.v_Silent.addItems([<span class="hljs-string">'ON'</span>, <span class="hljs-string">'OFF'</span>])
+
+        self.b_Start = QPushButton(<span class="hljs-string">'Start'</span>)
+        self.b_Start.clicked.connect(self.c_Start)
+
+        self.PB = QProgressBar()
+        self.PB.setValue(<span class="hljs-number">0</span>)
+        self.PB.hide()
+
+        self.msg = QLabel(<span class="hljs-string">'Collecting... '</span>)
+        self.msg.setAlignment(Qt.AlignCenter)
+        self.msg.hide()
+        
+        self.main_layout.addWidget(self.l_Type, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
+        self.main_layout.addWidget(self.v_Type, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)
+        self.main_layout.addWidget(self.b_Start, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)        
+        self.main_layout.addWidget(self.l_Starc, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)
+        self.main_layout.addWidget(self.v_Starc, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+        self.main_layout.addWidget(self.b_Starc, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>)
+        self.main_layout.addWidget(self.l_Input, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>)
+        self.main_layout.addWidget(self.v_Input, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+        self.main_layout.addWidget(self.b_Input, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+        self.main_layout.addWidget(self.l_Output, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>)
+        self.main_layout.addWidget(self.v_Output, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+        self.main_layout.addWidget(self.b_Output, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>)
+        self.main_layout.addWidget(self.l_Diff, <span class="hljs-number">4</span>, <span class="hljs-number">0</span>)
+        self.main_layout.addWidget(self.v_Diff, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>)
+        self.main_layout.addWidget(self.l_Size, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>)
+        self.main_layout.addWidget(self.v_Size, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>)
+        self.main_layout.addWidget(self.l_Batch, <span class="hljs-number">5</span>, <span class="hljs-number">0</span>)
+        self.main_layout.addWidget(self.v_Batch, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>)
+        self.main_layout.addWidget(self.l_Silent, <span class="hljs-number">5</span>, <span class="hljs-number">2</span>)
+        self.main_layout.addWidget(self.v_Silent, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>)
+        self.main_layout.addWidget(self.PB, <span class="hljs-number">6</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>)
+        self.main_layout.addWidget(self.msg, <span class="hljs-number">6</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>)
+
+        self.setLayout(self.main_layout)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">c_Input</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">if</span> self.v_Type.currentText().lower() == <span class="hljs-string">'star'</span>:
+            self.v_Input.setText(QFileDialog.getOpenFileName(self, <span class="hljs-string">'Select Input Dat File'</span>, <span class="hljs-string">'.'</span>, <span class="hljs-string">"DAT (*.dat)"</span>)[<span class="hljs-number">0</span>])
+        <span class="hljs-keyword">else</span>:
+            self.v_Input.setText(QFileDialog.getExistingDirectory(self, <span class="hljs-string">"Select Input Directory"</span>, <span class="hljs-string">'.'</span>, QFileDialog.ShowDirsOnly))
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">c_Output</span><span class="hljs-params">(self)</span>:</span>
+        self.v_Output.setText(QFileDialog.getExistingDirectory(self, <span class="hljs-string">"Select Output Directory"</span>, <span class="hljs-string">'.'</span>, QFileDialog.ShowDirsOnly))
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">c_Starc</span><span class="hljs-params">(self)</span>:</span>
+        self.v_Starc.setText(QFileDialog.getExistingDirectory(self, <span class="hljs-string">"Select Output Directory"</span>, <span class="hljs-string">'.'</span>, QFileDialog.ShowDirsOnly))
+        
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">c_Start</span><span class="hljs-params">(self)</span>:</span>
+        self.PB.show()
+        self.msg.show()
+        self.params = {}
+        self.params[<span class="hljs-string">'basepath'</span>] = self.v_Input.text()
+        self.params[<span class="hljs-string">'work'</span>] = []
+        self.th = Thread(target = self.process)
+        self.th.start()
+        self.b_Start.setEnabled(<span class="hljs-keyword">False</span>)
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">slot_change_progress</span><span class="hljs-params">(self, v, max_v, text)</span>:</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.PB.maximum == max_v:
+            self.PB.setMaximum(max_v)
+            self.PB.setValue(<span class="hljs-number">0</span>)
+        self.PB.setValue(v)
+        self.msg.setText(text)
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">slot_end_of_calc</span><span class="hljs-params">(self)</span>:</span>
+        self.b_Start.setEnabled(<span class="hljs-keyword">True</span>)
+        self.msg.setText(<span class="hljs-string">'Finished'</span>)
+        
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">process</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">if</span> self.v_Type.currentText().lower() == <span class="hljs-string">'year'</span>:
+            self.scan_year()
+        <span class="hljs-keyword">elif</span> self.v_Type.currentText().lower() == <span class="hljs-string">'set'</span>:
+            self.scan_set()
+        <span class="hljs-keyword">elif</span> self.v_Type.currentText().lower() == <span class="hljs-string">'night'</span>:
+            self.scan_night()
+        <span class="hljs-keyword">elif</span> self.v_Type.currentText().lower() == <span class="hljs-string">'star'</span>:
+            <span class="hljs-keyword">pass</span>
+        self.sign_change_progress.emit(<span class="hljs-number">0</span>, len(self.params[<span class="hljs-string">'work'</span>]), <span class="hljs-string">'Ready to calculate.'</span>)
+        self.calc_PS()
+        self.sign_end_of_calc.emit()
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scan_year</span><span class="hljs-params">(self)</span>:</span>
+        self.params[<span class="hljs-string">'sets'</span>] = {}
+        self.params[<span class="hljs-string">'sets'</span>][<span class="hljs-string">'paths'</span>] = list(walk(self.params[<span class="hljs-string">'basepath'</span>]))[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]
+        self.scan_set()
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scan_set</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-string">'sets'</span> <span class="hljs-keyword">in</span> self.params:
+            <span class="hljs-keyword">for</span> p_set <span class="hljs-keyword">in</span> self.params[<span class="hljs-string">'sets'</span>][<span class="hljs-string">'paths'</span>]:
+                self.params[<span class="hljs-string">'sets'</span>][p_set] = {}
+                <span class="hljs-keyword">if</span> isdir(join(self.params[<span class="hljs-string">'basepath'</span>], p_set, <span class="hljs-string">'cut'</span>)): subdir = <span class="hljs-string">'cut'</span>
+                <span class="hljs-keyword">elif</span> isdir(join(self.params[<span class="hljs-string">'basepath'</span>], p_set, <span class="hljs-string">'rebuild'</span>)): subdir = <span class="hljs-string">'rebuild'</span>
+                <span class="hljs-keyword">elif</span> isdir(join(self.params[<span class="hljs-string">'basepath'</span>], p_set, <span class="hljs-string">'rebuilded'</span>)): subdir = <span class="hljs-string">'rebuilded'</span>
+                <span class="hljs-keyword">for</span> root, dirs, files <span class="hljs-keyword">in</span> walk(join(self.params[<span class="hljs-string">'basepath'</span>], p_set, subdir)):
+                    self.params[<span class="hljs-string">'sets'</span>][p_set][<span class="hljs-string">'nights'</span>] = [join(subdir, d) <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> dirs]                    
+                    <span class="hljs-keyword">break</span>
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">if</span> isdir(join(self.params[<span class="hljs-string">'basepath'</span>], <span class="hljs-string">'cut'</span>)): subdir = <span class="hljs-string">'cut'</span>
+            <span class="hljs-keyword">elif</span> isdir(join(self.params[<span class="hljs-string">'basepath'</span>], <span class="hljs-string">'rebuild'</span>)): subdir = <span class="hljs-string">'rebuild'</span>
+            <span class="hljs-keyword">elif</span> isdir(join(self.params[<span class="hljs-string">'basepath'</span>], <span class="hljs-string">'rebuilded'</span>)): subdir = <span class="hljs-string">'rebuilded'</span>
+            self.params[<span class="hljs-string">'nights'</span>] = [join(subdir, p) <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> list(walk(join(self.params[<span class="hljs-string">'basepath'</span>], subdir)))[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]]
+        self.scan_night()
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scan_night</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> self.params:
+            print(self.params[i])    
+        <span class="hljs-keyword">if</span> <span class="hljs-string">'sets'</span> <span class="hljs-keyword">in</span> self.params:
+            <span class="hljs-keyword">for</span> p_set <span class="hljs-keyword">in</span> self.params[<span class="hljs-string">'sets'</span>][<span class="hljs-string">'paths'</span>]:
+                <span class="hljs-keyword">for</span> night <span class="hljs-keyword">in</span> self.params[<span class="hljs-string">'sets'</span>][p_set][<span class="hljs-string">'nights'</span>]:
+                    <span class="hljs-keyword">for</span> root, dirs, files <span class="hljs-keyword">in</span> walk(join(self.params[<span class="hljs-string">'basepath'</span>], p_set, night)):
+                        <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> files:
+                            <span class="hljs-keyword">if</span> f.endswith(<span class="hljs-string">'.dat'</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> f.startswith(<span class="hljs-string">'dark'</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> f.startswith(<span class="hljs-string">'flat'</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> f.endswith(<span class="hljs-string">'moon.dat'</span>):
+                                self.params[<span class="hljs-string">'work'</span>].append(join(self.params[<span class="hljs-string">'basepath'</span>], p_set, night, f))
+        <span class="hljs-keyword">elif</span> <span class="hljs-string">'nights'</span> <span class="hljs-keyword">in</span> self.params:
+            <span class="hljs-keyword">for</span> night <span class="hljs-keyword">in</span> self.params[<span class="hljs-string">'nights'</span>]:
+                <span class="hljs-keyword">for</span> root, dirs, files <span class="hljs-keyword">in</span> walk(join(self.params[<span class="hljs-string">'basepath'</span>], night)):
+                    <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> files:
+                        <span class="hljs-keyword">if</span> f.endswith(<span class="hljs-string">'.dat'</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> f.startswith(<span class="hljs-string">'dark'</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> f.startswith(<span class="hljs-string">'flat'</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> f.endswith(<span class="hljs-string">'moon.dat'</span>):
+                            self.params[<span class="hljs-string">'work'</span>].append(join(self.params[<span class="hljs-string">'basepath'</span>], night, f))
+        <span class="hljs-keyword">else</span>:   
+            <span class="hljs-keyword">for</span> root, dirs, files <span class="hljs-keyword">in</span> walk(self.params[<span class="hljs-string">'basepath'</span>]):
+                <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> files:
+                    <span class="hljs-keyword">if</span> f.endswith(<span class="hljs-string">'.dat'</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> f.startswith(<span class="hljs-string">'dark'</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> f.startswith(<span class="hljs-string">'flat'</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> f.endswith(<span class="hljs-string">'moon.dat'</span>):
+                        self.params[<span class="hljs-string">'work'</span>].append(join(self.params[<span class="hljs-string">'basepath'</span>], f))
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_PS</span><span class="hljs-params">(self)</span>:</span>
+        i = <span class="hljs-number">0</span>
+        <span class="hljs-keyword">for</span> star <span class="hljs-keyword">in</span> self.params[<span class="hljs-string">'work'</span>]:
+            i+=<span class="hljs-number">1</span>
+            self.sign_change_progress.emit(i, len(self.params[<span class="hljs-string">'work'</span>]), star)
+            <span class="hljs-keyword">if</span> self.v_Silent.currentText() == <span class="hljs-string">'ON'</span>:
+                self.silent = <span class="hljs-string">'/s'</span>
+            <span class="hljs-keyword">else</span>:
+                self.silent = <span class="hljs-string">''</span>
+            <span class="hljs-keyword">if</span> self.v_Batch.currentText() == <span class="hljs-string">'ON'</span>:
+                self.batch = <span class="hljs-string">'/p'</span>
+            <span class="hljs-keyword">else</span>:
+                self.batch = <span class="hljs-string">''</span>
+
+            <span class="hljs-keyword">if</span> self.v_Type.currentText().lower() == <span class="hljs-string">'star'</span>:
+                output_path = self.v_Output.text()
+            <span class="hljs-keyword">elif</span> self.v_Type.currentText().lower() == <span class="hljs-string">'night'</span>:
+                output_path = join(self.v_Output.text(), star.split(<span class="hljs-string">'\\'</span>)[<span class="hljs-number">-2</span>])                
+            <span class="hljs-keyword">elif</span> self.v_Type.currentText().lower() == <span class="hljs-string">'set'</span>:
+                output_path = join(self.v_Output.text(), star.split(<span class="hljs-string">'\\'</span>)[<span class="hljs-number">-2</span>])
+            <span class="hljs-keyword">elif</span> self.v_Type.currentText().lower() == <span class="hljs-string">'year'</span>:
+                output_path = join(self.v_Output.text(), star.split(<span class="hljs-string">'\\'</span>)[<span class="hljs-number">-4</span>], star.split(<span class="hljs-string">'\\'</span>)[<span class="hljs-number">-2</span>])
+            <span class="hljs-keyword">try</span>:
+                makedirs(output_path)
+            <span class="hljs-keyword">except</span>:
+                <span class="hljs-keyword">pass</span>
+            copy(join(self.v_Starc.text(), <span class="hljs-string">'DATA'</span>, <span class="hljs-string">'file.xfs'</span>), star+<span class="hljs-string">'.xfs'</span>)
+            call([join(self.v_Starc.text(), <span class="hljs-string">'spectr.exe'</span>), star, <span class="hljs-string">'/k {}'</span>.format(self.v_Diff.currentText()), <span class="hljs-string">'/S {}'</span>.format(self.v_Size.currentText()), self.silent, self.batch])
+            move(join(self.v_Starc.text(), <span class="hljs-string">'SPECTR'</span>, <span class="hljs-string">'{}x'</span>.format(self.v_Size.currentText()), <span class="hljs-string">'VIS'</span>, basename(star)+<span class="hljs-string">'.spectr.[1]acf.dat'</span>), join(output_path, basename(star)+<span class="hljs-string">'ACF.dat'</span>)) 
+            move(join(self.v_Starc.text(), <span class="hljs-string">'SPECTR'</span>, <span class="hljs-string">'{}x'</span>.format(self.v_Size.currentText()), <span class="hljs-string">'VIS'</span>, basename(star)+<span class="hljs-string">'.spectr.[1]acf.%dat'</span>), join(output_path, basename(star)+<span class="hljs-string">'ACF.%dat'</span>)) 
+            move(join(self.v_Starc.text(), <span class="hljs-string">'SPECTR'</span>, <span class="hljs-string">'{}x'</span>.format(self.v_Size.currentText()), <span class="hljs-string">'VIS'</span>, basename(star)+<span class="hljs-string">'.spectr.[1]sw4.dat'</span>), join(output_path, basename(star)+<span class="hljs-string">'PS.dat'</span>)) 
+            move(join(self.v_Starc.text(), <span class="hljs-string">'SPECTR'</span>, <span class="hljs-string">'{}x'</span>.format(self.v_Size.currentText()), <span class="hljs-string">'VIS'</span>, basename(star)+<span class="hljs-string">'.spectr.[1]sw4.%dat'</span>), join(output_path, basename(star)+<span class="hljs-string">'PS.%dat'</span>))      
+</div></code></pre>
+<hr>
+<h3 id="3">3. Алгоритм работы</h3>
+<p>Будет описан позже</p>
+
+    </body>
+    </html>

@@ -6,32 +6,22 @@ import webbrowser
 from os.path import join, dirname
 from time import sleep
 
-try:
-    from . import __version__
-    from .d_AUTO.w_PSCalc import PSCalculator
-    from .d_AUTO.w_Rebuilder import Rebuilder
-    from .d_OBS.w_HPMS import HPMS
-    from .d_HELP.w_About import About
-    from .d_WIN.w_starc_Mask import starc_MASK
-    from .d_WIN.w_starc_PS import starc_PS
-except:
-    print('Debug version')
-    from __init__ import __version__
-    from d_AUTO.w_PSCalc import PSCalculator
-    from d_AUTO.w_Rebuilder import Rebuilder
-    from d_OBS.w_HPMS import HPMS
-    from d_HELP.w_About import About
-    from d_WIN.w_starc_Mask import starc_MASK
-    from d_WIN.w_starc_PS import starc_PS
+from . import __version__
+from .d_AUTO.w_PSCalc import PSCalculator
+from .d_AUTO.w_Rebuilder import Rebuilder
+from .d_OBS.w_HPMS import HPMS
+from .d_HELP.w_About import About
+from .d_HELP.w_Help import Help
+from .d_WIN.w_starc_Mask import starc_MASK
+from .d_WIN.w_starc_PS import starc_PS
 
 class mainGUI(QMainWindow):
     def __init__(self, parent = None):
         QMainWindow.__init__(self, parent)
         self.startWidget = QWidget()
         self.startLayout = QGridLayout()
-        title = 'MAVR HELPER SOFTWARE VER: {}'.format(__version__)
-        self.setWindowTitle(title)
-        self.label = QLabel(title)
+        self.setWindowTitle('UMS v.: {}'.format(__version__))
+        self.label = QLabel('Universal Mavr Software v.: {}'.format(__version__))
         self.label.setStyleSheet('font-size: 20pt')
         self.setFixedSize(0,0)
         
@@ -46,7 +36,7 @@ class mainGUI(QMainWindow):
         m_Help = mainMenu.addMenu('Помощь')
 
             #____ AUTO signals
-        m_Auto_PSCalculator = QAction(QIcon(''), 'Расчет спектра мощности', self)
+        m_Auto_PSCalculator = QAction(QIcon(''), 'Расчет СПМ', self)
         m_Auto_PSCalculator.setStatusTip('Автоматический расчет спектра мощности по году, сету, ночи или файлу')
         m_Auto_PSCalculator.triggered.connect(self.t_PSCalculator)
         m_Auto.addAction(m_Auto_PSCalculator)
@@ -83,7 +73,7 @@ class mainGUI(QMainWindow):
         m_Help_Help.setStatusTip('Информация о модулях программы')
         m_Help_Help.triggered.connect(self.t_Help)
         m_Help.addAction(m_Help_Help)
-        m_Help_Help.setEnabled(False)
+        #m_Help_Help.setEnabled(False)
 
 
         #____ Layout Settings
@@ -109,7 +99,8 @@ class mainGUI(QMainWindow):
         self.update_sizes()
 
     def t_Help(self):
-        webbrowser.open_new(join(dirname(__file__), 'doc', 'lms-help.pdf'))
+        self.setCentralWidget(Help(parent = self))
+        self.update_sizes()
 
     def t_starc_Mask(self):
         self.setCentralWidget(starc_MASK(parent = self))
