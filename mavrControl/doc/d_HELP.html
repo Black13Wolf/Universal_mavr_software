@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Помощь</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="index.html">Помощь</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-pane">
+<p>Top-level docs &amp; dirs:</p>
+<ul><li><a href="d_AUTO.html">Автоматизация</a></li><li><a href="d_OBS.html">Наблюдения</a></li><li><a href="d_WIN.html">WindowsOnly</a></li><li><b>Помощь</b></li></ul>
+</div>
+
+<div id="center-box">
+
+<div id="header-nav-bar">
+<a href="./d_WIN.html">← prev</a> | next → &nbsp; &nbsp; <a href="toc.html">Top-level ToC</a> &nbsp; &nbsp; <b>/d_HELP.html</b> &nbsp; &nbsp; (<a href="d_HELP-printable.html">printable version</a>)<br/>
+
+</div>
+
+<div id="content">
+<div id="header">
+<h1 class="title">Помощь</h1>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#о-программе"><span class="toc-section-number">1</span> О программе</a><ul>
+<li><a href="#описание"><span class="toc-section-number">1.1</span> Описание</a></li>
+<li><a href="#руководство-пользователя"><span class="toc-section-number">1.2</span> Руководство пользователя</a><ul>
+<li><a href="#внешний-вид-модуля"><span class="toc-section-number">1.2.1</span> Внешний вид модуля</a></li>
+<li><a href="#порядок-действий"><span class="toc-section-number">1.2.2</span> Порядок действий</a></li>
+</ul></li>
+<li><a href="#алгоритм"><span class="toc-section-number">1.3</span> Алгоритм</a></li>
+<li><a href="#состав-модуля"><span class="toc-section-number">1.4</span> Состав модуля</a><ul>
+<li><a href="#используемые-пакеты-python"><span class="toc-section-number">1.4.1</span> Используемые пакеты Python</a></li>
+<li><a href="#компоненты-модуля"><span class="toc-section-number">1.4.2</span> Компоненты модуля</a></li>
+</ul></li>
+<li><a href="#исходный-код-модуля"><span class="toc-section-number">1.5</span> Исходный код модуля</a><ul>
+<li><a href="#w_about.py"><span class="toc-section-number">1.5.1</span> w_About.py</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#помощь"><span class="toc-section-number">2</span> Помощь</a></li>
+</ul>
+</div>
+<hr />
+<h1 id="о-программе"><span class="header-section-number">1</span> О программе</h1>
+<h2 id="описание"><span class="header-section-number">1.1</span> Описание</h2>
+<p>Модуль, который выводит информацию о текущей версии программы, о разработчике и контактах с ним, а так же дает возможность проверить обновления и обновить программу до последней версии</p>
+<h2 id="руководство-пользователя"><span class="header-section-number">1.2</span> Руководство пользователя</h2>
+<h3 id="внешний-вид-модуля"><span class="header-section-number">1.2.1</span> Внешний вид модуля</h3>
+<div class="figure">
+<img src="img/w_About.png" />
+
+</div>
+<h3 id="порядок-действий"><span class="header-section-number">1.2.2</span> Порядок действий</h3>
+<ol style="list-style-type: decimal">
+<li>Нажать кнопку <strong>“Проверить обновления”</strong></li>
+<li>Дождаться результата
+<ol style="list-style-type: decimal">
+<li>Программа выдаст сообщение о том, что у Вас установлена последняя версия</li>
+<li>Программа выдаст сообщение о более новой версии и появится кнопка <strong>“Обновить”</strong></li>
+</ol></li>
+</ol>
+<h2 id="алгоритм"><span class="header-section-number">1.3</span> Алгоритм</h2>
+<blockquote>
+<p>Будет описан позднее</p>
+</blockquote>
+<h2 id="состав-модуля"><span class="header-section-number">1.4</span> Состав модуля</h2>
+<h3 id="используемые-пакеты-python"><span class="header-section-number">1.4.1</span> Используемые пакеты Python</h3>
+<ul>
+<li>PyQt5</li>
+<li>urllib</li>
+<li>json</li>
+</ul>
+<h3 id="компоненты-модуля"><span class="header-section-number">1.4.2</span> Компоненты модуля</h3>
+<ul>
+<li><strong>w_About.py</strong>: Единственный компонент, включающий в себя и виджет отображения в главном GUI, и алгоритм отображения информации и обновления</li>
+</ul>
+<h2 id="исходный-код-модуля"><span class="header-section-number">1.5</span> Исходный код модуля</h2>
+<h3 id="w_about.py"><span class="header-section-number">1.5.1</span> w_About.py</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> PyQt5.QtCore <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> PyQt5.QtGui <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> PyQt5.QtWidgets <span class="im">import</span> <span class="op">*</span>
+<span class="im">import</span> urllib.request
+<span class="im">import</span> json
+
+<span class="kw">class</span> About(QWidget):
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,  __version__, parent <span class="op">=</span> <span class="va">None</span>):
+        <span class="va">self</span>.ver <span class="op">=</span> __version__
+        <span class="va">self</span>.mainGui <span class="op">=</span> parent
+        QWidget.<span class="fu">__init__</span>(<span class="va">self</span>, parent)
+        <span class="va">self</span>.main_layout <span class="op">=</span> QGridLayout()
+
+        <span class="va">self</span>.l_name <span class="op">=</span> sLabel(<span class="st">&#39;Название: Universal Mavr Software&#39;</span>)
+        <span class="va">self</span>.l_version <span class="op">=</span> sLabel(<span class="st">&#39;Версия: </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(<span class="va">self</span>.ver))
+        <span class="va">self</span>.l_programmer <span class="op">=</span> sLabel(<span class="st">&#39;Разработчик: Бескакотов А. С.&#39;</span>)
+        <span class="va">self</span>.l_mail <span class="op">=</span> sLabel(<span class="st">&#39;eMail: beskakotov.as@gmail.com&#39;</span>)
+        
+        <span class="va">self</span>.l_git_version <span class="op">=</span> sLabel(<span class="st">&#39;&#39;</span>)
+        <span class="va">self</span>.l_git_version.hide()
+        
+        <span class="va">self</span>.b_Check <span class="op">=</span> QPushButton(<span class="st">&#39;Проверить обновления&#39;</span>)
+        <span class="va">self</span>.b_Check.clicked.<span class="ex">connect</span>(<span class="va">self</span>.c_Check_updates)
+        <span class="va">self</span>.b_Check.setFixedHeight(<span class="dv">25</span>)
+        
+        <span class="va">self</span>.b_Update <span class="op">=</span> QPushButton(<span class="st">&#39;Обновить&#39;</span>)
+        <span class="va">self</span>.b_Update.clicked.<span class="ex">connect</span>(<span class="va">self</span>.c_Update)
+        <span class="va">self</span>.b_Update.setFixedHeight(<span class="dv">25</span>)
+        <span class="va">self</span>.b_Update.hide()
+
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_name)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_version)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_programmer)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_mail)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Check)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_git_version)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Update)
+          
+        <span class="va">self</span>.setLayout(<span class="va">self</span>.main_layout)
+
+    <span class="kw">def</span> c_Check_updates(<span class="va">self</span>):
+        <span class="cf">try</span>:
+            <span class="cf">with</span> urllib.request.urlopen(<span class="st">&#39;https://api.github.com/repos/Black13Wolf/linux_mavr_software/tags&#39;</span>) <span class="im">as</span> url:
+                data <span class="op">=</span> json.loads(url.read().decode())
+        <span class="cf">except</span>:
+            proxies <span class="op">=</span> {
+                    <span class="st">&quot;http&quot;</span> : <span class="st">&quot;http://squid.sao.ru:8080&quot;</span>,
+                    <span class="co">&quot;https&quot;</span> : <span class="st">&quot;http://squid.sao.ru:8080&quot;</span>,
+            }
+            proxy_support <span class="op">=</span> urllib.request.ProxyHandler(proxies)
+            opener <span class="op">=</span> urllib.request.build_opener(proxy_support)
+            urllib.request.install_opener(opener)
+            <span class="cf">with</span> urllib.request.urlopen(<span class="st">&#39;https://api.github.com/repos/Black13Wolf/linux_mavr_software/tags&#39;</span>) <span class="im">as</span> url:
+                data <span class="op">=</span> json.loads(url.read().decode())
+        <span class="va">self</span>.last_update <span class="op">=</span> data[<span class="dv">0</span>][<span class="st">&#39;name&#39;</span>]
+
+        <span class="cf">if</span> <span class="va">self</span>.ver <span class="op">==</span> <span class="va">self</span>.last_update:
+            <span class="va">self</span>.l_git_version.setText(<span class="st">&#39;У Вас установлена самая последняя версия.&#39;</span>)
+        <span class="cf">else</span>:
+            <span class="va">self</span>.l_git_version.setText(<span class="st">&#39;Последняя версия: </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(<span class="va">self</span>.last_update))           
+            <span class="va">self</span>.b_Update.show() 
+        <span class="va">self</span>.l_git_version.show()
+
+    <span class="kw">def</span> c_Update(<span class="va">self</span>):
+        <span class="va">self</span>.b_Check.setEnabled(<span class="va">False</span>)
+        <span class="va">self</span>.b_Update.setEnabled(<span class="va">False</span>)
+        proxies <span class="op">=</span> {
+            <span class="st">&quot;http&quot;</span> : <span class="st">&quot;http://squid.sao.ru:8080&quot;</span>,
+            <span class="co">&quot;https&quot;</span> : <span class="st">&quot;http://squid.sao.ru:8080&quot;</span>,
+        }
+        proxy_support <span class="op">=</span> urllib.request.ProxyHandler(proxies)
+        opener <span class="op">=</span> urllib.request.build_opener(proxy_support)
+        urllib.request.install_opener(opener)
+        <span class="cf">with</span> urllib.request.urlopen(<span class="st">&#39;https://api.github.com/repos/Black13Wolf/linux_mavr_software/tags&#39;</span>) <span class="im">as</span> url:
+            data <span class="op">=</span> json.loads(url.read().decode())
+        last_update <span class="op">=</span> data[<span class="dv">0</span>]
+        <span class="va">self</span>.mainGui.close()
+        
+        <span class="im">from</span> pip._internal <span class="im">import</span> main <span class="im">as</span> pip
+        pip([<span class="st">&#39;install&#39;</span>, last_update[<span class="st">&#39;tarball_url&#39;</span>], <span class="st">&#39;--user&#39;</span>, <span class="st">&#39;--proxy=http://squid.sao.ru:8080&#39;</span>])
+
+<span class="kw">class</span> sLabel(QLabel):
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, text, parent <span class="op">=</span> <span class="va">None</span>):
+        QLabel.<span class="fu">__init__</span>(<span class="va">self</span>, parent)
+        <span class="va">self</span>.setAlignment(Qt.AlignCenter)
+        <span class="va">self</span>.setText(text)
+        <span class="va">self</span>.setFixedWidth(<span class="dv">450</span>)</code></pre></div>
+<hr />
+<h1 id="помощь"><span class="header-section-number">2</span> Помощь</h1>
+<blockquote>
+<p>На стадии описания</p>
+</blockquote>
+
+</div> <!-- content -->
+
+<div id="footer-nav-bar">
+<a href="./d_WIN.html">← prev</a> | next → &nbsp; &nbsp; <a href="toc.html">Top-level ToC</a> &nbsp; &nbsp; <b>/d_HELP.html</b> &nbsp; &nbsp; (<a href="d_HELP-printable.html">printable version</a>)<br/>
+
+</div>
+
+</div> <!-- center-box -->
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<br/>
+<a href="d_HELP.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+</body>
+</html>

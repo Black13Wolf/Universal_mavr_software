@@ -1,0 +1,716 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Автоматизация</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="styles-printable.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Автоматизация</h1>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#пересборщик"><span class="toc-section-number">1</span> Пересборщик</a><ul>
+<li><a href="#описание"><span class="toc-section-number">1.1</span> Описание</a></li>
+<li><a href="#руководство-пользователя"><span class="toc-section-number">1.2</span> Руководство пользователя</a><ul>
+<li><a href="#внешний-вид-модуля"><span class="toc-section-number">1.2.1</span> Внешний вид модуля</a></li>
+<li><a href="#входные-данные"><span class="toc-section-number">1.2.2</span> Входные данные</a></li>
+<li><a href="#порядок-действий"><span class="toc-section-number">1.2.3</span> Порядок действий</a></li>
+</ul></li>
+<li><a href="#алгоритм"><span class="toc-section-number">1.3</span> Алгоритм</a></li>
+<li><a href="#состав-модуля"><span class="toc-section-number">1.4</span> Состав модуля</a><ul>
+<li><a href="#используемые-библиотеки-python"><span class="toc-section-number">1.4.1</span> Используемые библиотеки Python</a></li>
+<li><a href="#компоненты-модуля"><span class="toc-section-number">1.4.2</span> Компоненты модуля</a></li>
+</ul></li>
+<li><a href="#исходный-код-модулей"><span class="toc-section-number">1.5</span> Исходный код модулей</a><ul>
+<li><a href="#w_rebuilder.py"><span class="toc-section-number">1.5.1</span> w_Rebuilder.py</a></li>
+<li><a href="#p_rebuild.py"><span class="toc-section-number">1.5.2</span> p_Rebuild.py</a></li>
+<li><a href="#m_rebuild.py"><span class="toc-section-number">1.5.3</span> m_Rebuild.py</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#расчет-спм"><span class="toc-section-number">2</span> Расчет СПМ</a><ul>
+<li><a href="#описание-1"><span class="toc-section-number">2.1</span> Описание</a></li>
+<li><a href="#руководство-пользователя-1"><span class="toc-section-number">2.2</span> Руководство пользователя</a><ul>
+<li><a href="#внешний-вид-модуля-1"><span class="toc-section-number">2.2.1</span> Внешний вид модуля</a></li>
+<li><a href="#входные-данные-1"><span class="toc-section-number">2.2.2</span> Входные данные</a></li>
+<li><a href="#порядок-действий-1"><span class="toc-section-number">2.2.3</span> Порядок действий</a></li>
+</ul></li>
+<li><a href="#алгоритм-1"><span class="toc-section-number">2.3</span> Алгоритм</a></li>
+<li><a href="#состав-модуля-1"><span class="toc-section-number">2.4</span> Состав модуля</a><ul>
+<li><a href="#используемые-библиотеки-python-1"><span class="toc-section-number">2.4.1</span> Используемые библиотеки Python</a></li>
+<li><a href="#компоненты-модуля-1"><span class="toc-section-number">2.4.2</span> Компоненты модуля</a></li>
+</ul></li>
+<li><a href="#исходный-код-модулей-1"><span class="toc-section-number">2.5</span> Исходный код модулей</a><ul>
+<li><a href="#w_pscalc.py"><span class="toc-section-number">2.5.1</span> w_PSCalc.py</a></li>
+<li><a href="#p_psbasescan.py"><span class="toc-section-number">2.5.2</span> p_PSBaseScan.py</a></li>
+<li><a href="#m_pscalc.p"><span class="toc-section-number">2.5.3</span> m_PSCalc.p</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<hr />
+<h1 id="пересборщик"><span class="header-section-number">1</span> Пересборщик</h1>
+<h2 id="описание"><span class="header-section-number">1.1</span> Описание</h2>
+<p>Модуль предназначен для приведения выходных файлов камер Andor (SpoolDataXX.dat или spool.tif) и SWIR InGaAs Snake-640 (Serie tif) к бинарному формату, который используется большинством программ обработки группы.</p>
+<h2 id="руководство-пользователя"><span class="header-section-number">1.2</span> Руководство пользователя</h2>
+<h3 id="внешний-вид-модуля"><span class="header-section-number">1.2.1</span> Внешний вид модуля</h3>
+<div class="figure">
+<img src="img/w_Rebuilder.png" />
+
+</div>
+<h3 id="входные-данные"><span class="header-section-number">1.2.2</span> Входные данные</h3>
+<p><strong><code>Input path</code></strong>: Путь до директории сета/ночи/объекта</p>
+<p><strong><code>Output path</code></strong>: Выходной путь сохранения результатов. Если поле оставлено пустым, то выходной путь приравнивается ко входному.</p>
+<blockquote>
+<p>Обратите внимание, что формат файла добавляется программно, поэтому в качестве выходного пути, в случае если пересобирается объект, указывается только имя. Например: <code>path/to/dir/name_of_object</code></p>
+</blockquote>
+<p><strong><code>Type</code></strong>: Указывается тип входных данных. Есть три варианта:<br />
+- <strong><em>Set</em></strong>: Указанная входная директория - директория сета<br />
+- <strong><em>Night</em></strong>: Указанная входная директория - директория ночи<br />
+- <strong><em>Star</em></strong>: Указанная входная директория - директория объекта</p>
+<h3 id="порядок-действий"><span class="header-section-number">1.2.3</span> Порядок действий</h3>
+<ol style="list-style-type: decimal">
+<li>Ввести входной путь</li>
+<li>Ввести выходной путь</li>
+<li>Выбрать тип</li>
+<li>Запустить, нажатием кнопки <strong><code>Пересобрать</code></strong></li>
+</ol>
+<h2 id="алгоритм"><span class="header-section-number">1.3</span> Алгоритм</h2>
+<blockquote>
+<p>Будет описан позднее</p>
+</blockquote>
+<h2 id="состав-модуля"><span class="header-section-number">1.4</span> Состав модуля</h2>
+<h3 id="используемые-библиотеки-python"><span class="header-section-number">1.4.1</span> Используемые библиотеки Python</h3>
+<ul>
+<li>PyQt5</li>
+<li>sys</li>
+<li>os</li>
+<li>time</li>
+<li>threading</li>
+<li>numpy</li>
+<li>PIL (pillow)</li>
+</ul>
+<h3 id="компоненты-модуля"><span class="header-section-number">1.4.2</span> Компоненты модуля</h3>
+<ul>
+<li><strong>w_Rebuilder.py</strong>: Содержит описание виджета, отображаемого в GUI</li>
+<li><strong>p_Rebuild.py</strong>: Содержит описание потока, запускаемого параллельно основному</li>
+<li><strong>m_Rebuild.py</strong>: Содержит описание различных функций для выполнения алгоритма</li>
+</ul>
+<h2 id="исходный-код-модулей"><span class="header-section-number">1.5</span> Исходный код модулей</h2>
+<h3 id="w_rebuilder.py"><span class="header-section-number">1.5.1</span> w_Rebuilder.py</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> PyQt5.QtCore <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> PyQt5.QtGui <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> PyQt5.QtWidgets <span class="im">import</span> <span class="op">*</span>
+<span class="im">import</span> sys
+<span class="im">from</span> os.path <span class="im">import</span> join, abspath, dirname, pardir
+<span class="im">from</span> time <span class="im">import</span> sleep
+<span class="im">from</span> threading <span class="im">import</span> Thread, active_count
+
+<span class="im">from</span> . <span class="im">import</span> p_Rebuild <span class="im">as</span> rebuilder
+
+<span class="kw">class</span> Rebuilder(QWidget):
+    sign_set_progress <span class="op">=</span> pyqtSignal(<span class="bu">int</span>, <span class="bu">int</span>)
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, parent <span class="op">=</span> <span class="va">None</span>):
+        QWidget.<span class="fu">__init__</span>(<span class="va">self</span>, parent)
+        <span class="va">self</span>.mainGui <span class="op">=</span> parent        
+        <span class="va">self</span>.main_layout <span class="op">=</span> QGridLayout()
+
+        <span class="va">self</span>.b_Input <span class="op">=</span> QPushButton(<span class="st">&#39;Choose path&#39;</span>)
+        <span class="va">self</span>.b_Input.clicked.<span class="ex">connect</span>(<span class="va">self</span>.c_Input)
+        <span class="va">self</span>.b_Output <span class="op">=</span> QPushButton(<span class="st">&#39;Choose path&#39;</span>)
+        <span class="va">self</span>.b_Output.clicked.<span class="ex">connect</span>(<span class="va">self</span>.c_Output)
+        <span class="va">self</span>.b_Start <span class="op">=</span> QPushButton(<span class="st">&#39;Пересобрать&#39;</span>)
+        <span class="va">self</span>.b_Start.clicked.<span class="ex">connect</span>(<span class="va">self</span>.c_Start)        
+        
+        <span class="va">self</span>.l_Input <span class="op">=</span> QLabel(<span class="st">&#39;Input path: &#39;</span>)
+        <span class="va">self</span>.v_Input <span class="op">=</span> QLineEdit()
+        <span class="va">self</span>.v_Input.setFixedWidth(<span class="dv">300</span>)
+        <span class="va">self</span>.v_Input.textChanged.<span class="ex">connect</span>(<span class="va">self</span>.s_Def_path)
+        <span class="va">self</span>.l_Output <span class="op">=</span> QLabel(<span class="st">&#39;Output path: &#39;</span>)
+        <span class="va">self</span>.v_Output <span class="op">=</span> QLineEdit()
+        <span class="va">self</span>.v_Output.setFixedWidth(<span class="dv">300</span>)
+
+        <span class="va">self</span>.l_Type <span class="op">=</span> QLabel(<span class="st">&#39;Type: &#39;</span>)
+        <span class="va">self</span>.v_Type <span class="op">=</span> QComboBox()
+        <span class="va">self</span>.v_Type.addItems([<span class="st">&#39;Set&#39;</span>, <span class="st">&#39;Night&#39;</span>, <span class="st">&#39;Star&#39;</span>])
+        
+        <span class="va">self</span>.progressbar <span class="op">=</span> QProgressBar()
+        <span class="va">self</span>.sign_set_progress.<span class="ex">connect</span>(<span class="va">self</span>.slot_set_progress)
+        <span class="va">self</span>.progressbar.hide()
+
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Input, <span class="dv">0</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Input, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Input, <span class="dv">0</span>, <span class="dv">3</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Output, <span class="dv">1</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Output, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Output, <span class="dv">1</span>, <span class="dv">3</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Type, <span class="dv">2</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Type, <span class="dv">2</span>, <span class="dv">1</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Start, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.progressbar, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">4</span>)
+        <span class="va">self</span>.setLayout(<span class="va">self</span>.main_layout)
+
+    <span class="kw">def</span> c_Input(<span class="va">self</span>):
+        <span class="va">self</span>.v_Input.setText(QFileDialog.getExistingDirectory(<span class="va">self</span>, <span class="st">&quot;Select Input Directory&quot;</span>, <span class="st">&#39;.&#39;</span>, QFileDialog.ShowDirsOnly))
+
+    <span class="kw">def</span> c_Output(<span class="va">self</span>):
+        <span class="va">self</span>.v_Output.setText(QFileDialog.getExistingDirectory(<span class="va">self</span>, <span class="st">&quot;Select Output Directory&quot;</span>, <span class="st">&#39;.&#39;</span>, QFileDialog.ShowDirsOnly))
+
+    <span class="kw">def</span> c_Start(<span class="va">self</span>):
+        <span class="va">self</span>.b_Start.setEnabled(<span class="va">False</span>)
+        <span class="va">self</span>.b_Input.setEnabled(<span class="va">False</span>)
+        <span class="va">self</span>.b_Output.setEnabled(<span class="va">False</span>)
+        <span class="va">self</span>.progressbar.show()
+
+        params <span class="op">=</span> {}
+        params[<span class="st">&#39;type&#39;</span>] <span class="op">=</span> <span class="va">self</span>.v_Type.currentText().lower()
+        params[<span class="st">&#39;input&#39;</span>] <span class="op">=</span> {<span class="va">self</span>.v_Type.currentText().lower() : <span class="va">self</span>.v_Input.text()}
+        params[<span class="st">&#39;output&#39;</span>] <span class="op">=</span> {<span class="va">self</span>.v_Type.currentText().lower() : <span class="va">self</span>.v_Output.text()}
+        <span class="va">self</span>.th <span class="op">=</span> Thread(target <span class="op">=</span> rebuilder.rebuild_start, args<span class="op">=</span>(params, <span class="va">self</span>))
+        <span class="va">self</span>.th.start()
+                
+    <span class="kw">def</span> s_Def_path(<span class="va">self</span>):
+        <span class="cf">if</span> <span class="va">self</span>.v_Output.text() <span class="op">==</span> <span class="st">&#39;&#39;</span> <span class="kw">and</span> <span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;star&#39;</span>:
+            <span class="va">self</span>.v_Output.setText(join(<span class="va">self</span>.v_Input.text()))
+        <span class="cf">elif</span> <span class="va">self</span>.v_Output.text() <span class="op">==</span> <span class="st">&#39;&#39;</span> <span class="kw">and</span> (<span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;night&#39;</span> <span class="kw">or</span> <span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;set&#39;</span>):
+            <span class="va">self</span>.v_Output.setText(join(<span class="va">self</span>.v_Input.text(), <span class="st">&#39;rebuild&#39;</span>))
+        
+    <span class="kw">def</span> slot_set_progress(<span class="va">self</span>, v, maxv):
+        <span class="va">self</span>.progressbar.setRange(<span class="dv">0</span>, maxv)
+        <span class="va">self</span>.progressbar.setValue(v)
+        <span class="cf">if</span> v <span class="op">==</span> maxv:
+            <span class="va">self</span>.b_Start.setEnabled(<span class="va">True</span>)
+            <span class="va">self</span>.b_Input.setEnabled(<span class="va">True</span>)
+            <span class="va">self</span>.b_Output.setEnabled(<span class="va">True</span>)</code></pre></div>
+<h3 id="p_rebuild.py"><span class="header-section-number">1.5.2</span> p_Rebuild.py</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> numpy <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> os <span class="im">import</span> walk, makedirs
+<span class="im">from</span> os.path <span class="im">import</span> isdir, join, isfile, dirname
+
+<span class="im">from</span> .m_Rebuild <span class="im">import</span> <span class="op">*</span>
+
+<span class="kw">def</span> rebuild_start(params, parent <span class="op">=</span> <span class="va">None</span>):
+    <span class="cf">if</span> params[<span class="st">&#39;type&#39;</span>] <span class="op">==</span> <span class="st">&#39;set&#39;</span>:
+        params[<span class="st">&#39;nights&#39;</span>] <span class="op">=</span> {}
+        params[<span class="st">&#39;nights&#39;</span>][<span class="st">&#39;inputs&#39;</span>] <span class="op">=</span> []
+        params[<span class="st">&#39;nights&#39;</span>][<span class="st">&#39;outputs&#39;</span>] <span class="op">=</span> []
+        append_i <span class="op">=</span> params[<span class="st">&#39;nights&#39;</span>][<span class="st">&#39;inputs&#39;</span>].append
+        append_o <span class="op">=</span> params[<span class="st">&#39;nights&#39;</span>][<span class="st">&#39;outputs&#39;</span>].append
+        <span class="cf">for</span> root, dirs, files <span class="kw">in</span> walk(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;set&#39;</span>]):
+            <span class="cf">for</span> d <span class="kw">in</span> dirs:
+                append_i(join(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;set&#39;</span>], d))
+                append_o(join(params[<span class="st">&#39;output&#39;</span>][<span class="st">&#39;set&#39;</span>], d))
+            <span class="cf">break</span>
+        params[<span class="st">&#39;stars&#39;</span>] <span class="op">=</span> {}
+        params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;inputs&#39;</span>] <span class="op">=</span> []
+        params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;outputs&#39;</span>] <span class="op">=</span> []        
+        append_i <span class="op">=</span> params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;inputs&#39;</span>].append
+        append_o <span class="op">=</span> params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;outputs&#39;</span>].append
+        <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(params[<span class="st">&#39;nights&#39;</span>][<span class="st">&#39;inputs&#39;</span>])):
+            <span class="cf">for</span> root, dirs, files <span class="kw">in</span> walk(params[<span class="st">&#39;nights&#39;</span>][<span class="st">&#39;inputs&#39;</span>][n]):
+                <span class="cf">for</span> d <span class="kw">in</span> dirs:
+                    append_i(join(root, d))
+                    append_o(join(params[<span class="st">&#39;nights&#39;</span>][<span class="st">&#39;outputs&#39;</span>][n], d))
+                <span class="cf">break</span>
+
+    <span class="cf">elif</span> params[<span class="st">&#39;type&#39;</span>] <span class="op">==</span> <span class="st">&#39;night&#39;</span>:
+        params[<span class="st">&#39;stars&#39;</span>] <span class="op">=</span> {}
+        params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;inputs&#39;</span>] <span class="op">=</span> []
+        params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;outputs&#39;</span>] <span class="op">=</span> []        
+        append_i <span class="op">=</span> params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;inputs&#39;</span>].append
+        append_o <span class="op">=</span> params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;outputs&#39;</span>].append
+        <span class="cf">for</span> root, dirs, files <span class="kw">in</span> walk(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;night&#39;</span>]):
+            <span class="cf">for</span> d <span class="kw">in</span> dirs:
+                append_i(join(root, d))
+                append_o(join(params[<span class="st">&#39;output&#39;</span>][<span class="st">&#39;night&#39;</span>], d))
+            <span class="cf">break</span>
+
+    <span class="cf">elif</span> params[<span class="st">&#39;type&#39;</span>] <span class="op">==</span> <span class="st">&#39;star&#39;</span>:
+        params[<span class="st">&#39;stars&#39;</span>] <span class="op">=</span> {}
+        params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;inputs&#39;</span>] <span class="op">=</span> [params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;star&#39;</span>],]
+        params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;outputs&#39;</span>] <span class="op">=</span> [params[<span class="st">&#39;output&#39;</span>][<span class="st">&#39;star&#39;</span>],]
+
+    params[<span class="st">&#39;files&#39;</span>] <span class="op">=</span> <span class="bu">len</span>(params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;inputs&#39;</span>])
+    parent.sign_set_progress.emit(<span class="dv">0</span>, params[<span class="st">&#39;files&#39;</span>])
+
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;inputs&#39;</span>])):
+        rebuild_star(params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;inputs&#39;</span>][i], params[<span class="st">&#39;stars&#39;</span>][<span class="st">&#39;outputs&#39;</span>][i])
+        parent.sign_set_progress.emit(i<span class="dv">+1</span>, params[<span class="st">&#39;files&#39;</span>])
+        
+<span class="kw">def</span> rebuild_star(path_i, path_o):
+    <span class="cf">try</span>:
+        makedirs(dirname(path_o))
+    <span class="cf">except</span>:
+        <span class="cf">pass</span>
+    <span class="bu">print</span>(path_i)
+    serie_type <span class="op">=</span> check_serie_type(path_i)
+
+    <span class="cf">if</span> <span class="kw">not</span> serie_type:
+        <span class="cf">return</span> <span class="dv">0</span>
+    <span class="cf">if</span> serie_type <span class="op">==</span> <span class="st">&#39;dat&#39;</span>:
+        spool(path_i, path_o)
+    <span class="cf">elif</span> serie_type <span class="op">==</span> <span class="st">&#39;big_tif&#39;</span>:
+        big_tif(path_i, path_o)       
+    <span class="cf">elif</span> serie_type <span class="op">==</span> <span class="st">&#39;serie_tif&#39;</span>:
+        serie_tif(path_i, path_o)
+
+<span class="kw">def</span> check_serie_type(path_to_dir):
+    files_num <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> root, dirs, files <span class="kw">in</span> walk(path_to_dir):
+        files_num <span class="op">+=</span> <span class="bu">len</span>(files)
+    <span class="cf">if</span> files_num <span class="op">==</span> <span class="dv">0</span>:
+        <span class="bu">print</span>(path_to_dir<span class="op">+</span><span class="st">&#39; is empty folder.&#39;</span>)
+        <span class="cf">return</span> <span class="dv">0</span>
+    <span class="cf">elif</span> isdir(join(path_to_dir, <span class="st">&#39;spool&#39;</span>)):
+        <span class="cf">return</span> <span class="st">&#39;dat&#39;</span>
+    <span class="cf">elif</span> isfile(join(path_to_dir, <span class="st">&#39;spool.tif&#39;</span>)):
+        <span class="cf">return</span> <span class="st">&#39;big_tif&#39;</span>
+    <span class="cf">elif</span> files_num <span class="op">&gt;</span> <span class="dv">100</span> <span class="kw">and</span> files[<span class="op">-</span><span class="dv">1</span>].endswith(<span class="st">&#39;.tif&#39;</span>):
+        <span class="cf">return</span> <span class="st">&#39;serie_tif&#39;</span>
+    <span class="cf">else</span>:
+        <span class="bu">print</span>(path_to_dir<span class="op">+</span><span class="st">&#39; have unknown format&#39;</span>)</code></pre></div>
+<h3 id="m_rebuild.py"><span class="header-section-number">1.5.3</span> m_Rebuild.py</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> spool(main_path, output_dir):
+    <span class="im">from</span> os <span class="im">import</span> walk, path
+    <span class="im">from</span> numpy <span class="im">import</span> memmap, where
+    spools<span class="op">=</span>[]
+    <span class="cf">for</span> root, dirs, files <span class="kw">in</span> walk(path.join(main_path, <span class="st">&#39;spool&#39;</span>)):
+        <span class="cf">for</span> d <span class="kw">in</span> dirs:
+            <span class="cf">if</span> d.startswith(<span class="st">&#39;Spool&#39;</span>):
+                spools.append(d)
+    spool_num <span class="op">=</span> <span class="dv">0</span>
+    <span class="cf">for</span> spool <span class="kw">in</span> spools:
+        spool_num <span class="op">+=</span> <span class="dv">1</span>
+        files <span class="op">=</span> <span class="bu">list</span>(walk(path.join(main_path, <span class="st">&#39;spool&#39;</span>, spool)))[<span class="dv">0</span>][<span class="dv">2</span>]
+        files.sort()
+        <span class="cf">for</span> f <span class="kw">in</span> files:
+            datfile <span class="op">=</span> memmap(path.join(main_path, <span class="st">&#39;spool&#39;</span>, spool, f), dtype<span class="op">=</span><span class="st">&#39;uint16&#39;</span>)
+            <span class="cf">if</span> <span class="bu">any</span>(datfile <span class="op">==</span> <span class="dv">0</span>):
+                <span class="cf">for</span> i <span class="kw">in</span> where(datfile <span class="op">==</span> <span class="dv">0</span>)[<span class="dv">0</span>]:
+                    <span class="cf">if</span> datfile[i:i<span class="dv">+10</span>].<span class="bu">sum</span>()<span class="op">==</span><span class="dv">0</span>:
+                        <span class="cf">if</span> i:
+                            <span class="cf">with</span> <span class="bu">open</span>(path.join(output_dir<span class="op">+</span><span class="st">&#39;.dat&#39;</span>), <span class="st">&#39;ab&#39;</span>) <span class="im">as</span> f:
+                                f.write(datfile[:i])
+                        <span class="cf">break</span>
+                <span class="cf">else</span>:
+                    <span class="cf">with</span> <span class="bu">open</span>(path.join(output_dir<span class="op">+</span><span class="st">&#39;.dat&#39;</span>), <span class="st">&#39;ab&#39;</span>) <span class="im">as</span> f:
+                        f.write(datfile)
+            <span class="cf">else</span>:
+                <span class="cf">with</span> <span class="bu">open</span>(path.join(output_dir<span class="op">+</span><span class="st">&#39;.dat&#39;</span>), <span class="st">&#39;ab&#39;</span>) <span class="im">as</span> f:
+                    f.write(datfile)
+        
+<span class="kw">def</span> serie_tif(path_to_dir, output_dir):
+    <span class="im">from</span> PIL <span class="im">import</span> Image
+    <span class="im">from</span> numpy <span class="im">import</span> array, uint16
+    <span class="im">from</span> os <span class="im">import</span> walk, path
+
+    files <span class="op">=</span> <span class="bu">list</span>(walk(path_to_dir))[<span class="dv">0</span>][<span class="dv">2</span>]
+    <span class="cf">for</span> f <span class="kw">in</span> files:
+        <span class="cf">if</span> f.endswith(<span class="st">&#39;.jpg&#39;</span>) <span class="kw">or</span> f.endswith(<span class="st">&#39;.jpeg&#39;</span>) <span class="kw">or</span> f.endswith(<span class="st">&#39;.png&#39;</span>) <span class="kw">or</span> f.endswith(<span class="st">&#39;.tif&#39;</span>) <span class="kw">or</span> f.endswith(<span class="st">&#39;.gif&#39;</span>):
+            img_path <span class="op">=</span> path.join(path_to_dir, f)
+            img <span class="op">=</span> Image.<span class="bu">open</span>(img_path).convert(<span class="st">&#39;I&#39;</span>)
+            img <span class="op">=</span> array(img).astype(<span class="st">&#39;uint16&#39;</span>)
+            <span class="cf">with</span> <span class="bu">open</span>(path.join(output_dir<span class="op">+</span><span class="st">&#39;.dat&#39;</span>), <span class="st">&#39;ab&#39;</span>) <span class="im">as</span> output:
+                output.write(img)
+
+<span class="kw">def</span> big_tif(path_to_dir, output_dir):
+    <span class="im">from</span> PIL <span class="im">import</span> Image
+    <span class="im">from</span> numpy <span class="im">import</span> array, uint16
+    <span class="im">from</span> os <span class="im">import</span> stat, path, walk
+
+    <span class="cf">if</span> stat(path.join(path_to_dir, <span class="st">&#39;spool.tif&#39;</span>)).st_size <span class="op">==</span> <span class="dv">8</span>:
+        <span class="bu">print</span>(<span class="st">&#39;</span><span class="sc">{}</span><span class="st">: Ошибка в директории. Пересоберите вручную.&#39;</span>.<span class="bu">format</span>(main_path))
+        <span class="cf">return</span> <span class="dv">0</span>
+    tiffs <span class="op">=</span> <span class="bu">list</span>(walk(path_to_dir))[<span class="dv">0</span>][<span class="dv">2</span>]
+    <span class="cf">if</span> <span class="bu">len</span>(tiffs) <span class="op">==</span> <span class="dv">1</span>:
+        serie <span class="op">=</span> Image.<span class="bu">open</span>(path.join(path_to_dir, <span class="st">&#39;spool.tif&#39;</span>))
+        frames <span class="op">=</span> serie.n_frames
+        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(frames):
+            serie.seek(i)
+            <span class="cf">with</span> <span class="bu">open</span>(path.join(output_dir<span class="op">+</span><span class="st">&#39;.dat&#39;</span>), <span class="st">&#39;ab&#39;</span>) <span class="im">as</span> output:
+                output.write(array(serie).astype(<span class="st">&#39;uint16&#39;</span>))
+    <span class="cf">else</span>:
+        <span class="cf">for</span> f <span class="kw">in</span> tiffs:
+            <span class="cf">if</span> stat(path.join(path_to_dir, f)).st_size <span class="op">==</span> <span class="dv">8</span>:
+                <span class="cf">continue</span>
+            <span class="cf">else</span>:
+                serie <span class="op">=</span> Image.<span class="bu">open</span>(path.join(path_to_dir, f))
+                frames <span class="op">=</span> serie.n_frames
+                <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(frames):
+                    serie.seek(i)
+                    <span class="cf">with</span> <span class="bu">open</span>(path.join(output_dir<span class="op">+</span><span class="st">&#39;.dat&#39;</span>), <span class="st">&#39;ab&#39;</span>) <span class="im">as</span> output:
+                        output.write(array(serie).astype(<span class="st">&#39;uint16&#39;</span>))</code></pre></div>
+<hr />
+<h1 id="расчет-спм"><span class="header-section-number">2</span> Расчет СПМ</h1>
+<h2 id="описание-1"><span class="header-section-number">2.1</span> Описание</h2>
+<p>Модуль предназначен для автоматического расчета спектров мощности (СПМ) и автокорреляционных функций (АКФ). Способен рассчитать спектр мощности года/сета/ночи наблюдений или отдельно взятого объекта</p>
+<h2 id="руководство-пользователя-1"><span class="header-section-number">2.2</span> Руководство пользователя</h2>
+<h3 id="внешний-вид-модуля-1"><span class="header-section-number">2.2.1</span> Внешний вид модуля</h3>
+<div class="figure">
+<img src="img/w_PSCalc.png" />
+
+</div>
+<h3 id="входные-данные-1"><span class="header-section-number">2.2.2</span> Входные данные</h3>
+<p><strong><code>Input path</code></strong>: указывается путь до директории, в которой располагается год, сет или ночь наблюдений, или до файла, содержащего серию кадров одного объекта.</p>
+<p><strong><code>Output path</code></strong>: указывается выходной путь сохранения результата работы модуля. Если поле остается пустым, то выходной путь приравнивается к входному.</p>
+<p><strong><code>Type</code></strong>: Указывается тип входных данных: - <strong><em>Year</em></strong>: Модуль будет считать, что в качестве входной директории дана директория с годом наблюдений. В ней он будет искать сеты, в сетах ночи, в ночах файлы. - <strong><em>Set</em></strong>: Модуль будет считать, что в качестве входной директории дана директория с сетом наблюдений. В ней он будет искать ночи, в ночах файлы. - <strong><em>Night</em></strong>: Модуль будет считать, что в качестве входной директории дана директория с ночью наблюдений. В ней он будет файлы. - <strong><em>Star</em></strong>: Модуль будет считать, что в качестве входной директории дан файл с серией кадров объекта.</p>
+<p><strong><code>Diff frames</code></strong>: Указывается, с какой разностью кадров считать СПМ. При указании 0 - расчет с учетом разности кадров отключается. Максимальное значение - 50.</p>
+<p><strong><code>ACF</code></strong>: Два варианта: <strong><em>ON</em></strong> и <strong><em>OFF</em></strong> позволяют включить или выключить соответственно расчет и сохранение АКФ.</p>
+<p><strong><code>Save</code></strong>: Предлагает выбрать формат сохранения результата: - <strong><em>fits</em></strong>: расчитанные СПМ и АКФ будут сохраняться в формате <em><code>*.fits</code></em> - <strong><em>OFF</em></strong>: данная опция предусмотрена для вывода результата как переменной, в случае если пакет используется как модуль Python</p>
+<p><strong><code>Shape</code></strong>: Предлагает выбрать формат выходного файла. Имеется 4 варианта: - 1024 х 1024 (по умолчанию) - 512 х 512 - 2048 х 2048 - 4096 х 4096</p>
+<p><strong><code>Removing BGR</code></strong>: Включает или выключает применение алгоритма по устранению центральной полосы в спектре мощности</p>
+<p><strong><code>Partickle Search</code> (<em>Не реализовано</em>)</strong>: Включает алгоритм поиска кадров с частицами</p>
+<p><strong><code>Partickle Save Result</code> (<em>Не реализовано</em>)</strong>: Включает сохранение результата поиска “плохих” кадров</p>
+<h3 id="порядок-действий-1"><span class="header-section-number">2.2.3</span> Порядок действий</h3>
+<ol style="list-style-type: decimal">
+<li>В поле <strong><code>Type</code></strong> необходимо выбрать тип входных данных</li>
+<li>Затем указать входную и выходную директорию</li>
+<li>Выбрать остальные параметры</li>
+<li>Запустить нажатием кнопки <strong><code>Start</code></strong></li>
+</ol>
+<h2 id="алгоритм-1"><span class="header-section-number">2.3</span> Алгоритм</h2>
+<blockquote>
+<p>Будет описан позднее</p>
+</blockquote>
+<h2 id="состав-модуля-1"><span class="header-section-number">2.4</span> Состав модуля</h2>
+<h3 id="используемые-библиотеки-python-1"><span class="header-section-number">2.4.1</span> Используемые библиотеки Python</h3>
+<ul>
+<li>PyQt5</li>
+<li>sys</li>
+<li>threading</li>
+<li>ast</li>
+<li>time</li>
+<li>os</li>
+<li>numpy</li>
+<li>astropy</li>
+<li>gc</li>
+<li>matplotlib</li>
+</ul>
+<h3 id="компоненты-модуля-1"><span class="header-section-number">2.4.2</span> Компоненты модуля</h3>
+<ul>
+<li><strong>w_PSCalc.py</strong>: Содержит описание виджета, отображаемого в GUI</li>
+<li><strong>p_PSBaseScan.py</strong>: Содержит описание потока, запускаемого параллельно основному</li>
+<li><strong>m_PSCalc.py</strong>: Содержит описание различных функций для выполнения алгоритма</li>
+</ul>
+<h2 id="исходный-код-модулей-1"><span class="header-section-number">2.5</span> Исходный код модулей</h2>
+<h3 id="w_pscalc.py"><span class="header-section-number">2.5.1</span> w_PSCalc.py</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> PyQt5.QtCore <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> PyQt5.QtGui <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> PyQt5.QtWidgets <span class="im">import</span> <span class="op">*</span>
+<span class="im">import</span> sys
+<span class="im">from</span> threading <span class="im">import</span> Thread, active_count
+<span class="im">from</span> ast <span class="im">import</span> literal_eval
+<span class="im">from</span> time <span class="im">import</span> sleep
+
+<span class="im">from</span> . <span class="im">import</span> p_PSBaseScan <span class="im">as</span> base_scan
+<span class="im">from</span> .m_PSCalc <span class="im">import</span> get_ps
+    
+<span class="kw">class</span> PSCalculator(QWidget):
+    sign_set_progress <span class="op">=</span> pyqtSignal(<span class="bu">int</span>, <span class="bu">int</span>)    
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, parent <span class="op">=</span> <span class="va">None</span>):
+        <span class="va">self</span>.mainGui <span class="op">=</span> parent
+        QWidget.<span class="fu">__init__</span>(<span class="va">self</span>, parent)
+        <span class="va">self</span>.main_layout <span class="op">=</span> QGridLayout()
+
+        <span class="va">self</span>.b_Start <span class="op">=</span> QPushButton(<span class="st">&#39;Start&#39;</span>)
+        <span class="va">self</span>.b_Start.clicked.<span class="ex">connect</span>(<span class="va">self</span>.c_Start)
+        <span class="va">self</span>.b_Input <span class="op">=</span> QPushButton(<span class="st">&#39;Choose path&#39;</span>)
+        <span class="va">self</span>.b_Input.clicked.<span class="ex">connect</span>(<span class="va">self</span>.c_Input)
+        <span class="va">self</span>.b_Output <span class="op">=</span> QPushButton(<span class="st">&#39;Choose path&#39;</span>)
+        <span class="va">self</span>.b_Output.clicked.<span class="ex">connect</span>(<span class="va">self</span>.c_Output)        
+        
+        <span class="va">self</span>.l_Input <span class="op">=</span> QLabel(<span class="st">&#39;Input path: &#39;</span>)
+        <span class="va">self</span>.v_Input <span class="op">=</span> QLineEdit()
+        <span class="va">self</span>.v_Input.setFixedWidth(<span class="dv">300</span>)
+        <span class="va">self</span>.l_Output <span class="op">=</span> QLabel(<span class="st">&#39;Output path: &#39;</span>)
+        <span class="va">self</span>.v_Output <span class="op">=</span> QLineEdit()
+        <span class="va">self</span>.v_Output.setFixedWidth(<span class="dv">300</span>)
+        
+        <span class="va">self</span>.l_Type <span class="op">=</span> QLabel(<span class="st">&#39;Type: &#39;</span>)
+        <span class="va">self</span>.v_Type <span class="op">=</span> QComboBox()
+        <span class="va">self</span>.v_Type.addItems([<span class="st">&#39;Year&#39;</span>, <span class="st">&#39;Set&#39;</span>, <span class="st">&#39;Night&#39;</span>, <span class="st">&#39;Star&#39;</span>])
+        
+        <span class="va">self</span>.l_Diff <span class="op">=</span> QLabel(<span class="st">&#39;Diff frames: &#39;</span>)
+        <span class="va">self</span>.v_Diff <span class="op">=</span> QSpinBox()
+        <span class="va">self</span>.v_Diff.setValue(<span class="dv">1</span>)
+        <span class="va">self</span>.v_Diff.setMaximum(<span class="dv">50</span>)
+        
+        <span class="va">self</span>.l_Acf <span class="op">=</span> QLabel(<span class="st">&#39;ACF&#39;</span>)
+        <span class="va">self</span>.v_Acf <span class="op">=</span> QComboBox()
+        <span class="va">self</span>.v_Acf.addItems([<span class="st">&#39;ON&#39;</span>, <span class="st">&#39;OFF&#39;</span>])
+        
+        <span class="va">self</span>.l_Save <span class="op">=</span> QLabel(<span class="st">&#39;Save: &#39;</span>)
+        <span class="va">self</span>.v_Save <span class="op">=</span> QComboBox()
+        <span class="va">self</span>.v_Save.addItems([<span class="st">&#39;fits&#39;</span>, <span class="st">&#39;OFF&#39;</span>])
+
+        <span class="va">self</span>.l_Shape <span class="op">=</span> QLabel(<span class="st">&#39;Shape: &#39;</span>)
+        <span class="va">self</span>.v_Shape <span class="op">=</span> QComboBox()
+        <span class="va">self</span>.v_Shape.addItems([<span class="st">&#39;(1024,1024)&#39;</span>, <span class="st">&#39;(512,512)&#39;</span>, <span class="st">&#39;(2048,2048)&#39;</span>, <span class="st">&#39;(4096,4096)&#39;</span>, <span class="st">&#39;(512, 640)&#39;</span>])
+
+        <span class="va">self</span>.l_Rmbgr <span class="op">=</span> QLabel(<span class="st">&#39;Removing BGR: &#39;</span>)
+        <span class="va">self</span>.v_Rmbgr <span class="op">=</span> QComboBox()
+        <span class="va">self</span>.v_Rmbgr.addItems([<span class="st">&#39;ON&#39;</span>, <span class="st">&#39;OFF&#39;</span>])
+
+        <span class="va">self</span>.progressbar <span class="op">=</span> QProgressBar()
+        <span class="va">self</span>.sign_set_progress.<span class="ex">connect</span>(<span class="va">self</span>.slot_set_progress)
+        <span class="va">self</span>.progressbar.hide()
+
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Input, <span class="dv">0</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Input, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Input, <span class="dv">0</span>, <span class="dv">3</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Output, <span class="dv">1</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Output, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Output, <span class="dv">1</span>, <span class="dv">3</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Type, <span class="dv">2</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Type, <span class="dv">2</span>, <span class="dv">1</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Diff, <span class="dv">2</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Diff, <span class="dv">2</span>, <span class="dv">3</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Acf, <span class="dv">3</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Acf, <span class="dv">3</span>, <span class="dv">1</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Save, <span class="dv">3</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Save, <span class="dv">3</span>, <span class="dv">3</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Shape, <span class="dv">4</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Shape, <span class="dv">4</span>, <span class="dv">1</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Rmbgr, <span class="dv">4</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Rmbgr, <span class="dv">4</span>, <span class="dv">3</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Start, <span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.progressbar, <span class="dv">11</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">4</span>)
+        <span class="va">self</span>.setLayout(<span class="va">self</span>.main_layout)
+    
+
+    <span class="kw">def</span> c_Start(<span class="va">self</span>):
+        <span class="va">self</span>.b_Start.setEnabled(<span class="va">False</span>)
+        <span class="va">self</span>.b_Input.setEnabled(<span class="va">False</span>)
+        <span class="va">self</span>.b_Output.setEnabled(<span class="va">False</span>)
+        <span class="va">self</span>.progressbar.show()
+        params <span class="op">=</span> {}
+        params[<span class="st">&#39;input&#39;</span>] <span class="op">=</span> {<span class="va">self</span>.v_Type.currentText().lower() : <span class="va">self</span>.v_Input.text()}
+        params[<span class="st">&#39;output&#39;</span>] <span class="op">=</span> {<span class="va">self</span>.v_Type.currentText().lower() : <span class="va">self</span>.v_Output.text()}
+        params[<span class="st">&#39;type&#39;</span>] <span class="op">=</span> <span class="va">self</span>.v_Type.currentText().lower()
+        params[<span class="st">&#39;diff&#39;</span>] <span class="op">=</span> <span class="va">self</span>.v_Diff.value() 
+
+        <span class="cf">if</span> <span class="va">self</span>.v_Acf.currentText() <span class="op">==</span> <span class="st">&#39;ON&#39;</span>:
+            params[<span class="st">&#39;acf&#39;</span>] <span class="op">=</span> <span class="va">True</span>
+        <span class="cf">elif</span> <span class="va">self</span>.v_Acf.currentText() <span class="op">==</span> <span class="st">&#39;OFF&#39;</span>:
+            params[<span class="st">&#39;acf&#39;</span>] <span class="op">=</span> <span class="va">False</span>
+
+        <span class="cf">if</span> <span class="va">self</span>.v_Save.currentText() <span class="op">==</span> <span class="st">&#39;OFF&#39;</span>:
+            params[<span class="st">&#39;save&#39;</span>] <span class="op">=</span> <span class="va">False</span>
+        <span class="cf">else</span>:
+            params[<span class="st">&#39;save&#39;</span>] <span class="op">=</span> <span class="va">self</span>.v_Save.currentText()
+
+        params[<span class="st">&#39;shape&#39;</span>] <span class="op">=</span> literal_eval(<span class="va">self</span>.v_Shape.currentText())
+
+        <span class="cf">if</span> <span class="va">self</span>.v_Rmbgr.currentText() <span class="op">==</span> <span class="st">&#39;ON&#39;</span>:
+            params[<span class="st">&#39;rmbgr&#39;</span>] <span class="op">=</span> <span class="va">True</span>
+        <span class="cf">elif</span> <span class="va">self</span>.v_Rmbgr.currentText() <span class="op">==</span> <span class="st">&#39;OFF&#39;</span>:
+            params[<span class="st">&#39;rmbgr&#39;</span>] <span class="op">=</span> <span class="va">False</span>
+
+        <span class="cf">if</span> params[<span class="st">&#39;type&#39;</span>] <span class="op">==</span> <span class="st">&#39;year&#39;</span>:
+            <span class="va">self</span>.th <span class="op">=</span> Thread(target <span class="op">=</span> base_scan.scan_year, args<span class="op">=</span>(params, <span class="va">self</span>))
+        <span class="cf">elif</span> params[<span class="st">&#39;type&#39;</span>] <span class="op">==</span> <span class="st">&#39;set&#39;</span>:
+            <span class="va">self</span>.th <span class="op">=</span> Thread(target <span class="op">=</span> base_scan.scan_set, args<span class="op">=</span>(params, <span class="va">self</span>))
+        <span class="cf">elif</span> params[<span class="st">&#39;type&#39;</span>] <span class="op">==</span> <span class="st">&#39;night&#39;</span>:
+            <span class="va">self</span>.th <span class="op">=</span> Thread(target <span class="op">=</span> base_scan.scan_night, args<span class="op">=</span>(params, <span class="va">self</span>))
+        <span class="cf">elif</span> params[<span class="st">&#39;type&#39;</span>] <span class="op">==</span> <span class="st">&#39;star&#39;</span>:
+            <span class="va">self</span>.th <span class="op">=</span> Thread(target <span class="op">=</span> get_ps, args <span class="op">=</span> (params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;star&#39;</span>],), kwargs<span class="op">=</span>{<span class="st">&#39;diff&#39;</span>:params[<span class="st">&#39;diff&#39;</span>], <span class="st">&#39;acf&#39;</span>:params[<span class="st">&#39;acf&#39;</span>], <span class="st">&#39;save&#39;</span>:params[<span class="st">&#39;save&#39;</span>], <span class="st">&#39;shape&#39;</span>:params[<span class="st">&#39;shape&#39;</span>], <span class="st">&#39;output&#39;</span>:params[<span class="st">&#39;output&#39;</span>][<span class="st">&#39;star&#39;</span>], <span class="st">&#39;rmbgr_on&#39;</span>:params[<span class="st">&#39;rmbgr&#39;</span>]})
+        <span class="cf">else</span>:
+            <span class="cf">return</span> <span class="dv">1</span>
+        <span class="va">self</span>.th.start()
+
+    <span class="kw">def</span> c_Input(<span class="va">self</span>):
+        <span class="cf">if</span> <span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;star&#39;</span>:
+            <span class="va">self</span>.v_Input.setText(QFileDialog.getOpenFileName(<span class="va">self</span>, <span class="st">&#39;Select Input Dat File&#39;</span>, <span class="st">&#39;.&#39;</span>, <span class="st">&quot;DAT (*.dat)&quot;</span>)[<span class="dv">0</span>])
+        <span class="cf">else</span>:
+            <span class="va">self</span>.v_Input.setText(QFileDialog.getExistingDirectory(<span class="va">self</span>, <span class="st">&quot;Select Input Directory&quot;</span>, <span class="st">&#39;.&#39;</span>, QFileDialog.ShowDirsOnly))
+
+    <span class="kw">def</span> c_Output(<span class="va">self</span>):
+        <span class="va">self</span>.v_Output.setText(QFileDialog.getExistingDirectory(<span class="va">self</span>, <span class="st">&quot;Select Output Directory&quot;</span>, <span class="st">&#39;.&#39;</span>, QFileDialog.ShowDirsOnly))
+    
+    <span class="kw">def</span> slot_set_progress(<span class="va">self</span>, v, maxv):
+        <span class="va">self</span>.progressbar.setRange(<span class="dv">0</span>, maxv)
+        <span class="va">self</span>.progressbar.setValue(v)
+        <span class="cf">if</span> v <span class="op">==</span> maxv:
+            <span class="va">self</span>.b_Start.setEnabled(<span class="va">True</span>)
+            <span class="va">self</span>.b_Input.setEnabled(<span class="va">True</span>)
+            <span class="va">self</span>.b_Output.setEnabled(<span class="va">True</span>)</code></pre></div>
+<h3 id="p_psbasescan.py"><span class="header-section-number">2.5.2</span> p_PSBaseScan.py</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> os.path <span class="im">import</span> join, isdir, basename
+<span class="im">from</span> os <span class="im">import</span> walk, makedirs, system, listdir
+<span class="im">import</span> sys
+<span class="im">from</span> time <span class="im">import</span> time
+<span class="im">from</span> numpy <span class="im">import</span> mean
+
+<span class="im">from</span> .m_PSCalc <span class="im">import</span> get_ps
+    
+<span class="kw">def</span> scan_year(params, parent <span class="op">=</span> <span class="va">None</span>, level <span class="op">=</span> <span class="dv">0</span>):
+    sets <span class="op">=</span> <span class="bu">list</span>(walk(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;year&#39;</span>]))[<span class="dv">0</span>][<span class="dv">1</span>]
+    <span class="cf">for</span> month <span class="kw">in</span> sets:
+        params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;set&#39;</span>] <span class="op">=</span> join(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;year&#39;</span>], month)
+        params[<span class="st">&#39;output&#39;</span>][<span class="st">&#39;set&#39;</span>] <span class="op">=</span> join(params[<span class="st">&#39;output&#39;</span>][<span class="st">&#39;year&#39;</span>], month)
+        <span class="bu">print</span>(<span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span><span class="op">*</span>level <span class="op">+</span> params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;set&#39;</span>])
+        scan_set(params, parent, level<span class="dv">+1</span>)
+        
+<span class="kw">def</span> scan_set(params, parent <span class="op">=</span> <span class="va">None</span>, level <span class="op">=</span> <span class="dv">0</span>):
+    <span class="cf">if</span> isdir(join(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;set&#39;</span>], <span class="st">&#39;cut&#39;</span>)):
+        params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;subdir&#39;</span>] <span class="op">=</span> join(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;set&#39;</span>], <span class="st">&#39;cut&#39;</span>)
+    <span class="cf">elif</span> isdir(join(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;set&#39;</span>], <span class="st">&#39;rebuild&#39;</span>)):
+        params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;subdir&#39;</span>] <span class="op">=</span> join(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;set&#39;</span>], <span class="st">&#39;rebuild&#39;</span>)
+    <span class="cf">elif</span> isdir(join(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;set&#39;</span>], <span class="st">&#39;rebuilded&#39;</span>)):
+        params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;subdir&#39;</span>] <span class="op">=</span> join(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;set&#39;</span>], <span class="st">&#39;rebuilded&#39;</span>)
+    <span class="cf">else</span>:
+        params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;subdir&#39;</span>] <span class="op">=</span> params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;set&#39;</span>]
+    
+    nights <span class="op">=</span> <span class="bu">list</span>(walk(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;subdir&#39;</span>]))[<span class="dv">0</span>][<span class="dv">1</span>]
+    <span class="cf">for</span> night <span class="kw">in</span> nights:
+        params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;night&#39;</span>] <span class="op">=</span> join(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;subdir&#39;</span>], night)
+        params[<span class="st">&#39;output&#39;</span>][<span class="st">&#39;night&#39;</span>] <span class="op">=</span> join(params[<span class="st">&#39;output&#39;</span>][<span class="st">&#39;set&#39;</span>], night)
+        <span class="bu">print</span>(<span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span><span class="op">*</span>level <span class="op">+</span> params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;night&#39;</span>])        
+        scan_night(params, parent)
+        
+<span class="kw">def</span> scan_night(params, parent <span class="op">=</span> <span class="va">False</span>, level <span class="op">=</span> <span class="dv">0</span>):
+    stars <span class="op">=</span> []
+    <span class="cf">try</span>:
+        makedirs(params[<span class="st">&#39;output&#39;</span>][<span class="st">&#39;night&#39;</span>])
+        <span class="bu">print</span>(<span class="st">&#39;Dir created: &#39;</span><span class="op">+</span>params[<span class="st">&#39;output&#39;</span>][<span class="st">&#39;night&#39;</span>])
+    <span class="cf">except</span>:
+        <span class="bu">print</span>(<span class="st">&#39;Error create: &#39;</span><span class="op">+</span>params[<span class="st">&#39;output&#39;</span>][<span class="st">&#39;night&#39;</span>])
+    <span class="cf">for</span> root, dirs, files <span class="kw">in</span> walk(params[<span class="st">&#39;input&#39;</span>][<span class="st">&#39;night&#39;</span>]):
+        <span class="cf">for</span> name <span class="kw">in</span> files:
+            <span class="cf">if</span> <span class="kw">not</span> name.endswith(<span class="st">&#39;.dat&#39;</span>) <span class="kw">or</span> name.startswith(<span class="st">&#39;dark&#39;</span>) <span class="kw">or</span> name.startswith(<span class="st">&#39;flat&#39;</span>) <span class="kw">or</span> <span class="st">&#39;moon&#39;</span> <span class="kw">in</span> name <span class="kw">or</span> <span class="st">&#39;bin&#39;</span> <span class="kw">in</span> name:
+                <span class="cf">continue</span>
+            <span class="cf">else</span>:
+                stars.append(join(root, name))
+        <span class="cf">break</span>
+    i<span class="op">=</span><span class="dv">0</span>
+    parent.sign_set_progress.emit(i, <span class="bu">len</span>(stars))    
+    <span class="cf">for</span> star <span class="kw">in</span> stars:
+        <span class="bu">print</span>(<span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span><span class="op">*</span>level <span class="op">+</span> star)                
+        get_ps(star, diff<span class="op">=</span>params[<span class="st">&#39;diff&#39;</span>], acf<span class="op">=</span>params[<span class="st">&#39;acf&#39;</span>], save<span class="op">=</span>params[<span class="st">&#39;save&#39;</span>], shape<span class="op">=</span>params[<span class="st">&#39;shape&#39;</span>], output<span class="op">=</span>params[<span class="st">&#39;output&#39;</span>][<span class="st">&#39;night&#39;</span>], rmbgr_on<span class="op">=</span>params[<span class="st">&#39;rmbgr&#39;</span>])
+        i<span class="op">+=</span><span class="dv">1</span>
+        parent.sign_set_progress.emit(i, <span class="bu">len</span>(stars))  </code></pre></div>
+<h3 id="m_pscalc.p"><span class="header-section-number">2.5.3</span> m_PSCalc.p</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> get_ps(path_to_dat, diff<span class="op">=</span><span class="dv">0</span>, acf<span class="op">=</span><span class="va">False</span>, save<span class="op">=</span><span class="va">False</span>, shape<span class="op">=</span>(<span class="dv">512</span>,<span class="dv">512</span>), output<span class="op">=</span><span class="va">False</span>, rmbgr_on<span class="op">=</span><span class="va">True</span>):
+    <span class="im">from</span> numpy <span class="im">import</span> memmap, zeros, fft, <span class="bu">any</span>
+    <span class="im">from</span> os.path <span class="im">import</span> basename, join
+    <span class="cf">if</span> output:
+        output_file <span class="op">=</span> join(output, basename(path_to_dat))
+    <span class="cf">else</span>:
+        output_file <span class="op">=</span> path_to_dat
+    serie <span class="op">=</span> memmap(path_to_dat, dtype<span class="op">=</span><span class="st">&#39;uint16&#39;</span>).astype(<span class="st">&#39;float32&#39;</span>)
+    <span class="cf">if</span> shape <span class="op">==</span> (<span class="dv">512</span>, <span class="dv">640</span>): lims <span class="op">=</span> (<span class="dv">512</span>, <span class="dv">640</span>)
+    <span class="cf">else</span>: lims <span class="op">=</span> (<span class="dv">512</span>,<span class="dv">512</span>)
+    frames <span class="op">=</span> <span class="bu">int</span>(serie.size<span class="op">/</span>lims[<span class="dv">0</span>]<span class="op">/</span>lims[<span class="dv">1</span>])
+    serie <span class="op">=</span> serie.reshape((frames, lims[<span class="dv">0</span>], lims[<span class="dv">1</span>]))
+
+    serie, frames <span class="op">=</span> partickle_searcher(serie, path_to_dat, output_file, output)
+
+    output_ps <span class="op">=</span> zeros(shape)
+    <span class="cf">for</span> num <span class="kw">in</span> <span class="bu">range</span>(frames):
+        frame <span class="op">=</span> zeros(shape)
+        <span class="cf">if</span> diff <span class="kw">and</span> num<span class="op">&lt;</span>frames<span class="op">-</span>diff:
+            frame[:lims[<span class="dv">0</span>], :lims[<span class="dv">1</span>]] <span class="op">+=</span> serie[num] <span class="op">-</span> serie[num<span class="op">+</span>diff]
+            frame[:lims[<span class="dv">0</span>], :lims[<span class="dv">1</span>]] <span class="op">+=</span> serie[num] <span class="op">-</span> serie[num<span class="op">+</span>diff]
+        <span class="cf">else</span>:
+            frame[:lims[<span class="dv">0</span>], :lims[<span class="dv">1</span>]] <span class="op">+=</span> serie[num]
+        output_ps <span class="op">+=</span> <span class="bu">abs</span>(fft.fft2(frame)<span class="op">**</span><span class="dv">2</span>)                                                                                                                                                                                                                                                                                                                                                                                            
+    output_ps <span class="op">/=</span> frames  
+    <span class="cf">if</span> rmbgr_on: 
+        output_ps <span class="op">=</span> fft.fftshift(rmbgr(fft.fftshift(output_ps), <span class="dv">100</span>))
+          
+    <span class="cf">if</span> acf: output_acf <span class="op">=</span> <span class="bu">abs</span>(fft.ifft2(fft.fftshift(output_ps)))
+    <span class="cf">if</span> save:
+        <span class="cf">if</span> save <span class="op">==</span> <span class="st">&#39;fits&#39;</span>:
+            <span class="im">from</span> astropy.io <span class="im">import</span> fits
+            fits.writeto(output_file<span class="op">+</span><span class="st">&#39;_ps_diff</span><span class="sc">{}</span><span class="st">_shape</span><span class="sc">{}</span><span class="st">.</span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(diff, shape, save), fft.fftshift(output_ps))
+            <span class="cf">if</span> acf: fits.writeto(output_file<span class="op">+</span><span class="st">&#39;_acf_diff</span><span class="sc">{}</span><span class="st">_shape</span><span class="sc">{}</span><span class="st">.</span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(diff, shape, save), fft.fftshift(output_acf))
+        <span class="cf">else</span>:
+            <span class="bu">print</span>(<span class="st">&#39;Unknown format: </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(save))
+        <span class="im">import</span> gc
+        memory <span class="op">=</span> gc.collect()
+        <span class="bu">print</span>(<span class="st">&#39;Очищено объектов из памяти: </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(memory))
+    <span class="cf">else</span>:
+        <span class="cf">if</span> acf:
+            <span class="cf">return</span> fft.fftshift(output_ps), fft.fftshift(output_acf)
+        <span class="cf">else</span>:
+            <span class="cf">return</span> fft.fftshift(output_ps)
+    
+<span class="kw">def</span> rmbgr(middle_star, xlim): 
+    <span class="im">from</span> numpy <span class="im">import</span> mean
+    outbound <span class="op">=</span> middle_star[<span class="dv">0</span>:xlim] 
+    slice_out <span class="op">=</span> mean(outbound, axis<span class="op">=</span><span class="dv">0</span>) 
+    middle_star_clean <span class="op">=</span> middle_star <span class="op">-</span> slice_out 
+    <span class="cf">return</span> middle_star_clean 
+
+<span class="kw">def</span> partickle_searcher(data, name, output_path, log_path):
+    <span class="bu">print</span>(<span class="st">&#39;Поиск частиц&#39;</span>)
+    <span class="bu">print</span>(data.shape)
+    <span class="im">from</span> numpy <span class="im">import</span> std, array, mean, where, delete, save
+    <span class="im">from</span> matplotlib.pyplot <span class="im">import</span> clf, plot, savefig, hlines
+    <span class="im">from</span> os.path <span class="im">import</span> join
+    
+    sf <span class="op">=</span> data.shape[<span class="dv">0</span>]
+    mvs <span class="op">=</span> []
+    <span class="cf">for</span> i <span class="kw">in</span> data:
+        mvs.append(i.<span class="bu">max</span>())
+    mvs <span class="op">=</span> array(mvs)
+    mvs <span class="op">-=</span> mvs.<span class="bu">min</span>()
+    mvs <span class="op">/=</span> mvs.<span class="bu">max</span>()
+    ad <span class="op">=</span> mean(mvs)
+    <span class="bu">print</span>(<span class="st">&#39;Коэфф: </span><span class="sc">{:.2f}</span><span class="st">&#39;</span>.<span class="bu">format</span>(ad))
+    plot(mvs)
+    k <span class="op">=</span> mean(mvs)<span class="op">*</span><span class="dv">2</span> <span class="op">+</span> std(mvs)<span class="op">*</span><span class="dv">4</span>
+    hlines(k, <span class="dv">0</span>, data.shape[<span class="dv">0</span>], color<span class="op">=</span><span class="st">&#39;red&#39;</span>)
+    savefig(output_path<span class="op">+</span><span class="st">&#39;.maxvalues.png&#39;</span>)
+    clf()
+    bad_frames <span class="op">=</span> where(mvs <span class="op">&gt;</span> k)[<span class="dv">0</span>]
+    
+    <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;</span> <span class="bu">len</span>(bad_frames) <span class="op">&lt;</span> data.shape[<span class="dv">0</span>] <span class="op">*</span> <span class="fl">0.025</span>:
+        data <span class="op">=</span> delete(data, bad_frames, axis <span class="op">=</span> <span class="dv">0</span>)
+    <span class="bu">print</span>(<span class="st">&#39;Конец поиска частиц&#39;</span>)
+    <span class="cf">with</span> <span class="bu">open</span>(join(log_path, <span class="st">&#39;logfile.txt&#39;</span>), <span class="st">&#39;a+&#39;</span>) <span class="im">as</span> log:
+        log.write(<span class="st">&#39;</span><span class="sc">{}</span><span class="ch">\t</span><span class="st"> koeff: </span><span class="sc">{:.2f}</span><span class="ch">\t</span><span class="st"> Bad frames: </span><span class="sc">{}</span><span class="st">(</span><span class="sc">{:.2f}</span><span class="st">) </span><span class="ch">\t</span><span class="st"> </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">&#39;</span>.<span class="bu">format</span>(name, ad, <span class="bu">len</span>(bad_frames), (<span class="bu">len</span>(bad_frames)<span class="op">/</span>sf)<span class="op">*</span><span class="dv">100</span>, <span class="bu">str</span>(bad_frames)))
+    <span class="cf">return</span> data, data.shape[<span class="dv">0</span>]</code></pre></div>
+</body>
+</html>

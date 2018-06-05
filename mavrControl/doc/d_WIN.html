@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>WindowsOnly</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="index.html">Помощь</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-pane">
+<p>Top-level docs &amp; dirs:</p>
+<ul><li><a href="d_AUTO.html">Автоматизация</a></li><li><a href="d_OBS.html">Наблюдения</a></li><li><b>WindowsOnly</b></li><li><a href="d_HELP.html">Помощь</a></li></ul>
+</div>
+
+<div id="center-box">
+
+<div id="header-nav-bar">
+<a href="./d_OBS.html">← prev</a> | <a href="./d_HELP.html">next →</a> &nbsp; &nbsp; <a href="toc.html">Top-level ToC</a> &nbsp; &nbsp; <b>/d_WIN.html</b> &nbsp; &nbsp; (<a href="d_WIN-printable.html">printable version</a>)<br/>
+
+</div>
+
+<div id="content">
+<div id="header">
+<h1 class="title">WindowsOnly</h1>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#расчет-спм-и-акф"><span class="toc-section-number">1</span> Расчет СПМ и АКФ</a><ul>
+<li><a href="#описание"><span class="toc-section-number">1.1</span> Описание</a></li>
+<li><a href="#руководство-пользователя"><span class="toc-section-number">1.2</span> Руководство пользователя</a><ul>
+<li><a href="#внешний-вид-модуля"><span class="toc-section-number">1.2.1</span> Внешний вид модуля</a></li>
+<li><a href="#входные-данные"><span class="toc-section-number">1.2.2</span> Входные данные</a></li>
+<li><a href="#порядок-действий"><span class="toc-section-number">1.2.3</span> Порядок действий</a></li>
+</ul></li>
+<li><a href="#алгоритм"><span class="toc-section-number">1.3</span> Алгоритм</a></li>
+<li><a href="#состав-модуля"><span class="toc-section-number">1.4</span> 1. Состав модуля</a><ul>
+<li><a href="#используемые-библиотеки-python"><span class="toc-section-number">1.4.1</span> Используемые библиотеки Python</a></li>
+<li><a href="#компоненты-модуля"><span class="toc-section-number">1.4.2</span> Компоненты модуля</a></li>
+</ul></li>
+<li><a href="#исходный-код-модулей"><span class="toc-section-number">1.5</span> Исходный код модулей</a><ul>
+<li><a href="#w_starc_ps.py"><span class="toc-section-number">1.5.1</span> w_starc_PS.py</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#расчет-масок"><span class="toc-section-number">2</span> Расчет масок</a><ul>
+<li><a href="#описание-1"><span class="toc-section-number">2.1</span> Описание</a></li>
+<li><a href="#руководство-пользователя-1"><span class="toc-section-number">2.2</span> Руководство пользователя</a></li>
+<li><a href="#алгоритм-1"><span class="toc-section-number">2.3</span> Алгоритм</a></li>
+<li><a href="#исходный-код"><span class="toc-section-number">2.4</span> Исходный код</a></li>
+</ul></li>
+</ul>
+</div>
+<hr />
+<h1 id="расчет-спм-и-акф"><span class="header-section-number">1</span> Расчет СПМ и АКФ</h1>
+<h2 id="описание"><span class="header-section-number">1.1</span> Описание</h2>
+<p>Модуль используется для автоматического расчета спектров мощности (СПМ) и автокорелляционных функций (АКФ) с использованием модуля <strong><code>spectr.exe</code></strong> пакета <strong><code>StarC</code></strong> по году/сету/ночи наблюдений, или конкретного объекта.</p>
+<h2 id="руководство-пользователя"><span class="header-section-number">1.2</span> Руководство пользователя</h2>
+<h3 id="внешний-вид-модуля"><span class="header-section-number">1.2.1</span> Внешний вид модуля</h3>
+<div class="figure">
+<img src="img/w_starc_PS.png" />
+
+</div>
+<h3 id="входные-данные"><span class="header-section-number">1.2.2</span> Входные данные</h3>
+<ul>
+<li><strong><code>Type</code></strong>: Тип планируемых расчетов.</li>
+<li><strong><code>STARC path</code></strong>: Путь до корневой директории пакета программ StarC</li>
+<li><strong><code>Input path</code></strong>: Входная директория для расчетов</li>
+<li><strong><code>Output path</code></strong>: Путь сохранения выходных файлов</li>
+<li><strong><code>Frame diff (/k)</code></strong>: Влияет на разность кадров. При выборе <strong><code>&quot;-1&quot;</code></strong> сохранит два типа файлов: с разностью <strong><code>&quot;0&quot;</code></strong> и <strong><code>&quot;1&quot;</code></strong></li>
+<li><strong><code>BG mode (/p)</code></strong>: Включение/выключение фонового режима</li>
+<li><strong><code>Resizing (/S)</code></strong>: Изменение формата кадра. 1 - 512х512, 2 - 1024х1024 и т.д.</li>
+<li><strong><code>Silent mode (/s)</code></strong>: Включение/выключение тихого режима</li>
+</ul>
+<blockquote>
+<p>В названии некоторых параметров в скобках указан аналог консольного ключа в модуле <strong><code>spectr.exe</code></strong> пакета <strong><code>StarC</code></strong></p>
+</blockquote>
+<h3 id="порядок-действий"><span class="header-section-number">1.2.3</span> Порядок действий</h3>
+<ol style="list-style-type: decimal">
+<li>Выбрать тип входных данных.</li>
+<li>Указать путь до пакета StarC</li>
+<li>Указать пути входной директории и директории сохранения</li>
+<li>Указать необходимые параметры</li>
+<li>Запустить, нажатием кнопки <strong>“Start”</strong></li>
+</ol>
+<h2 id="алгоритм"><span class="header-section-number">1.3</span> Алгоритм</h2>
+<blockquote>
+<p>Будет описан позднее</p>
+</blockquote>
+<h2 id="состав-модуля"><span class="header-section-number">1.4</span> 1. Состав модуля</h2>
+<h3 id="используемые-библиотеки-python"><span class="header-section-number">1.4.1</span> Используемые библиотеки Python</h3>
+<ul>
+<li>PyQt5</li>
+<li>sys</li>
+<li>threading</li>
+<li>ast</li>
+<li>time</li>
+<li>subprocess</li>
+<li>os</li>
+<li>shutil</li>
+</ul>
+<h3 id="компоненты-модуля"><span class="header-section-number">1.4.2</span> Компоненты модуля</h3>
+<ul>
+<li><strong>w_starc_PS.py</strong>: Единственный компонент, включающий в себя и виджет отображения в главном GUI, и алгоритм по-очередного запуска расчета СПМ и АКФ</li>
+</ul>
+<h2 id="исходный-код-модулей"><span class="header-section-number">1.5</span> Исходный код модулей</h2>
+<h3 id="w_starc_ps.py"><span class="header-section-number">1.5.1</span> w_starc_PS.py</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> PyQt5.QtCore <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> PyQt5.QtGui <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> PyQt5.QtWidgets <span class="im">import</span> <span class="op">*</span>
+<span class="im">import</span> sys
+<span class="im">from</span> threading <span class="im">import</span> Thread, active_count
+<span class="im">from</span> ast <span class="im">import</span> literal_eval
+<span class="im">from</span> time <span class="im">import</span> sleep
+<span class="im">from</span> subprocess <span class="im">import</span> call
+<span class="im">from</span> os <span class="im">import</span> walk, makedirs
+<span class="im">from</span> os.path <span class="im">import</span> join, isdir, basename
+<span class="im">from</span> shutil <span class="im">import</span> copy, move
+
+<span class="kw">class</span> starc_PS(QWidget):
+    sign_change_progress <span class="op">=</span> pyqtSignal(<span class="bu">int</span>, <span class="bu">int</span>, <span class="bu">str</span>)
+    sign_end_of_calc <span class="op">=</span> pyqtSignal()
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, parent <span class="op">=</span> <span class="va">None</span>):
+        <span class="va">self</span>.mainGui <span class="op">=</span> parent
+        QWidget.<span class="fu">__init__</span>(<span class="va">self</span>, parent)
+
+        <span class="va">self</span>.sign_change_progress.<span class="ex">connect</span>(<span class="va">self</span>.slot_change_progress)
+        <span class="va">self</span>.sign_end_of_calc.<span class="ex">connect</span>(<span class="va">self</span>.slot_end_of_calc)
+        <span class="va">self</span>.main_layout <span class="op">=</span> QGridLayout()
+        
+        <span class="va">self</span>.l_Starc <span class="op">=</span> QLabel(<span class="st">&#39;STARC path: &#39;</span>)
+        <span class="va">self</span>.v_Starc <span class="op">=</span> QLineEdit()
+        <span class="va">self</span>.v_Starc.setFixedWidth(<span class="dv">300</span>)
+        <span class="va">self</span>.b_Starc <span class="op">=</span> QPushButton(<span class="st">&#39;Choose path&#39;</span>)
+        <span class="va">self</span>.b_Starc.clicked.<span class="ex">connect</span>(<span class="va">self</span>.c_Starc)
+
+        <span class="va">self</span>.l_Input <span class="op">=</span> QLabel(<span class="st">&#39;Input path: &#39;</span>)
+        <span class="va">self</span>.v_Input <span class="op">=</span> QLineEdit()
+        <span class="va">self</span>.b_Input <span class="op">=</span> QPushButton(<span class="st">&#39;Choose path&#39;</span>)
+        <span class="va">self</span>.b_Input.clicked.<span class="ex">connect</span>(<span class="va">self</span>.c_Input)
+        
+        <span class="va">self</span>.l_Output <span class="op">=</span> QLabel(<span class="st">&#39;Output path: &#39;</span>)
+        <span class="va">self</span>.v_Output <span class="op">=</span> QLineEdit()
+        <span class="va">self</span>.b_Output <span class="op">=</span> QPushButton(<span class="st">&#39;Choose path&#39;</span>)
+        <span class="va">self</span>.b_Output.clicked.<span class="ex">connect</span>(<span class="va">self</span>.c_Output)
+        
+        <span class="va">self</span>.l_Type <span class="op">=</span> QLabel(<span class="st">&#39;Type: &#39;</span>)
+        <span class="va">self</span>.v_Type <span class="op">=</span> QComboBox()
+        <span class="va">self</span>.v_Type.addItems([<span class="st">&#39;Year&#39;</span>, <span class="st">&#39;Set&#39;</span>, <span class="st">&#39;Night&#39;</span>, <span class="st">&#39;Star&#39;</span>])
+
+        <span class="va">self</span>.l_Diff <span class="op">=</span> QLabel(<span class="st">&#39;Frame diff (/k): &#39;</span>)
+        <span class="va">self</span>.v_Diff <span class="op">=</span> QComboBox()
+        <span class="va">self</span>.v_Diff.addItems([<span class="st">&#39;1&#39;</span>, <span class="st">&#39;0&#39;</span>, <span class="st">&#39;-1&#39;</span>, <span class="st">&#39;2&#39;</span>, <span class="st">&#39;3&#39;</span>, <span class="st">&#39;5&#39;</span>, <span class="st">&#39;10&#39;</span>, <span class="st">&#39;25&#39;</span>, <span class="st">&#39;50&#39;</span>, <span class="st">&#39;100&#39;</span>])
+
+        <span class="va">self</span>.l_Size <span class="op">=</span> QLabel(<span class="st">&#39;Resizing (/S): &#39;</span>)
+        <span class="va">self</span>.v_Size <span class="op">=</span> QComboBox()
+        <span class="va">self</span>.v_Size.addItems([<span class="st">&#39;2&#39;</span>, <span class="st">&#39;1&#39;</span>, <span class="st">&#39;4&#39;</span>, <span class="st">&#39;8&#39;</span>])
+
+        <span class="va">self</span>.l_Batch <span class="op">=</span> QLabel(<span class="st">&#39;BG mode (/p): &#39;</span>)
+        <span class="va">self</span>.v_Batch <span class="op">=</span> QComboBox()
+        <span class="va">self</span>.v_Batch.addItems([<span class="st">&#39;ON&#39;</span>, <span class="st">&#39;OFF&#39;</span>])
+
+        <span class="va">self</span>.l_Silent <span class="op">=</span> QLabel(<span class="st">&#39;Silent mode (/s): &#39;</span>)
+        <span class="va">self</span>.v_Silent <span class="op">=</span> QComboBox()
+        <span class="va">self</span>.v_Silent.addItems([<span class="st">&#39;ON&#39;</span>, <span class="st">&#39;OFF&#39;</span>])
+
+        <span class="va">self</span>.b_Start <span class="op">=</span> QPushButton(<span class="st">&#39;Start&#39;</span>)
+        <span class="va">self</span>.b_Start.clicked.<span class="ex">connect</span>(<span class="va">self</span>.c_Start)
+
+        <span class="va">self</span>.PB <span class="op">=</span> QProgressBar()
+        <span class="va">self</span>.PB.setValue(<span class="dv">0</span>)
+        <span class="va">self</span>.PB.hide()
+
+        <span class="va">self</span>.msg <span class="op">=</span> QLabel(<span class="st">&#39;Collecting... &#39;</span>)
+        <span class="va">self</span>.msg.setAlignment(Qt.AlignCenter)
+        <span class="va">self</span>.msg.hide()
+        
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Type, <span class="dv">0</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Type, <span class="dv">0</span>, <span class="dv">1</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Start, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>)        
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Starc, <span class="dv">1</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Starc, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Starc, <span class="dv">1</span>, <span class="dv">3</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Input, <span class="dv">2</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Input, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Input, <span class="dv">2</span>, <span class="dv">3</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Output, <span class="dv">3</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Output, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Output, <span class="dv">3</span>, <span class="dv">3</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Diff, <span class="dv">4</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Diff, <span class="dv">4</span>, <span class="dv">1</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Size, <span class="dv">4</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Size, <span class="dv">4</span>, <span class="dv">3</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Batch, <span class="dv">5</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Batch, <span class="dv">5</span>, <span class="dv">1</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_Silent, <span class="dv">5</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.v_Silent, <span class="dv">5</span>, <span class="dv">3</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.PB, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">4</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.msg, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">4</span>)
+
+        <span class="va">self</span>.setLayout(<span class="va">self</span>.main_layout)
+
+    <span class="kw">def</span> c_Input(<span class="va">self</span>):
+        <span class="cf">if</span> <span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;star&#39;</span>:
+            <span class="va">self</span>.v_Input.setText(QFileDialog.getOpenFileName(<span class="va">self</span>, <span class="st">&#39;Select Input Dat File&#39;</span>, <span class="st">&#39;.&#39;</span>, <span class="st">&quot;DAT (*.dat)&quot;</span>)[<span class="dv">0</span>])
+        <span class="cf">else</span>:
+            <span class="va">self</span>.v_Input.setText(QFileDialog.getExistingDirectory(<span class="va">self</span>, <span class="st">&quot;Select Input Directory&quot;</span>, <span class="st">&#39;.&#39;</span>, QFileDialog.ShowDirsOnly))
+
+    <span class="kw">def</span> c_Output(<span class="va">self</span>):
+        <span class="va">self</span>.v_Output.setText(QFileDialog.getExistingDirectory(<span class="va">self</span>, <span class="st">&quot;Select Output Directory&quot;</span>, <span class="st">&#39;.&#39;</span>, QFileDialog.ShowDirsOnly))
+
+    <span class="kw">def</span> c_Starc(<span class="va">self</span>):
+        <span class="va">self</span>.v_Starc.setText(QFileDialog.getExistingDirectory(<span class="va">self</span>, <span class="st">&quot;Select Output Directory&quot;</span>, <span class="st">&#39;.&#39;</span>, QFileDialog.ShowDirsOnly))
+        
+    <span class="kw">def</span> c_Start(<span class="va">self</span>):
+        <span class="va">self</span>.PB.show()
+        <span class="va">self</span>.msg.show()
+        <span class="va">self</span>.params <span class="op">=</span> {}
+        <span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>] <span class="op">=</span> <span class="va">self</span>.v_Input.text()
+        <span class="va">self</span>.params[<span class="st">&#39;work&#39;</span>] <span class="op">=</span> []
+        <span class="va">self</span>.th <span class="op">=</span> Thread(target <span class="op">=</span> <span class="va">self</span>.process)
+        <span class="va">self</span>.th.start()
+        <span class="va">self</span>.b_Start.setEnabled(<span class="va">False</span>)
+    
+    <span class="kw">def</span> slot_change_progress(<span class="va">self</span>, v, max_v, text):
+        <span class="cf">if</span> <span class="kw">not</span> <span class="va">self</span>.PB.maximum <span class="op">==</span> max_v:
+            <span class="va">self</span>.PB.setMaximum(max_v)
+            <span class="va">self</span>.PB.setValue(<span class="dv">0</span>)
+        <span class="va">self</span>.PB.setValue(v)
+        <span class="va">self</span>.msg.setText(text)
+    
+    <span class="kw">def</span> slot_end_of_calc(<span class="va">self</span>):
+        <span class="va">self</span>.b_Start.setEnabled(<span class="va">True</span>)
+        <span class="va">self</span>.msg.setText(<span class="st">&#39;Finished&#39;</span>)
+        
+    <span class="kw">def</span> process(<span class="va">self</span>):
+        <span class="cf">if</span> <span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;year&#39;</span>:
+            <span class="va">self</span>.scan_year()
+        <span class="cf">elif</span> <span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;set&#39;</span>:
+            <span class="va">self</span>.scan_set()
+        <span class="cf">elif</span> <span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;night&#39;</span>:
+            <span class="va">self</span>.scan_night()
+        <span class="cf">elif</span> <span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;star&#39;</span>:
+            <span class="cf">pass</span>
+        <span class="va">self</span>.sign_change_progress.emit(<span class="dv">0</span>, <span class="bu">len</span>(<span class="va">self</span>.params[<span class="st">&#39;work&#39;</span>]), <span class="st">&#39;Ready to calculate.&#39;</span>)
+        <span class="va">self</span>.calc_PS()
+        <span class="va">self</span>.sign_end_of_calc.emit()
+
+    <span class="kw">def</span> scan_year(<span class="va">self</span>):
+        <span class="va">self</span>.params[<span class="st">&#39;sets&#39;</span>] <span class="op">=</span> {}
+        <span class="va">self</span>.params[<span class="st">&#39;sets&#39;</span>][<span class="st">&#39;paths&#39;</span>] <span class="op">=</span> <span class="bu">list</span>(walk(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>]))[<span class="dv">0</span>][<span class="dv">1</span>]
+        <span class="va">self</span>.scan_set()
+
+    <span class="kw">def</span> scan_set(<span class="va">self</span>):
+        <span class="cf">if</span> <span class="st">&#39;sets&#39;</span> <span class="kw">in</span> <span class="va">self</span>.params:
+            <span class="cf">for</span> p_set <span class="kw">in</span> <span class="va">self</span>.params[<span class="st">&#39;sets&#39;</span>][<span class="st">&#39;paths&#39;</span>]:
+                <span class="va">self</span>.params[<span class="st">&#39;sets&#39;</span>][p_set] <span class="op">=</span> {}
+                <span class="cf">if</span> isdir(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], p_set, <span class="st">&#39;cut&#39;</span>)): subdir <span class="op">=</span> <span class="st">&#39;cut&#39;</span>
+                <span class="cf">elif</span> isdir(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], p_set, <span class="st">&#39;rebuild&#39;</span>)): subdir <span class="op">=</span> <span class="st">&#39;rebuild&#39;</span>
+                <span class="cf">elif</span> isdir(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], p_set, <span class="st">&#39;rebuilded&#39;</span>)): subdir <span class="op">=</span> <span class="st">&#39;rebuilded&#39;</span>
+                <span class="cf">for</span> root, dirs, files <span class="kw">in</span> walk(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], p_set, subdir)):
+                    <span class="va">self</span>.params[<span class="st">&#39;sets&#39;</span>][p_set][<span class="st">&#39;nights&#39;</span>] <span class="op">=</span> [join(subdir, d) <span class="cf">for</span> d <span class="kw">in</span> dirs]                    
+                    <span class="cf">break</span>
+        <span class="cf">else</span>:
+            <span class="cf">if</span> isdir(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], <span class="st">&#39;cut&#39;</span>)): subdir <span class="op">=</span> <span class="st">&#39;cut&#39;</span>
+            <span class="cf">elif</span> isdir(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], <span class="st">&#39;rebuild&#39;</span>)): subdir <span class="op">=</span> <span class="st">&#39;rebuild&#39;</span>
+            <span class="cf">elif</span> isdir(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], <span class="st">&#39;rebuilded&#39;</span>)): subdir <span class="op">=</span> <span class="st">&#39;rebuilded&#39;</span>
+            <span class="va">self</span>.params[<span class="st">&#39;nights&#39;</span>] <span class="op">=</span> [join(subdir, p) <span class="cf">for</span> p <span class="kw">in</span> <span class="bu">list</span>(walk(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], subdir)))[<span class="dv">0</span>][<span class="dv">1</span>]]
+        <span class="va">self</span>.scan_night()
+
+    <span class="kw">def</span> scan_night(<span class="va">self</span>):
+        <span class="cf">for</span> i <span class="kw">in</span> <span class="va">self</span>.params:
+            <span class="bu">print</span>(<span class="va">self</span>.params[i])    
+        <span class="cf">if</span> <span class="st">&#39;sets&#39;</span> <span class="kw">in</span> <span class="va">self</span>.params:
+            <span class="cf">for</span> p_set <span class="kw">in</span> <span class="va">self</span>.params[<span class="st">&#39;sets&#39;</span>][<span class="st">&#39;paths&#39;</span>]:
+                <span class="cf">for</span> night <span class="kw">in</span> <span class="va">self</span>.params[<span class="st">&#39;sets&#39;</span>][p_set][<span class="st">&#39;nights&#39;</span>]:
+                    <span class="cf">for</span> root, dirs, files <span class="kw">in</span> walk(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], p_set, night)):
+                        <span class="cf">for</span> f <span class="kw">in</span> files:
+                            <span class="cf">if</span> f.endswith(<span class="st">&#39;.dat&#39;</span>) <span class="kw">and</span> <span class="kw">not</span> f.startswith(<span class="st">&#39;dark&#39;</span>) <span class="kw">and</span> <span class="kw">not</span> f.startswith(<span class="st">&#39;flat&#39;</span>) <span class="kw">and</span> <span class="kw">not</span> f.endswith(<span class="st">&#39;moon.dat&#39;</span>):
+                                <span class="va">self</span>.params[<span class="st">&#39;work&#39;</span>].append(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], p_set, night, f))
+        <span class="cf">elif</span> <span class="st">&#39;nights&#39;</span> <span class="kw">in</span> <span class="va">self</span>.params:
+            <span class="cf">for</span> night <span class="kw">in</span> <span class="va">self</span>.params[<span class="st">&#39;nights&#39;</span>]:
+                <span class="cf">for</span> root, dirs, files <span class="kw">in</span> walk(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], night)):
+                    <span class="cf">for</span> f <span class="kw">in</span> files:
+                        <span class="cf">if</span> f.endswith(<span class="st">&#39;.dat&#39;</span>) <span class="kw">and</span> <span class="kw">not</span> f.startswith(<span class="st">&#39;dark&#39;</span>) <span class="kw">and</span> <span class="kw">not</span> f.startswith(<span class="st">&#39;flat&#39;</span>) <span class="kw">and</span> <span class="kw">not</span> f.endswith(<span class="st">&#39;moon.dat&#39;</span>):
+                            <span class="va">self</span>.params[<span class="st">&#39;work&#39;</span>].append(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], night, f))
+        <span class="cf">else</span>:   
+            <span class="cf">for</span> root, dirs, files <span class="kw">in</span> walk(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>]):
+                <span class="cf">for</span> f <span class="kw">in</span> files:
+                    <span class="cf">if</span> f.endswith(<span class="st">&#39;.dat&#39;</span>) <span class="kw">and</span> <span class="kw">not</span> f.startswith(<span class="st">&#39;dark&#39;</span>) <span class="kw">and</span> <span class="kw">not</span> f.startswith(<span class="st">&#39;flat&#39;</span>) <span class="kw">and</span> <span class="kw">not</span> f.endswith(<span class="st">&#39;moon.dat&#39;</span>):
+                        <span class="va">self</span>.params[<span class="st">&#39;work&#39;</span>].append(join(<span class="va">self</span>.params[<span class="st">&#39;basepath&#39;</span>], f))
+    
+    <span class="kw">def</span> calc_PS(<span class="va">self</span>):
+        i <span class="op">=</span> <span class="dv">0</span>
+        <span class="cf">for</span> star <span class="kw">in</span> <span class="va">self</span>.params[<span class="st">&#39;work&#39;</span>]:
+            i<span class="op">+=</span><span class="dv">1</span>
+            <span class="va">self</span>.sign_change_progress.emit(i, <span class="bu">len</span>(<span class="va">self</span>.params[<span class="st">&#39;work&#39;</span>]), star)
+            <span class="cf">if</span> <span class="va">self</span>.v_Silent.currentText() <span class="op">==</span> <span class="st">&#39;ON&#39;</span>:
+                <span class="va">self</span>.silent <span class="op">=</span> <span class="st">&#39;/s&#39;</span>
+            <span class="cf">else</span>:
+                <span class="va">self</span>.silent <span class="op">=</span> <span class="st">&#39;&#39;</span>
+            <span class="cf">if</span> <span class="va">self</span>.v_Batch.currentText() <span class="op">==</span> <span class="st">&#39;ON&#39;</span>:
+                <span class="va">self</span>.batch <span class="op">=</span> <span class="st">&#39;/p&#39;</span>
+            <span class="cf">else</span>:
+                <span class="va">self</span>.batch <span class="op">=</span> <span class="st">&#39;&#39;</span>
+
+            <span class="cf">if</span> <span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;star&#39;</span>:
+                output_path <span class="op">=</span> <span class="va">self</span>.v_Output.text()
+            <span class="cf">elif</span> <span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;night&#39;</span>:
+                output_path <span class="op">=</span> join(<span class="va">self</span>.v_Output.text(), star.split(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">&#39;</span>)[<span class="op">-</span><span class="dv">2</span>])                
+            <span class="cf">elif</span> <span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;set&#39;</span>:
+                output_path <span class="op">=</span> join(<span class="va">self</span>.v_Output.text(), star.split(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">&#39;</span>)[<span class="op">-</span><span class="dv">2</span>])
+            <span class="cf">elif</span> <span class="va">self</span>.v_Type.currentText().lower() <span class="op">==</span> <span class="st">&#39;year&#39;</span>:
+                output_path <span class="op">=</span> join(<span class="va">self</span>.v_Output.text(), star.split(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">&#39;</span>)[<span class="op">-</span><span class="dv">4</span>], star.split(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">&#39;</span>)[<span class="op">-</span><span class="dv">2</span>])
+            <span class="cf">try</span>:
+                makedirs(output_path)
+            <span class="cf">except</span>:
+                <span class="cf">pass</span>
+            copy(join(<span class="va">self</span>.v_Starc.text(), <span class="st">&#39;DATA&#39;</span>, <span class="st">&#39;file.xfs&#39;</span>), star<span class="op">+</span><span class="st">&#39;.xfs&#39;</span>)
+            call([join(<span class="va">self</span>.v_Starc.text(), <span class="st">&#39;spectr.exe&#39;</span>), star, <span class="st">&#39;/k </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(<span class="va">self</span>.v_Diff.currentText()), <span class="st">&#39;/S </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(<span class="va">self</span>.v_Size.currentText()), <span class="va">self</span>.silent, <span class="va">self</span>.batch])
+            move(join(<span class="va">self</span>.v_Starc.text(), <span class="st">&#39;SPECTR&#39;</span>, <span class="st">&#39;</span><span class="sc">{}</span><span class="st">x&#39;</span>.<span class="bu">format</span>(<span class="va">self</span>.v_Size.currentText()), <span class="st">&#39;VIS&#39;</span>, basename(star)<span class="op">+</span><span class="st">&#39;.spectr.[1]acf.dat&#39;</span>), join(output_path, basename(star)<span class="op">+</span><span class="st">&#39;ACF.dat&#39;</span>)) 
+            move(join(<span class="va">self</span>.v_Starc.text(), <span class="st">&#39;SPECTR&#39;</span>, <span class="st">&#39;</span><span class="sc">{}</span><span class="st">x&#39;</span>.<span class="bu">format</span>(<span class="va">self</span>.v_Size.currentText()), <span class="st">&#39;VIS&#39;</span>, basename(star)<span class="op">+</span><span class="st">&#39;.spectr.[1]acf.</span><span class="sc">%d</span><span class="st">at&#39;</span>), join(output_path, basename(star)<span class="op">+</span><span class="st">&#39;ACF.</span><span class="sc">%d</span><span class="st">at&#39;</span>)) 
+            move(join(<span class="va">self</span>.v_Starc.text(), <span class="st">&#39;SPECTR&#39;</span>, <span class="st">&#39;</span><span class="sc">{}</span><span class="st">x&#39;</span>.<span class="bu">format</span>(<span class="va">self</span>.v_Size.currentText()), <span class="st">&#39;VIS&#39;</span>, basename(star)<span class="op">+</span><span class="st">&#39;.spectr.[1]sw4.dat&#39;</span>), join(output_path, basename(star)<span class="op">+</span><span class="st">&#39;PS.dat&#39;</span>)) 
+            move(join(<span class="va">self</span>.v_Starc.text(), <span class="st">&#39;SPECTR&#39;</span>, <span class="st">&#39;</span><span class="sc">{}</span><span class="st">x&#39;</span>.<span class="bu">format</span>(<span class="va">self</span>.v_Size.currentText()), <span class="st">&#39;VIS&#39;</span>, basename(star)<span class="op">+</span><span class="st">&#39;.spectr.[1]sw4.</span><span class="sc">%d</span><span class="st">at&#39;</span>), join(output_path, basename(star)<span class="op">+</span><span class="st">&#39;PS.</span><span class="sc">%d</span><span class="st">at&#39;</span>))      </code></pre></div>
+<hr />
+<h1 id="расчет-масок"><span class="header-section-number">2</span> Расчет масок</h1>
+<blockquote>
+<p>На стадии описания</p>
+</blockquote>
+<h2 id="описание-1"><span class="header-section-number">2.1</span> Описание</h2>
+<h2 id="руководство-пользователя-1"><span class="header-section-number">2.2</span> Руководство пользователя</h2>
+<h2 id="алгоритм-1"><span class="header-section-number">2.3</span> Алгоритм</h2>
+<h2 id="исходный-код"><span class="header-section-number">2.4</span> Исходный код</h2>
+
+</div> <!-- content -->
+
+<div id="footer-nav-bar">
+<a href="./d_OBS.html">← prev</a> | <a href="./d_HELP.html">next →</a> &nbsp; &nbsp; <a href="toc.html">Top-level ToC</a> &nbsp; &nbsp; <b>/d_WIN.html</b> &nbsp; &nbsp; (<a href="d_WIN-printable.html">printable version</a>)<br/>
+
+</div>
+
+</div> <!-- center-box -->
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<br/>
+<a href="d_WIN.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+</body>
+</html>

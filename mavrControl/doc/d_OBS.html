@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Наблюдения</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+<body>
+
+<div id="main-outer-box">
+
+<div id="my-header">
+  <a href="index.html">Помощь</a>
+</div>
+
+<div id="trunk-box">
+
+<div id="nav-pane">
+<p>Top-level docs &amp; dirs:</p>
+<ul><li><a href="d_AUTO.html">Автоматизация</a></li><li><b>Наблюдения</b></li><li><a href="d_WIN.html">WindowsOnly</a></li><li><a href="d_HELP.html">Помощь</a></li></ul>
+</div>
+
+<div id="center-box">
+
+<div id="header-nav-bar">
+<a href="./d_AUTO.html">← prev</a> | <a href="./d_WIN.html">next →</a> &nbsp; &nbsp; <a href="toc.html">Top-level ToC</a> &nbsp; &nbsp; <b>/d_OBS.html</b> &nbsp; &nbsp; (<a href="d_OBS-printable.html">printable version</a>)<br/>
+
+</div>
+
+<div id="content">
+<div id="header">
+<h1 class="title">Наблюдения</h1>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#координаты-hpms"><span class="toc-section-number">1</span> Координаты HPMS</a><ul>
+<li><a href="#описание"><span class="toc-section-number">1.1</span> Описание</a></li>
+<li><a href="#руководство-пользователя"><span class="toc-section-number">1.2</span> Руководство пользователя</a><ul>
+<li><a href="#внешний-вид-модуля"><span class="toc-section-number">1.2.1</span> Внешний вид модуля</a></li>
+<li><a href="#входные-данные"><span class="toc-section-number">1.2.2</span> Входные данные</a></li>
+<li><a href="#порядок-действий"><span class="toc-section-number">1.2.3</span> Порядок действий</a></li>
+</ul></li>
+<li><a href="#алгоритм"><span class="toc-section-number">1.3</span> Алгоритм</a></li>
+<li><a href="#состав-модуля"><span class="toc-section-number">1.4</span> Состав модуля</a><ul>
+<li><a href="#используемые-библиотеки-python"><span class="toc-section-number">1.4.1</span> Используемые библиотеки Python</a></li>
+<li><a href="#компоненты-модуля"><span class="toc-section-number">1.4.2</span> Компоненты модуля</a></li>
+</ul></li>
+<li><a href="#исходный-код-модулей"><span class="toc-section-number">1.5</span> Исходный код модулей</a><ul>
+<li><a href="#w_hpms.py"><span class="toc-section-number">1.5.1</span> w_HPMS.py</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#обработка-lo"><span class="toc-section-number">2</span> Обработка LO</a><ul>
+<li><a href="#описание-1"><span class="toc-section-number">2.1</span> Описание</a></li>
+<li><a href="#руководство-пользователя-1"><span class="toc-section-number">2.2</span> Руководство пользователя</a></li>
+<li><a href="#алгоритм-1"><span class="toc-section-number">2.3</span> Алгоритм</a></li>
+<li><a href="#исходный-код"><span class="toc-section-number">2.4</span> Исходный код</a></li>
+</ul></li>
+</ul>
+</div>
+<hr />
+<h1 id="координаты-hpms"><span class="header-section-number">1</span> Координаты HPMS</h1>
+<h2 id="описание"><span class="header-section-number">1.1</span> Описание</h2>
+<p>Модуль позволяет рассчитать новые координаты объекта, основываясь на скорости смещения, указанных в базе Simbad</p>
+<h2 id="руководство-пользователя"><span class="header-section-number">1.2</span> Руководство пользователя</h2>
+<h3 id="внешний-вид-модуля"><span class="header-section-number">1.2.1</span> Внешний вид модуля</h3>
+<div class="figure">
+<img src="img/w_HPMS.png" />
+
+</div>
+<h3 id="входные-данные"><span class="header-section-number">1.2.2</span> Входные данные</h3>
+<p><strong><code>RA</code></strong>: Прямое восхождение объекта в формате: <strong><code>HH MM SS.SS</code></strong><br />
+<strong><code>DEC</code></strong>: Слонение объекта в формате: <strong><code>±DD MM SS.SS</code></strong><br />
+<strong><code>RA proper</code></strong>: Собственное движение по прямому восхождению в mas/year<br />
+<strong><code>DEC proper</code></strong>: Собственное движение по склонению в mas/year</p>
+<h3 id="порядок-действий"><span class="header-section-number">1.2.3</span> Порядок действий</h3>
+<ol style="list-style-type: decimal">
+<li>Ввести все необходимые данные</li>
+<li>Нажать кнопку <strong>“Рассчитать”</strong></li>
+<li>Новые координаты появятся сразу над кнопкой</li>
+</ol>
+<h2 id="алгоритм"><span class="header-section-number">1.3</span> Алгоритм</h2>
+<blockquote>
+<p>Будет описан позднее</p>
+</blockquote>
+<h2 id="состав-модуля"><span class="header-section-number">1.4</span> Состав модуля</h2>
+<h3 id="используемые-библиотеки-python"><span class="header-section-number">1.4.1</span> Используемые библиотеки Python</h3>
+<ul>
+<li>datetime</li>
+<li>PyQt5</li>
+<li>sys</li>
+</ul>
+<h3 id="компоненты-модуля"><span class="header-section-number">1.4.2</span> Компоненты модуля</h3>
+<ul>
+<li><strong>w_HPMS.py</strong>: Единственный компонент, включающий в себя и виджет отображения в главном GUI, и алгоритм расчета координат</li>
+</ul>
+<h2 id="исходный-код-модулей"><span class="header-section-number">1.5</span> Исходный код модулей</h2>
+<h3 id="w_hpms.py"><span class="header-section-number">1.5.1</span> w_HPMS.py</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> datetime <span class="im">import</span> datetime <span class="im">as</span> dt
+<span class="im">from</span> PyQt5.QtCore <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> PyQt5.QtWidgets <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> PyQt5.QtGui <span class="im">import</span> <span class="op">*</span>
+<span class="im">import</span> sys
+
+<span class="kw">class</span> HPMS(QWidget):
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, parent<span class="op">=</span><span class="va">None</span>):
+        QWidget.<span class="fu">__init__</span>(<span class="va">self</span>, parent)
+
+        <span class="va">self</span>.main_layout <span class="op">=</span> QGridLayout()
+        <span class="va">self</span>.setWindowTitle(<span class="st">&#39;HPM stars v 0.2&#39;</span>)
+
+        d <span class="op">=</span> dt.now()
+        <span class="va">self</span>.diff <span class="op">=</span> (<span class="bu">float</span>(d.strftime(<span class="st">&quot;%j&quot;</span>))<span class="op">-</span><span class="dv">1</span>) <span class="op">/</span> <span class="dv">366</span> <span class="op">+</span> <span class="bu">float</span>(d.strftime(<span class="st">&quot;%Y&quot;</span>)) <span class="op">-</span> <span class="dv">2000</span>
+        
+       <span class="co">#________ Buttons</span>
+        <span class="va">self</span>.b_Calc <span class="op">=</span> QPushButton(<span class="st">&#39;Расчитать&#39;</span>)
+        <span class="va">self</span>.b_Calc.clicked.<span class="ex">connect</span>(<span class="va">self</span>._Culc)        
+        <span class="co">#________ Labels and TextBoxes</span>
+        <span class="va">self</span>.today <span class="op">=</span> QLabel(<span class="st">&#39;Today: </span><span class="sc">{:.2f}</span><span class="st">&#39;</span>.<span class="bu">format</span>(<span class="va">self</span>.diff <span class="op">+</span> <span class="dv">2000</span>))
+        <span class="va">self</span>.today.setAlignment(Qt.AlignCenter)
+        <span class="va">self</span>.l_old_ra <span class="op">=</span> QLabel(<span class="st">&#39;RA:&#39;</span>)
+        <span class="va">self</span>.l_old_dec <span class="op">=</span> QLabel(<span class="st">&#39;DEC:&#39;</span>)
+        <span class="va">self</span>.t_old_ra <span class="op">=</span> QLineEdit()
+        <span class="va">self</span>.t_old_ra.setFixedWidth(<span class="dv">200</span>)
+        <span class="va">self</span>.t_old_dec <span class="op">=</span> QLineEdit()
+        <span class="va">self</span>.t_old_dec.setFixedWidth(<span class="dv">200</span>)        
+        <span class="va">self</span>.l_p_ra <span class="op">=</span> QLabel(<span class="st">&#39;RA proper:&#39;</span>)
+        <span class="va">self</span>.l_p_dec <span class="op">=</span> QLabel(<span class="st">&#39;DEC proper:&#39;</span>)
+        <span class="va">self</span>.t_p_ra <span class="op">=</span> QLineEdit()
+        <span class="va">self</span>.t_p_dec <span class="op">=</span> QLineEdit()
+        <span class="va">self</span>.new_ra <span class="op">=</span> QLabel(<span class="st">&#39;HH MM SS.SS&#39;</span>)
+        <span class="va">self</span>.new_ra.setAlignment(Qt.AlignCenter)
+        <span class="va">self</span>.new_dec <span class="op">=</span> QLabel(<span class="st">&#39;DD MM SS.SS&#39;</span>)
+        <span class="va">self</span>.new_dec.setAlignment(Qt.AlignCenter)
+        
+        <span class="co">#________ Layout</span>
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.today, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_old_ra, <span class="dv">1</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_old_dec, <span class="dv">1</span>, <span class="dv">1</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.t_old_ra, <span class="dv">2</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.t_old_dec, <span class="dv">2</span>, <span class="dv">1</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_p_ra, <span class="dv">3</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.l_p_dec, <span class="dv">3</span>, <span class="dv">1</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.t_p_ra, <span class="dv">4</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.t_p_dec, <span class="dv">4</span>, <span class="dv">1</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.new_ra, <span class="dv">5</span>, <span class="dv">0</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.new_dec, <span class="dv">5</span>, <span class="dv">1</span>)
+        <span class="va">self</span>.main_layout.addWidget(<span class="va">self</span>.b_Calc, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+        <span class="va">self</span>.setLayout(<span class="va">self</span>.main_layout)
+        
+    <span class="kw">def</span> _Culc(<span class="va">self</span>):
+        <span class="cf">if</span> <span class="va">self</span>.t_old_dec.text() <span class="kw">and</span> <span class="va">self</span>.t_old_ra.text() <span class="kw">and</span> <span class="va">self</span>.t_p_dec.text() <span class="kw">and</span> <span class="va">self</span>.t_p_ra.text():
+            ra <span class="op">=</span> <span class="va">self</span>.t_old_ra.text()
+            dec <span class="op">=</span> <span class="st">&#39;</span><span class="sc">%s</span><span class="st">&#39;</span><span class="op">%</span><span class="va">self</span>.t_old_dec.text()
+            p_ra <span class="op">=</span> <span class="va">self</span>.t_p_ra.text()
+            p_dec <span class="op">=</span> <span class="va">self</span>.t_p_dec.text()
+
+            ra <span class="op">=</span> ra.split()
+            dec <span class="op">=</span> dec.split()
+            p_ra <span class="op">=</span> <span class="va">self</span>.diff <span class="op">*</span> <span class="bu">float</span>(p_ra)<span class="op">/</span><span class="dv">1000</span>
+            p_dec <span class="op">=</span> <span class="va">self</span>.diff <span class="op">*</span> <span class="bu">float</span>(p_dec)<span class="op">/</span><span class="dv">1000</span>
+
+            ra_h <span class="op">=</span> <span class="bu">int</span>(ra[<span class="dv">0</span>])
+            ra_m <span class="op">=</span> <span class="bu">int</span>(ra[<span class="dv">1</span>])
+            ra_s <span class="op">=</span> <span class="bu">float</span>(ra[<span class="dv">2</span>])
+            ra_in_sec <span class="op">=</span> (ra_h<span class="op">*</span><span class="dv">60</span><span class="op">+</span>ra_m)<span class="op">*</span><span class="dv">60</span> <span class="op">+</span> ra_s
+            dec_d <span class="op">=</span> <span class="bu">int</span>(dec[<span class="dv">0</span>])
+            dec_m <span class="op">=</span> <span class="bu">int</span>(dec[<span class="dv">1</span>])
+            dec_s <span class="op">=</span> <span class="bu">float</span>(dec[<span class="dv">2</span>])
+            <span class="cf">if</span> dec_d<span class="op">&lt;</span><span class="dv">0</span>:
+                dec_d <span class="op">=</span> <span class="bu">abs</span>(dec_d)
+                dec_in_sec <span class="op">=</span> (dec_d<span class="op">*</span><span class="dv">60</span><span class="op">+</span>dec_m)<span class="op">*</span><span class="dv">60</span> <span class="op">+</span> dec_s
+                dec_in_sec <span class="op">*=</span> <span class="op">-</span><span class="dv">1</span>
+            <span class="cf">else</span>:
+                dec_in_sec <span class="op">=</span> (dec_d<span class="op">*</span><span class="dv">60</span><span class="op">+</span>dec_m)<span class="op">*</span><span class="dv">60</span> <span class="op">+</span> dec_s
+
+            new_ra_in_sec <span class="op">=</span> ra_in_sec <span class="op">+</span> p_ra
+            new_dec_in_sec <span class="op">=</span> dec_in_sec <span class="op">+</span> p_dec
+
+            new_ra_h <span class="op">=</span> <span class="bu">int</span>(ra_in_sec<span class="op">/</span><span class="dv">3600</span>)
+            new_ra_m <span class="op">=</span> <span class="bu">int</span>((new_ra_in_sec <span class="op">-</span> new_ra_h<span class="op">*</span><span class="dv">3600</span>)<span class="op">/</span><span class="dv">60</span>)
+            new_ra_s <span class="op">=</span> (new_ra_in_sec <span class="op">-</span> new_ra_h<span class="op">*</span><span class="dv">3600</span>)<span class="op">%</span><span class="dv">60</span>
+            
+            new_dec_d <span class="op">=</span> <span class="bu">int</span>(dec_in_sec<span class="op">/</span><span class="dv">3600</span>)
+            <span class="cf">if</span> new_dec_d<span class="op">&lt;</span><span class="dv">0</span>:
+                new_dec_m <span class="op">=</span> <span class="bu">int</span>((<span class="bu">abs</span>(new_dec_in_sec) <span class="op">-</span> <span class="bu">abs</span>(new_dec_d<span class="op">*</span><span class="dv">3600</span>))<span class="op">/</span><span class="dv">60</span>)
+                new_dec_s <span class="op">=</span> (<span class="bu">abs</span>(new_dec_in_sec) <span class="op">-</span> <span class="bu">abs</span>(new_dec_d<span class="op">*</span><span class="dv">3600</span>))<span class="op">%</span><span class="dv">60</span>
+            <span class="cf">else</span>:
+                new_dec_m <span class="op">=</span> <span class="bu">int</span>((new_dec_in_sec <span class="op">-</span> new_dec_d<span class="op">*</span><span class="dv">3600</span>)<span class="op">/</span><span class="dv">60</span>)
+                new_dec_s <span class="op">=</span> (new_dec_in_sec <span class="op">-</span> new_dec_d<span class="op">*</span><span class="dv">3600</span>)<span class="op">%</span><span class="dv">60</span>
+
+            new_ra <span class="op">=</span> <span class="st">&#39;</span><span class="sc">%i</span><span class="st"> </span><span class="sc">%i</span><span class="st"> </span><span class="sc">%.2f</span><span class="st">&#39;</span><span class="op">%</span>(new_ra_h, new_ra_m, new_ra_s)
+            new_dec <span class="op">=</span> <span class="st">&#39;</span><span class="sc">%i</span><span class="st"> </span><span class="sc">%i</span><span class="st"> </span><span class="sc">%.2f</span><span class="st">&#39;</span><span class="op">%</span>(new_dec_d, new_dec_m, new_dec_s)
+            <span class="va">self</span>.new_ra.setText(new_ra)
+            <span class="va">self</span>.new_dec.setText(new_dec)</code></pre></div>
+<hr />
+<h1 id="обработка-lo"><span class="header-section-number">2</span> Обработка LO</h1>
+<blockquote>
+<p>На стадии описания</p>
+</blockquote>
+<h2 id="описание-1"><span class="header-section-number">2.1</span> Описание</h2>
+<h2 id="руководство-пользователя-1"><span class="header-section-number">2.2</span> Руководство пользователя</h2>
+<h2 id="алгоритм-1"><span class="header-section-number">2.3</span> Алгоритм</h2>
+<h2 id="исходный-код"><span class="header-section-number">2.4</span> Исходный код</h2>
+
+</div> <!-- content -->
+
+<div id="footer-nav-bar">
+<a href="./d_AUTO.html">← prev</a> | <a href="./d_WIN.html">next →</a> &nbsp; &nbsp; <a href="toc.html">Top-level ToC</a> &nbsp; &nbsp; <b>/d_OBS.html</b> &nbsp; &nbsp; (<a href="d_OBS-printable.html">printable version</a>)<br/>
+
+</div>
+
+</div> <!-- center-box -->
+</div> <!-- trunk-box -->
+
+<div id="my-footer">
+<br/>
+<a href="d_OBS.md">Pandoc-Markdown source for this page</a><br/>
+(Docs processed by
+<a href="http://www.unexpected-vortices.com/sw/rippledoc/index.html">Rippledoc</a>.)
+</div> <!-- my-footer -->
+
+</div> <!-- main-outer-box -->
+</body>
+</html>

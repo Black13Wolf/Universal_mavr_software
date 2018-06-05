@@ -10,6 +10,7 @@ from . import __version__
 from .d_AUTO.w_PSCalc import PSCalculator
 from .d_AUTO.w_Rebuilder import Rebuilder
 from .d_OBS.w_HPMS import HPMS
+from .d_OBS.w_Occult import Occultation
 from .d_HELP.w_About import About
 from .d_HELP.w_Help import Help
 from .d_WIN.w_starc_Mask import starc_MASK
@@ -51,6 +52,11 @@ class mainGUI(QMainWindow):
         m_Obs_HPMS.setStatusTip('Пересчет координат для объектов с сильным собственным движением')
         m_Obs_HPMS.triggered.connect(self.t_HPMS)
         m_Obs.addAction(m_Obs_HPMS)            
+        
+        m_Obs_Occult = QAction(QIcon(''), 'Обработка LO', self)
+        m_Obs_Occult.setStatusTip('Первичная обработка файла с серией покрытия луной объекта и сохранение в fits')
+        m_Obs_Occult.triggered.connect(self.t_Occult)
+        m_Obs.addAction(m_Obs_Occult)            
 
             #____ OBS signals
         m_Win_Mask = QAction(QIcon(''), 'Рассчет масок', self)
@@ -98,9 +104,12 @@ class mainGUI(QMainWindow):
         self.setCentralWidget(HPMS(parent = self))
         self.update_sizes()
 
-    def t_Help(self):
-        self.setCentralWidget(Help(parent = self))
+    def t_Occult(self):
+        self.setCentralWidget(Occultation(parent = self))
         self.update_sizes()
+
+    def t_Help(self):
+        webbrowser.open_new(join(dirname(__file__), 'doc', 'index.html'))
 
     def t_starc_Mask(self):
         self.setCentralWidget(starc_MASK(parent = self))
