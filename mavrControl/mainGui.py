@@ -12,7 +12,6 @@ from .d_AUTO.w_Rebuilder import Rebuilder
 from .d_OBS.w_HPMS import HPMS
 from .d_OBS.w_Occult import Occultation
 from .d_HELP.w_About import About
-from .d_HELP.w_Help import Help
 from .d_WIN.w_starc_Mask import starc_MASK
 from .d_WIN.w_starc_PS import starc_PS
 
